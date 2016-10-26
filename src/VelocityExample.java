@@ -17,7 +17,6 @@ public final class VelocityExample {
     public static void main(final String[] args) {
         Spark.staticFileLocation("/css");
         get("/hello", (request, response) -> {
-            HashMap cssmodel = new HashMap();
 //            cssmodel.put("owl", "/css/owl.carousel.css");
             Map<String, Object> model = new HashMap<>();
             model.put("hello", "Velocity World");
