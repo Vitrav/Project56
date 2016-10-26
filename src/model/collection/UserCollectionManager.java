@@ -39,7 +39,7 @@ public class UserCollectionManager extends CollectionManager {
 		return true;
 	}
 	
-	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, BasicDBObject address, List<Integer> gameIdList, List<DBObject> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
+	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, BasicDBObject address, List<DBObject> cartItems, List<DBObject> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
 		if (databaseHasUser(username))
 			return false;
 		BasicDBObject userDocument = new BasicDBObject();
@@ -51,7 +51,7 @@ public class UserCollectionManager extends CollectionManager {
 		userDocument.put("email", email);
 		userDocument.put("admin", admin);
 		userDocument.put("address", address);
-		userDocument.put("cart_items", gameIdList);
+		userDocument.put("cart_items", cartItems);
 		userDocument.put("purchase_history", historyItems);
 		userDocument.put("favourite_list", favouriteList);
 		userDocument.put("wish_list", wishList);
@@ -105,6 +105,13 @@ public class UserCollectionManager extends CollectionManager {
 		addressDocument.put("number", number);
 		addressDocument.put("postalcode", postalcode);
 		return addressDocument;
+	}
+	
+	public BasicDBObject createCartItemDocument(int gameId) {
+		BasicDBObject cartItemDocument = new BasicDBObject();
+		cartItemDocument.put("id", gameId);
+		cartItemDocument.put("amount", 1);
+		return cartItemDocument;
 	}
 	
 	public DBObject createHistoryDocument(int gameId, Date purchaseDate) {

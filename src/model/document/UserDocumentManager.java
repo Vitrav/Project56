@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
+import model.collection.UserCollectionManager;
 
 public class UserDocumentManager extends DocumentManager {
 
@@ -70,17 +73,17 @@ public class UserDocumentManager extends DocumentManager {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Integer> getCartItems() {
-		return (List<Integer>) document.get("cart_items");
+	public List<BasicDBObject> getCartItems() {
+		return (List<BasicDBObject>) document.get("cart_items");
 	}
 	
-	public void setCartItems(List<Integer> cartItems) {
+	public void setCartItems(List<BasicDBObject> cartItems) {
 		document.replace("cart_items", cartItems);
 	}
 	
 	public void addCartItem(int gameId) {
-		List<Integer> items = getCartItems() == null ? new ArrayList<>() : getCartItems();
-		items.add(gameId);
+		List<BasicDBObject> items = getCartItems();
+		items.add(new UserCollectionManager().createCartItemDocument(gameId));
 		setCartItems(items);
 	}
 	

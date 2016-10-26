@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 
+import com.mongodb.BasicDBObject;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +13,7 @@ import javafx.stage.Stage;
 import model.collection.GameCollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.AddressDocumentManager;
+import model.document.CartItemDocumentManager;
 import model.document.GameDocumentManager;
 import model.document.UserDocumentManager;
 
@@ -68,13 +71,15 @@ public class Main extends Application {
     	
     	GameCollectionManager gameCollectionManager = new GameCollectionManager();
     	UserCollectionManager userCollectionManager = new UserCollectionManager();
+       	gameCollectionManager.dropCollection();
+    	userCollectionManager.dropCollection();
     	
     	//Insert two games in the game collection.
     	gameCollectionManager.insertNewGameDocument(gameCollectionManager.createGameDocument(1, "Game", "Awesome game", "EA", 12.22, 18, "PC", "Shooter", 10, new Date()));
     	gameCollectionManager.insertNewGameDocument(gameCollectionManager.createGameDocument(2, "Great Game", "Great game, play this 24/7", "Nintendo", 20.00, 7, "PS3", "Shooter", 2, new Date()));
     	
     	//Insert a new user in the user collection.
-    	userCollectionManager.insertUser("SuperUser12", "pass123", 18, new Date(), "SuperUser12@gmail.com", false, userCollectionManager.createAddressDocument("Netherlands", "Rotterdam", "Wijnhaven", "107", "1264 ZF"), Arrays.asList(1), Arrays.asList(), Arrays.asList(), Arrays.asList());
+    	userCollectionManager.insertUser("SuperUser12", "pass123", 18, new Date(), "SuperUser12@gmail.com", false, userCollectionManager.createAddressDocument("Netherlands", "Rotterdam", "Wijnhaven", "107", "1264 ZF"), Arrays.asList(userCollectionManager.createCartItemDocument(1)), Arrays.asList(), Arrays.asList(), Arrays.asList());
     	
     	
     	//Add a history documents to the user
@@ -111,8 +116,14 @@ public class Main extends Application {
     	userDocManager.addWishItem(4);
     	userDocManager.getWishList().forEach(System.out::println);
     	System.out.println("cart items");
-    	userDocManager.addCartItem(4);
-    	userDocManager.getCartItems().forEach(System.out::println);
+    	userDocManager.addCartItem(2);
+    	for (BasicDBObject item : userDocManager.getCartItems()) {
+    		CartItemDocumentManager cartManager = new CartItemDocumentManager(item);
+    		System.out.println(cartManager.getAmount());
+    		cartManager.setAmount(cartManager.getAmount() + 1);
+    		System.out.println(cartManager.getAmount());
+    	}
+    		
     	
     	//Print and change address info
     	System.out.println("\naddress info");
