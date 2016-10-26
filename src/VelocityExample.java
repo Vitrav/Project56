@@ -15,10 +15,10 @@ import static spark.Spark.get;
  */
 public final class VelocityExample {
     public static void main(final String[] args) {
-        Spark.staticFileLocation("/css");
+        Spark.staticFileLocation("/sources");
         get("/hello", (request, response) -> {
             HashMap cssmodel = new HashMap();
-//            cssmodel.put("owl", "/css/owl.carousel.css");
+//            cssmodel.put("owl", "/sources.css/owl.carousel.sources.css");
             Map<String, Object> model = new HashMap<>();
             model.put("hello", "Velocity World");
             model.put("person", new Person("Foobar"));

@@ -1,19 +1,3 @@
-///**
-// * Created by Dave on 25-10-16.
-// */
-//import static spark.Spark.*;
-//
-//public class Main {
-//    public static void main(String[] args) {
-//
-//        get("/hello", (req, res) -> "Hello STEFAN!?!?!?!!221");
-//
-//
-//
-//    }
-//
-//}
-
 import java.io.StringWriter;
 import java.util.Map;
 import java.util.Properties;
