@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 
 import model.collection.UserCollectionManager;
 
@@ -62,6 +61,14 @@ public class UserDocumentManager extends DocumentManager {
 	
 	public void setAdmin() {
 		document.replace("admin", true);
+	}
+	
+	public boolean wishListIsPrivate() {
+		return document.getBoolean("private_wish_list");
+	}
+	
+	public void setWishList(boolean toPrivate) {
+		document.replace("private_wish_list", toPrivate);
 	}
 	
 	public BasicDBObject getAddress() {

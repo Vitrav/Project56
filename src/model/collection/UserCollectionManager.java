@@ -42,6 +42,12 @@ public class UserCollectionManager extends CollectionManager {
 	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, BasicDBObject address, List<DBObject> cartItems, List<DBObject> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
 		if (databaseHasUser(username))
 			return false;
+		return insertUser(username, password, age, dateOfBirth, email, admin, address, cartItems, historyItems, favouriteList, wishList);
+	}
+	
+	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, boolean privateWishList, BasicDBObject address, List<DBObject> cartItems, List<DBObject> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
+		if (databaseHasUser(username))
+			return false;
 		BasicDBObject userDocument = new BasicDBObject();
 		String date = dateFormat.format(dateOfBirth);
 		userDocument.put("username", username);
@@ -50,6 +56,7 @@ public class UserCollectionManager extends CollectionManager {
 		userDocument.put("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length()));
 		userDocument.put("email", email);
 		userDocument.put("admin", admin);
+		userDocument.put("private_wish_list", privateWishList);
 		userDocument.put("address", address);
 		userDocument.put("cart_items", cartItems);
 		userDocument.put("purchase_history", historyItems);
