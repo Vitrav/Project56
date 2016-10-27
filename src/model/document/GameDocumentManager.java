@@ -2,11 +2,11 @@ package model.document;
 
 import java.util.Date;
 
-import com.mongodb.BasicDBObject;
+import org.bson.Document;
 
 public class GameDocumentManager extends DocumentManager {
 	
-	public GameDocumentManager(BasicDBObject document) {
+	public GameDocumentManager(Document document) {
 		super(document);
 	}
 	
@@ -39,7 +39,7 @@ public class GameDocumentManager extends DocumentManager {
 	}
 	
 	public int getAge() {
-		return document.getInt("age");
+		return document.getInteger("age");
 	}
 	
 	public void setAge(int age) {
@@ -63,7 +63,7 @@ public class GameDocumentManager extends DocumentManager {
 	}
 	
 	public int getAmountInStock() {
-		return document.getInt("amount_in_stock");
+		return document.getInteger("amount_in_stock");
 	}
 	
 	public void setAmountInStock(int amount) {

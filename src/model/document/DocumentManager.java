@@ -3,19 +3,19 @@ package model.document;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import com.mongodb.BasicDBObject;
+import org.bson.Document;
 
 public class DocumentManager {
 	
 	protected final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	
-	protected BasicDBObject document;
+	protected Document document;
 	
-	public DocumentManager(BasicDBObject document) {
+	public DocumentManager(Document document) {
 		this.document = document;
 	}
 	
-	public BasicDBObject getDocument() {
+	public Document getDocument() {
 		return document;
 	}
 

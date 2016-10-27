@@ -1,10 +1,10 @@
 package model.document;
 
-import com.mongodb.BasicDBObject;
+import org.bson.Document;
 
 public class AddressDocumentManager extends DocumentManager {
 
-	public AddressDocumentManager(BasicDBObject document) {
+	public AddressDocumentManager(Document document) {
 		super(document);
 	}
 	

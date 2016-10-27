@@ -1,19 +1,19 @@
 package model.document;
 
-import com.mongodb.BasicDBObject;
+import org.bson.Document;
 
 public class CartItemDocumentManager extends DocumentManager {
 
-	public CartItemDocumentManager(BasicDBObject document) {
+	public CartItemDocumentManager(Document document) {
 		super(document);
 	}
 	
 	public int getId() {
-		return document.getInt("id");
+		return document.getInteger("id");
 	}
 	
 	public int getAmount() {
-		return document.getInt("amount");
+		return document.getInteger("amount");
 	}
 	
 	public void setAmount(int amount) {

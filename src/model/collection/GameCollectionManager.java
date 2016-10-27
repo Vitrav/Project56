@@ -2,40 +2,40 @@ package model.collection;
 
 import java.util.Date;
 
-import com.mongodb.BasicDBObject;
+import org.bson.Document;
 
-import model.MongoDatabase;
+import model.Database;
 
 public class GameCollectionManager extends CollectionManager {
 	
 	public GameCollectionManager() {
-		super(MongoDatabase.getInstance().getGameCollection());
+		super(Database.getInstance().getGameCollection());
 	}
 
 	public boolean databaseHasGame(int id) {
-		BasicDBObject query = new BasicDBObject();
+		Document query = new Document();
 		query.put("id", id);
-		return collection.find(query).hasNext();
+		return collection.find(query).iterator().hasNext();
 	}
 	
-	public BasicDBObject getGameDocument(int id) {
-		BasicDBObject query = new BasicDBObject();
+	public Document getGameDocument(int id) {
+		Document query = new Document();
 		query.put("id", id);
-		return (BasicDBObject) collection.find(query).next();
+		return collection.find(query).iterator().next();
 	}
 	
-	public boolean insertNewGameDocument(BasicDBObject gameDocument) {
-		if (!databaseHasGame(gameDocument.getInt("id"))) {
-			collection.insert(gameDocument);
+	public boolean insertNewGameDocument(Document gameDocument) {
+		if (!databaseHasGame(gameDocument.getInteger("id"))) {
+			collection.insertOne(gameDocument);
 			return true;
 		}
 		return false;
 	}
 	
-	public BasicDBObject createGameDocument(int id, String name, String description, String publisher, double price, int age, String platform, String genre, int amount, Date releaseDate) {
+	public Document createGameDocument(int id, String name, String description, String publisher, double price, int age, String platform, String genre, int amount, Date releaseDate) {
 		if (databaseHasGame(id))
 			return getGameDocument(id);
-		BasicDBObject gameDocument = new BasicDBObject();
+		Document gameDocument = new Document();
 		gameDocument.put("id", id);
 		gameDocument.put("name", name);
 		gameDocument.put("description", description);

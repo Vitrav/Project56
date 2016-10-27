@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.Document;
+
 import com.mongodb.BasicDBObject;
 
 import model.collection.UserCollectionManager;
 
 public class UserDocumentManager extends DocumentManager {
 
-	public UserDocumentManager(BasicDBObject document) {
+	public UserDocumentManager(Document document) {
 		super(document);
 	}
 	
@@ -31,7 +33,7 @@ public class UserDocumentManager extends DocumentManager {
 	}
 	
 	public int getAge() {
-		return document.getInt("age");
+		return document.getInteger("age");
 	}
 	
 	public void setAge(int age) {
@@ -71,8 +73,8 @@ public class UserDocumentManager extends DocumentManager {
 		document.replace("private_wish_list", toPrivate);
 	}
 	
-	public BasicDBObject getAddress() {
-		return (BasicDBObject) document.get("address");
+	public Document getAddress() {
+		return (Document) document.get("address");
 	}
 	
 	public void setAddress(BasicDBObject address) {
@@ -80,16 +82,16 @@ public class UserDocumentManager extends DocumentManager {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<BasicDBObject> getCartItems() {
-		return (List<BasicDBObject>) document.get("cart_items");
+	public List<Document> getCartItems() {
+		return (List<Document>) document.get("cart_items");
 	}
 	
-	public void setCartItems(List<BasicDBObject> cartItems) {
+	public void setCartItems(List<Document> cartItems) {
 		document.replace("cart_items", cartItems);
 	}
 	
 	public void addCartItem(int gameId) {
-		List<BasicDBObject> items = getCartItems();
+		List<Document> items = getCartItems();
 		items.add(new UserCollectionManager().createCartItemDocument(gameId));
 		setCartItems(items);
 	}
