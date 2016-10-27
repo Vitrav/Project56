@@ -2,12 +2,15 @@ package model.document;
 
 import org.bson.Document;
 
+import model.Database;
+
 public class CartItemDocumentManager extends DocumentManager {
 
-	public CartItemDocumentManager(Document document) {
-		super(document);
+	public CartItemDocumentManager(Document doc) {
+		super(doc, Database.getInstance().getUserCollection());
+		setFilter(new Document("id", getId()));
 	}
-	
+
 	public int getId() {
 		return document.getInteger("id");
 	}
@@ -17,7 +20,7 @@ public class CartItemDocumentManager extends DocumentManager {
 	}
 	
 	public void setAmount(int amount) {
-		document.replace("amount", amount);
+		update(new Document("amount", amount));
 	}
 
 }

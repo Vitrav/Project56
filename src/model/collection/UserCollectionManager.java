@@ -25,25 +25,7 @@ public class UserCollectionManager extends CollectionManager {
 		query.put("username", username);
 		return collection.find(query).iterator().next();
 	}
-	
-	public void updateAddressDocument(String username, Document newAddressDocument) {
-		if (!databaseHasUser(username))
-			return;
-		getUserDocument(username).replace("address", newAddressDocument);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public boolean addToWishList(String username, int gameId) {
-		if (!databaseHasUser(username))
-			return false;
-		Document userDocument = getUserDocument(username);
-		List<Integer> wishList = userDocument.get("wish_list") == null ? new ArrayList<>() : (List<Integer>) userDocument.get("wish_list");
-		wishList.add(gameId);
-		userDocument.replace("wish_list", wishList);
-		collection.replaceOne(getUserDocument(username), userDocument);
-		return true;
-	}
-	
+		
 //	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, Document address, List<Document> cartItems, List<Document> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
 //		if (databaseHasUser(username))
 //			return false;
@@ -72,19 +54,6 @@ public class UserCollectionManager extends CollectionManager {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public boolean addHistoryDocument(String username, Document historyDocument) {
-		if (!databaseHasUser(username))
-			return false;
-		Document userDocument = getUserDocument(username);
-		Document oldDocument = userDocument;
-		List<Document> historyItems = userDocument.get("purchase_history") == null ? new ArrayList<>() : (List<Document>) userDocument.get("purchase_history");
-		historyItems.add(historyDocument);
-		userDocument.replace("purchase_history", historyItems);
-		collection.replaceOne(oldDocument, userDocument);
-		return true;
-	}
-	
-	@SuppressWarnings("unchecked")
 	public boolean userHasGame(String username, int gameId) {
 		if (!databaseHasUser(username))
 			return false;
@@ -94,20 +63,6 @@ public class UserCollectionManager extends CollectionManager {
 			if ((int) item.get("id") == gameId)
 				return true;
 		return false;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public boolean addToFavouriteList(String username, int gameId) {
-		if (!databaseHasUser(username))
-			return false;
-		if (!userHasGame(username, gameId))
-			return false;
-		Document userDocument = getUserDocument(username);
-		List<Integer> favouriteList = userDocument.get("favourite_list") == null ? new ArrayList<>() : (List<Integer>) userDocument.get("favourite_list");
-		favouriteList.add(gameId);
-		userDocument.replace("favourite_list", favouriteList);
-		collection.updateOne(getUserDocument(username), userDocument);
-		return true;
 	}
 	
 	public Document createAddressDocument(String country, String city, String street, String number, String postalcode) {

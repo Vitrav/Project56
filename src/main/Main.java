@@ -68,9 +68,10 @@ public class Main extends Application {
 
     public static void main(String[] args) {
     	//launch(args);
-    	
     	GameCollectionManager gameCollectionManager = new GameCollectionManager();
     	UserCollectionManager userCollectionManager = new UserCollectionManager();
+    	gameCollectionManager.dropCollection();
+    	userCollectionManager.dropCollection();
     	
     	//Insert two games in the game collection.
     	gameCollectionManager.insertNewGameDocument(gameCollectionManager.createGameDocument(1, "Game", "Awesome game", "EA", 12.22, 18, "PC", "Shooter", 10, new Date()));
@@ -79,84 +80,44 @@ public class Main extends Application {
     	//Insert a new user in the user collection.
     	userCollectionManager.insertUser("SuperUser12", "pass123", 18, new Date(), "SuperUser12@gmail.com", false, true, userCollectionManager.createAddressDocument("Netherlands", "Rotterdam", "Wijnhaven", "107", "1264 ZF"), Arrays.asList(userCollectionManager.createCartItemDocument(1)), Arrays.asList(), Arrays.asList(), Arrays.asList());
     	
-    	//Add a history documents to the user
-    	if (!userCollectionManager.addHistoryDocument("SuperUser12", userCollectionManager.createHistoryDocument(1, new Date())))
-    		System.out.println("user or game can not be found");
-     	if (!userCollectionManager.addHistoryDocument("SuperUser12", userCollectionManager.createHistoryDocument(2, new Date())))
-    		System.out.println("user or game can not be found");
-     	//Add fav game to the user
-    	if (!userCollectionManager.addToFavouriteList("SuperUser12", 2))
-    		System.out.println("User or game can not be found.");
-    	//Add game to wishlist
-    	if (!userCollectionManager.addToWishList("SuperUser12", 1))
-    		System.out.println("User or game can not be found.");
-    	
     	//Print and change userinfo
-    	System.out.println("userinfo:");
     	UserDocumentManager userDocManager = new UserDocumentManager(userCollectionManager.getUserDocument("SuperUser12"));
     	userDocManager.setName("NewName12");
-    	System.out.println(userDocManager.getName());
-    	userDocManager.setAge(20);
-    	System.out.println(userDocManager.getAge());
     	userDocManager.setDateOfBirth(new Date());
-    	System.out.println(userDocManager.getDateOfBirth());
     	userDocManager.setEmail("test@gmail.com");
-    	System.out.println(userDocManager.getEmail());
     	userDocManager.setPassword("newpass123");
-    	System.out.println(userDocManager.getPassword());
+    	userDocManager.setAge(20);
     	userDocManager.setAdmin();
-    	System.out.println(userDocManager.isAdmin());
-    	System.out.println("fav list");
+    	userDocManager.addHistoryItem(1);
     	userDocManager.addFavouriteItem(4);
-    	userDocManager.getFavouriteList().forEach(System.out::println);
-    	System.out.println("wish list");
+//    	userDocManager.getFavouriteList().forEach(System.out::println);
     	userDocManager.addWishItem(4);
-    	userDocManager.getWishList().forEach(System.out::println);
-    	System.out.println("cart items");
+//    	userDocManager.getWishList().forEach(System.out::println);
     	userDocManager.addCartItem(2);
     	for (Document item : userDocManager.getCartItems()) {
     		CartItemDocumentManager cartManager = new CartItemDocumentManager(item);
-    		System.out.println(cartManager.getAmount());
     		cartManager.setAmount(cartManager.getAmount() + 1);
-    		System.out.println(cartManager.getAmount());
     	}
-    		
     	
     	//Print and change address info
-    	System.out.println("\naddress info");
     	AddressDocumentManager addressDocManager = new AddressDocumentManager(userDocManager.getAddress());
     	addressDocManager.setCity("newCity");
-    	System.out.println(addressDocManager.getCity());
     	addressDocManager.setCountry("newCountry");
-    	System.out.println(addressDocManager.getCountry());
     	addressDocManager.setNumber("12A");
-    	System.out.println(addressDocManager.getNumber());
     	addressDocManager.setPostalCode("3173 ZP");
-    	System.out.println(addressDocManager.getPostalCode());
     	addressDocManager.setStreet("newstreet");
-    	System.out.println(addressDocManager.getStreet());
-    	userCollectionManager.updateAddressDocument("SuperUser12", addressDocManager.getDocument());
+    	userDocManager.setAddress(addressDocManager.getDocument());
     	
     	//Print and change game info
-    	System.out.println("\ngameinfo:");
     	GameDocumentManager gameDocManager = new GameDocumentManager(gameCollectionManager.getGameDocument(1));
     	gameDocManager.setName("newGame");
-    	System.out.println(gameDocManager.getName());
     	gameDocManager.setAge(12);
-    	System.out.println(gameDocManager.getAge());
     	gameDocManager.setAmountInStock(4);
-    	System.out.println(gameDocManager.getAmountInStock());
     	gameDocManager.setDate(new Date());
-    	System.out.println(gameDocManager.getDate());
     	gameDocManager.setDescription("new game desc");
-    	System.out.println(gameDocManager.getDescription());
     	gameDocManager.setPlatform("new platform");
-    	System.out.println(gameDocManager.getPlatform());
     	gameDocManager.setPrice(30);
-    	System.out.println(gameDocManager.getPrice());
     	gameDocManager.setGenre("new genre");
-    	System.out.println(gameDocManager.getGenre());
-    	System.out.println(gameDocManager.getPublisher());
     	
 //    	gameCollectionManager.dropCollection();
 //    	userCollectionManager.dropCollection();

@@ -4,18 +4,25 @@ import java.util.Date;
 
 import org.bson.Document;
 
+import model.Database;
+
 public class GameDocumentManager extends DocumentManager {
 	
-	public GameDocumentManager(Document document) {
-		super(document);
+	public GameDocumentManager(Document doc) {
+		super(doc, Database.getInstance().getGameCollection());
+		setFilter(new Document("id", getId()));
 	}
 	
+	public int getId() {
+		return document.getInteger("id");
+	}
+
 	public String getName() {
 		return document.getString("name");
 	}
 	
 	public void setName(String name) {
-		document.replace("name", name);
+		update(new Document("name", name));
 	}
 	
 	public String getDescription() {
@@ -23,7 +30,7 @@ public class GameDocumentManager extends DocumentManager {
 	}
 	
 	public void setDescription(String description) {
-		document.replace("description", description);
+		update(new Document("description", description));
 	}
 	
 	public String getPublisher() {
@@ -35,7 +42,7 @@ public class GameDocumentManager extends DocumentManager {
 	}
 	
 	public void setPrice(double price) {
-		document.replace("price", price);
+		update(new Document("price", price));
 	}
 	
 	public int getAge() {
@@ -43,7 +50,7 @@ public class GameDocumentManager extends DocumentManager {
 	}
 	
 	public void setAge(int age) {
-		document.replace("age", age);
+		update(new Document("age", age));
 	}
 	
 	public String getPlatform() {
@@ -51,7 +58,7 @@ public class GameDocumentManager extends DocumentManager {
 	}
 	
 	public void setPlatform(String platform) {
-		document.replace("platform", platform);
+		update(new Document("platform", platform));
 	}
 	
 	public String getGenre() {
@@ -59,7 +66,7 @@ public class GameDocumentManager extends DocumentManager {
 	}
 	
 	public void setGenre(String genre) {
-		document.replace("genre", genre);
+		update(new Document("genre", genre));
 	}
 	
 	public int getAmountInStock() {
@@ -67,7 +74,7 @@ public class GameDocumentManager extends DocumentManager {
 	}
 	
 	public void setAmountInStock(int amount) {
-		document.replace("amount_in_stock", amount);
+		update(new Document("amount_in_stock", amount));
 	}
 	
 	public String getDate() {
@@ -75,7 +82,7 @@ public class GameDocumentManager extends DocumentManager {
 	}
 	
 	public void setDate(Date date) {
-		 document.replace("release_date", dateFormat.format(date));
+		update(new Document("release_date", dateFormat.format(date)));
 	}
 
 }

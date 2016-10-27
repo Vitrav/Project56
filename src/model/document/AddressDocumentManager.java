@@ -2,12 +2,14 @@ package model.document;
 
 import org.bson.Document;
 
-public class AddressDocumentManager extends DocumentManager {
+import model.Database;
 
-	public AddressDocumentManager(Document document) {
-		super(document);
-	}
+public class AddressDocumentManager extends DocumentManager {
 	
+	public AddressDocumentManager(Document doc) {
+		super(doc, Database.getInstance().getUserCollection());
+	}
+
 	public String getCountry() {
 		return document.getString("country");
 	}
