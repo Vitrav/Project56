@@ -24,9 +24,17 @@
         <processorPath useClasspath="true" />
         <module name="Project5-6" />
       </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Project5-6_2" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Project5-6" target="1.8" />
+      <module name="Project5-6_2" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

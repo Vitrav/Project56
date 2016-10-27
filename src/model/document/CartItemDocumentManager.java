@@ -14,11 +14,11 @@ public class CartItemDocumentManager extends DocumentManager {
 	public int getId() {
 		return document.getInteger("id");
 	}
-	
+
 	public int getAmount() {
 		return document.getInteger("amount");
 	}
-	
+
 	public void setAmount(int amount) {
 		update(new Document("amount", amount));
 	}

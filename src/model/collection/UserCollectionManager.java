@@ -1,6 +1,5 @@
 package model.collection;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,25 +12,24 @@ public class UserCollectionManager extends CollectionManager {
 	public UserCollectionManager() {
 		super(Database.getInstance().getUserCollection());
 	}
-	
+
 	public boolean databaseHasUser(String username) {
 		Document query = new Document();
 		query.put("username", username);
 		return collection.find(query).iterator().hasNext();
 	}
-	
+
 	public Document getUserDocument(String username) {
 		Document query = new Document();
 		query.put("username", username);
 		return collection.find(query).iterator().next();
 	}
-		
 //	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, Document address, List<Document> cartItems, List<Document> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
 //		if (databaseHasUser(username))
 //			return false;
 //		return insertUser(username, password, age, dateOfBirth, email, admin, address, cartItems, historyItems, favouriteList, wishList);
 //	}
-	
+
 	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, boolean privateWishList, Document address, List<Document> cartItems, List<Document> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
 		if (databaseHasUser(username))
 			return false;
@@ -52,19 +50,7 @@ public class UserCollectionManager extends CollectionManager {
 		collection.insertOne(userDocument);
 		return true;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public boolean userHasGame(String username, int gameId) {
-		if (!databaseHasUser(username))
-			return false;
-		Document userDocument = getUserDocument(username);
-		List<Document> historyItems = userDocument.get("purchase_history") == null ? new ArrayList<>() : (List<Document>) userDocument.get("purchase_history");
-		for (Document item : historyItems)
-			if ((int) item.get("id") == gameId)
-				return true;
-		return false;
-	}
-	
+
 	public Document createAddressDocument(String country, String city, String street, String number, String postalcode) {
 		Document addressDocument = new Document();
 		addressDocument.put("country", country);
@@ -74,14 +60,14 @@ public class UserCollectionManager extends CollectionManager {
 		addressDocument.put("postalcode", postalcode);
 		return addressDocument;
 	}
-	
+
 	public Document createCartItemDocument(int gameId) {
 		Document cartItemDocument = new Document();
 		cartItemDocument.put("id", gameId);
 		cartItemDocument.put("amount", 1);
 		return cartItemDocument;
 	}
-	
+
 	public Document createHistoryDocument(int gameId, Date purchaseDate) {
 		Document historyDocument = new Document();
 		historyDocument.put("id", gameId);

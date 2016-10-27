@@ -9,9 +9,9 @@ import org.bson.conversions.Bson;
 import com.mongodb.client.MongoCollection;
 
 public class DocumentManager {
-	
+
 	protected final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	
+
 	protected Document document;
 	protected MongoCollection<Document> collection;
 	private Bson filter;
@@ -20,7 +20,7 @@ public class DocumentManager {
 		this.document = document;
 		this.collection = collection;
 	}
-	
+
 	public Document getDocument() {
 		return document;
 	}
