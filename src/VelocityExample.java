@@ -28,6 +28,7 @@ public final class VelocityExample {
         get(Path.Web.INDEX,          index.indexController.indexPage);
         get(Path.Web.SINGLEPAGE,     singleProductController.singleProductPage);
         get(Path.Web.CART,           cartController.cartPage);
+        get(Path.Web.SHOP,           shopController.shopPage);
         after("*",                   Filters.addGzipHeader);
 
 
