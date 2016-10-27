@@ -6,14 +6,14 @@ import java.util.List;
 
 import org.bson.Document;
 
-import com.mongodb.BasicDBObject;
-
+import model.Database;
 import model.collection.UserCollectionManager;
 
 public class UserDocumentManager extends DocumentManager {
-
-	public UserDocumentManager(Document document) {
-		super(document);
+	
+	public UserDocumentManager(Document doc) {
+		super(doc, Database.getInstance().getUserCollection());
+		setFilter(new Document("username", getName()));
 	}
 
 	public String getName() {
@@ -21,7 +21,8 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setName(String name) {
-		document.replace("username", name);
+		update(new Document("username", name));
+		setFilter(new Document("username", name));
 	}
 
 	public String getPassword() {
@@ -29,7 +30,7 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setPassword(String password) {
-		document.replace("password", password);
+		update(new Document("password", password));
 	}
 
 	public int getAge() {
@@ -37,7 +38,7 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setAge(int age) {
-		document.replace("age", age);
+		update(new Document("age", age));
 	}
 
 	public String getDateOfBirth() {
@@ -46,7 +47,7 @@ public class UserDocumentManager extends DocumentManager {
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		String date = dateFormat.format(dateOfBirth);
-		document.replace("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length()));
+		update(new Document("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length())));
 	}
 
 	public String getEmail() {
@@ -54,7 +55,7 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setEmail(String email) {
-		document.replace("email", email);
+		update(new Document("email", email));
 	}
 
 	public boolean isAdmin() {
@@ -62,7 +63,7 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setAdmin() {
-		document.replace("admin", true);
+		update(new Document("admin", true));
 	}
 
 	public boolean wishListIsPrivate() {
@@ -70,15 +71,15 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setWishList(boolean toPrivate) {
-		document.replace("private_wish_list", toPrivate);
+		update(new Document("private_wish_list", toPrivate));
 	}
 
 	public Document getAddress() {
 		return (Document) document.get("address");
 	}
-
-	public void setAddress(BasicDBObject address) {
-		document.replace("address", address);
+	
+	public void setAddress(Document address) {
+		update(new Document("address", address));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -87,7 +88,7 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setCartItems(List<Document> cartItems) {
-		document.replace("cart_items", cartItems);
+		update(new Document("cart_items", cartItems));
 	}
 
 	public void addCartItem(int gameId) {
@@ -102,7 +103,7 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setPurchaseHistory(List<Integer> historyItems) {
-		document.replace("purchase_history", historyItems);
+		update(new Document("purchase_history", historyItems));
 	}
 
 	public void addHistoryItem(int gameId) {
@@ -117,7 +118,7 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setFavouriteList(List<Integer> favouriteList) {
-		document.replace("favourite_list", favouriteList);
+		update(new Document("favourite_list", favouriteList));
 	}
 
 	public void addFavouriteItem(int gameId) {
@@ -132,7 +133,7 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public void setWishList(List<Integer> wishList) {
-		document.replace("wish_list", wishList);
+		update(new Document("wish_list", wishList));
 	}
 
 	public void addWishItem(int gameId) {
