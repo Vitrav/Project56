@@ -1,13 +1,13 @@
 /**
  * Created by Dave on 25-10-16.
  */
-import java.util.HashMap;
-import java.util.Map;
 
-import spark.ModelAndView;
+import index.singleProductController;
+import viewutil.*;
 import spark.Spark;
-import spark.template.velocity.VelocityTemplateEngine;
 
+import static spark.Spark.*;
+//import static spark.debug.DebugScreen.*;
 import static spark.Spark.get;
 
 /**
@@ -16,33 +16,20 @@ import static spark.Spark.get;
 public final class VelocityExample {
     public static void main(final String[] args) {
         Spark.staticFileLocation("/sources");
-        get("/hello", (request, response) -> {
-//            cssmodel.put("owl", "/sources.css/owl.carousel.sources.css");
-            Map<String, Object> model = new HashMap<>();
-            model.put("hello", "Velocity World");
-            model.put("person", new Person("Foobar"));
 
-            // The vm files are located under the resources directory
-            return new ModelAndView(model, "index.html");
 
-        }, new VelocityTemplateEngine());
+        port(4567);
+//        staticFiles.location("sources/assets");
+//        staticFiles.expireTime(600L);
+//        enableDebugScreen();
+
+        before("*",                  Filters.addTrailingSlashes);
+        before("*",                  Filters.handleLocaleChange);
+
+        get(Path.Web.INDEX,          index.indexController.indexPage);
+        get(Path.Web.LOGIN,          singleProductController.singleProductPage);
+        after("*",                   Filters.addGzipHeader);
+
 
     }
-
-    public static class Person {
-        private String name;
-
-        public Person(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
 }

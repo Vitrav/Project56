@@ -7,7 +7,7 @@ import org.bson.Document;
 import model.Database;
 
 public class GameCollectionManager extends CollectionManager {
-	
+
 	public GameCollectionManager() {
 		super(Database.getInstance().getGameCollection());
 	}
@@ -17,13 +17,13 @@ public class GameCollectionManager extends CollectionManager {
 		query.put("id", id);
 		return collection.find(query).iterator().hasNext();
 	}
-	
+
 	public Document getGameDocument(int id) {
 		Document query = new Document();
 		query.put("id", id);
 		return collection.find(query).iterator().next();
 	}
-	
+
 	public boolean insertNewGameDocument(Document gameDocument) {
 		if (!databaseHasGame(gameDocument.getInteger("id"))) {
 			collection.insertOne(gameDocument);
@@ -31,7 +31,7 @@ public class GameCollectionManager extends CollectionManager {
 		}
 		return false;
 	}
-	
+
 	public Document createGameDocument(int id, String name, String description, String publisher, double price, int age, String platform, String genre, int amount, Date releaseDate) {
 		if (databaseHasGame(id))
 			return getGameDocument(id);

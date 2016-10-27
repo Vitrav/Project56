@@ -13,25 +13,25 @@ public class UserCollectionManager extends CollectionManager {
 	public UserCollectionManager() {
 		super(Database.getInstance().getUserCollection());
 	}
-	
+
 	public boolean databaseHasUser(String username) {
 		Document query = new Document();
 		query.put("username", username);
 		return collection.find(query).iterator().hasNext();
 	}
-	
+
 	public Document getUserDocument(String username) {
 		Document query = new Document();
 		query.put("username", username);
 		return collection.find(query).iterator().next();
 	}
-	
+
 	public void updateAddressDocument(String username, Document newAddressDocument) {
 		if (!databaseHasUser(username))
 			return;
 		getUserDocument(username).replace("address", newAddressDocument);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public boolean addToWishList(String username, int gameId) {
 		if (!databaseHasUser(username))
@@ -43,13 +43,13 @@ public class UserCollectionManager extends CollectionManager {
 		collection.replaceOne(getUserDocument(username), userDocument);
 		return true;
 	}
-	
+
 //	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, Document address, List<Document> cartItems, List<Document> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
 //		if (databaseHasUser(username))
 //			return false;
 //		return insertUser(username, password, age, dateOfBirth, email, admin, address, cartItems, historyItems, favouriteList, wishList);
 //	}
-	
+
 	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, boolean privateWishList, Document address, List<Document> cartItems, List<Document> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
 		if (databaseHasUser(username))
 			return false;
@@ -70,7 +70,7 @@ public class UserCollectionManager extends CollectionManager {
 		collection.insertOne(userDocument);
 		return true;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public boolean addHistoryDocument(String username, Document historyDocument) {
 		if (!databaseHasUser(username))
@@ -83,7 +83,7 @@ public class UserCollectionManager extends CollectionManager {
 		collection.replaceOne(oldDocument, userDocument);
 		return true;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public boolean userHasGame(String username, int gameId) {
 		if (!databaseHasUser(username))
@@ -95,7 +95,7 @@ public class UserCollectionManager extends CollectionManager {
 				return true;
 		return false;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public boolean addToFavouriteList(String username, int gameId) {
 		if (!databaseHasUser(username))
@@ -109,7 +109,7 @@ public class UserCollectionManager extends CollectionManager {
 		collection.updateOne(getUserDocument(username), userDocument);
 		return true;
 	}
-	
+
 	public Document createAddressDocument(String country, String city, String street, String number, String postalcode) {
 		Document addressDocument = new Document();
 		addressDocument.put("country", country);
@@ -119,14 +119,14 @@ public class UserCollectionManager extends CollectionManager {
 		addressDocument.put("postalcode", postalcode);
 		return addressDocument;
 	}
-	
+
 	public Document createCartItemDocument(int gameId) {
 		Document cartItemDocument = new Document();
 		cartItemDocument.put("id", gameId);
 		cartItemDocument.put("amount", 1);
 		return cartItemDocument;
 	}
-	
+
 	public Document createHistoryDocument(int gameId, Date purchaseDate) {
 		Document historyDocument = new Document();
 		historyDocument.put("id", gameId);
