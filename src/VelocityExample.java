@@ -3,7 +3,6 @@
  */
 import index.*;
 import viewutil.*;
-import spark.Spark;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.*;
@@ -13,9 +12,9 @@ import static spark.Spark.get;
  * VelocityTemplateRoute example.
  */
 public final class VelocityExample {
+
     public static void main(final String[] args) {
 //        Spark.staticFileLocation("/sources");
-
 
         port(4567);
         staticFiles.location("/sources");
@@ -25,10 +24,10 @@ public final class VelocityExample {
         before("*",                  Filters.addTrailingSlashes);
         before("*",                  Filters.handleLocaleChange);
 
-        get(Path.Web.INDEX,          index.indexController.indexPage);
-        get(Path.Web.SINGLEPAGE,     singleProductController.singleProductPage);
-        get(Path.Web.CART,           cartController.cartPage);
-        get(Path.Web.SHOP,           shopController.shopPage);
+        get(Path.Web.INDEX,          IndexController.indexPage);
+        get(Path.Web.SINGLEPAGE,     SingleProductController.singleProductPage);
+        get(Path.Web.CART,           CartController.cartPage);
+        get(Path.Web.SHOP,           ShopController.shopPage);
         after("*",                   Filters.addGzipHeader);
 
 
