@@ -11,7 +11,7 @@ public class Path {
         @Getter public static final String SINGLEPAGE = "/single-product/";
         @Getter public static final String CART = "/cart/";
         @Getter public static final String SHOP = "/shop/";
-//        @Getter public static final String ONE_BOOK = "/books/:isbn/";
+        @Getter public static final String LOGIN = "/login/";
     }
 
     public static class Template {
@@ -19,6 +19,7 @@ public class Path {
         public final static String SINGLEPAGE = "/sources/HTML/singlePage/single-product.vm";
         public final static String CART = "/sources/HTML/cart/cart.vm";
         public static final String SHOP = "/sources/HTML/shop/shop.vm";
+        public static final String LOGIN = "/sources/HTML/login/login.vm";
         public static final String NOT_FOUND = "/velocity/notFound.html";
     }
 

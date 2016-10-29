@@ -17,11 +17,11 @@ import static viewutil.RequestUtil.getSessionLocale;
 public class ViewUtil {
 
     // Renders a template given a main.model and a request
-    // The request is needed to check the user session for language settings
-    // and to see if the user is logged in
+    // The request is needed to check the User session for language settings
+    // and to see if the User is logged in
     public static String render(Request request, Map<String, Object> model, String templatePath) {
-//        main.model.put("msg", new MessageBundle(getSessionLocale(request)));
-//        main.model.put("currentUser", getSessionCurrentUser(request));
+        model.put("msg", new MessageBundle(getSessionLocale(request)));
+        model.put("currentUser", getSessionCurrentUser(request));
         model.put("WebPath", Path.Web.class); // Access application URLs from templates
         return strictVelocityEngine().render(new ModelAndView(model, templatePath));
     }

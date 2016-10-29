@@ -16,7 +16,7 @@ import model.collection.GameCollectionManager;
  */
 
 
-//Main class which extends from Application Class
+//Main class which extends from main.Application Class
 public class Main extends Application {
 	
     //This is our PrimaryStage (It contains everything)
@@ -77,7 +77,7 @@ public class Main extends Application {
     	gameCollectionManager.insertNewGameDocument(gameCollectionManager.createGameDocument(1, "Game", "Awesome game", "EA", 12.22, 18, "PC", "Shooter", 10, new Date()));
     	gameCollectionManager.insertNewGameDocument(gameCollectionManager.createGameDocument(2, "Great Game", "Great game, play this 24/7", "Nintendo", 20.00, 7, "PS3", "Shooter", 2, new Date()));
 //    	
-//    	//Insert a new user in the user collection.
+//    	//Insert a new User in the User collection.
 //    	userCollectionManager.insertUser("SuperUser12", "pass123", 18, new Date(), "SuperUser12@gmail.com", false, true, userCollectionManager.createAddressDocument("Netherlands", "Rotterdam", "Wijnhaven", "107", "1264 ZF"), Arrays.asList(userCollectionManager.createCartItemDocument(1)), Arrays.asList(), Arrays.asList(), Arrays.asList());
 //    	
 //    	//Print and change userinfo

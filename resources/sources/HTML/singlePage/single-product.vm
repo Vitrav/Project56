@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     #parse("sources/HTML/layout/layout.vm")
-#@mainLayout()
-  <body>
+    #@mainLayout()
+    <body>
 
     
     <div class="product-big-title-area">
