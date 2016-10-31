@@ -41,13 +41,15 @@ public final class Application {
         get(Path.Web.LOGIN, LoginController.loginPage);
         get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
         after("*", Filters.addGzipHeader);
-        post("/test", (request, response) -> {
+        post("/index", (request, response) -> {
             // Get foo then call your Java method
-            String foo = request.queryParams("login_username");
-            String test = request.queryParams("login_password");
-            userCollect.insertUserRegister(foo,test);
-            System.out.println(foo);
-            return foo;
+            String username = request.queryParams("username");
+            String password = request.queryParams("password");
+            String age = request.queryParams("age");
+            String email = request.queryParams("email");
+            userCollect.insertUserRegister(username, password, age, email);
+            System.out.println(username);
+            return username;
         });
 
 

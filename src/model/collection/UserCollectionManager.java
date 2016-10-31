@@ -54,7 +54,7 @@ public class UserCollectionManager extends CollectionManager {
 		return true;
 	}
 
-	public boolean insertUserRegister(String username, String password	) {
+	public boolean insertUserRegister(String username, String password, String age, String email	) {
 		if (databaseHasUser(username))
 			return false;
 
@@ -62,9 +62,9 @@ public class UserCollectionManager extends CollectionManager {
 //		String date = dateFormat.format(dateOfBirth);
 		userDocument.put("username", username);
 		userDocument.put("password", password);
-//		userDocument.put("age", age);
+		userDocument.put("age", age);
 //		userDocument.put("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length()));
-//		userDocument.put("email", email);
+		userDocument.put("email", email);
 //		userDocument.put("admin", admin);
 //		userDocument.put("private_wish_list", privateWishList);
 //		userDocument.put("address", address);
