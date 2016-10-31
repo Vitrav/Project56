@@ -33,6 +33,10 @@ public class UserDocumentManager extends DocumentManager {
 		update(new Document("password", password));
 	}
 
+	public String getSalt() {
+		return document.getString("salt");
+	}
+
 	public int getAge() {
 		return document.getInteger("age");
 	}
