@@ -33,6 +33,7 @@ public final class Application {
         get(Path.Web.CART,           cartController.cartPage);
         get(Path.Web.SHOP,           shopController.shopPage);
         get(Path.Web.LOGIN,          loginController.loginPage);
+        get(Path.Web.REGISTRATION,   RegistrationController.registrationPage);
         after("*",                   Filters.addGzipHeader);
 
 
