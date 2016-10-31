@@ -1,6 +1,6 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="registrationForm" method="post">
+<form id="registrationForm" method="post", action = "/test">
     #if($authenticationFailed)
         <p class="bad notification">$msg.get("LOGIN_AUTH_FAILED")</p>
     #elseif($authenticationSucceeded)
@@ -15,12 +15,12 @@
     <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>
     <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_PASSWORD")" value="" required>
     <label>$msg.get("REGISTRATION_LABEL_AGE")</label>
-    <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_AGE")" value="" required>
+    <input type="date" name="date" placeholder="$msg.get("REGISTRATION_LABEL_AGE")" value="" required>
     <label>$msg.get("REGISTRATION_LABEL_EMAIL")</label>
-    <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_EMAIL")" value="" required>
+    <input type="email" name="email" placeholder="$msg.get("REGISTRATION_LABEL_EMAIL")" value="" required>
     #if($loginRedirect)
         <input type="hidden" name="loginRedirect" value="$loginRedirect">
     #end
-    <input type="submit" value="$msg.get("LOGIN_BUTTON_LOGIN")">
+    <input type="submit" value="$msg.get("REGISTRATION_BUTTON_REGISTER")">
 </form>
 #end

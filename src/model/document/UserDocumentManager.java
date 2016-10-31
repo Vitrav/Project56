@@ -8,9 +8,9 @@ import org.bson.Document;
 
 import model.Database;
 import model.collection.UserCollectionManager;
-
+import main.Application.*;
 public class UserDocumentManager extends DocumentManager {
-	
+
 	public UserDocumentManager(Document doc) {
 		super(doc, Database.getInstance().getUserCollection());
 		setFilter(new Document("username", getName()));

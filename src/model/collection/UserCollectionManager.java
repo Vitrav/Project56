@@ -1,14 +1,13 @@
 package model.collection;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.bson.Document;
 
 import model.Database;
-import user.Address;
-import user.User;
+
+import static spark.Spark.post;
 
 public class UserCollectionManager extends CollectionManager {
 
@@ -27,24 +26,26 @@ public class UserCollectionManager extends CollectionManager {
 		query.put("username", username);
 		return collection.find(query).iterator().next();
 	}
+//	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, Document address, List<Document> cartItems, List<Document> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
+//		if (databaseHasUser(username))
+//			return false;
+//		return insertUser(username, password, age, dateOfBirth, email, admin, address, cartItems, historyItems, favouriteList, wishList);
+//	}
 
-	public boolean insertUser(User user) {
-		return insertUser(user, Arrays.asList(), Arrays.asList(),  Arrays.asList(), Arrays.asList());
-	}
-
-	public boolean insertUser(User user, List<Document> cartItems, List<Document> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
-		if (databaseHasUser(user.getUsername()))
+	public boolean insertUser(String username, String password, int age, Date dateOfBirth, String email, boolean admin, boolean privateWishList, Document address, List<Document> cartItems, List<Document> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
+		if (databaseHasUser(username))
 			return false;
+
 		Document userDocument = new Document();
-		String date = dateFormat.format(user.getDateOfBirth());
-		userDocument.put("username", user.getUsername());
-		userDocument.put("password", user.getHashedPassword());
-		userDocument.put("age", user.getAge());
-		userDocument.put("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length()));
-		userDocument.put("email", user.getEmail());
-		userDocument.put("admin", user.getIsAdmin());
-		userDocument.put("private_wish_list", user.getHasPrivateWishList());
-		userDocument.put("address", createAddressDocument(user.getAddress()));
+//		String date = dateFormat.format(dateOfBirth);
+		userDocument.put("username", username);
+		userDocument.put("password", password);
+		userDocument.put("age", age);
+//		userDocument.put("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length()));
+		userDocument.put("email", email);
+		userDocument.put("admin", admin);
+		userDocument.put("private_wish_list", privateWishList);
+		userDocument.put("address", address);
 		userDocument.put("cart_items", cartItems);
 		userDocument.put("purchase_history", historyItems);
 		userDocument.put("favourite_list", favouriteList);
@@ -53,13 +54,35 @@ public class UserCollectionManager extends CollectionManager {
 		return true;
 	}
 
-	public Document createAddressDocument(Address address) {
+	public boolean insertUserRegister(String username, String password	) {
+		if (databaseHasUser(username))
+			return false;
+
+		Document userDocument = new Document();
+//		String date = dateFormat.format(dateOfBirth);
+		userDocument.put("username", username);
+		userDocument.put("password", password);
+//		userDocument.put("age", age);
+//		userDocument.put("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length()));
+//		userDocument.put("email", email);
+//		userDocument.put("admin", admin);
+//		userDocument.put("private_wish_list", privateWishList);
+//		userDocument.put("address", address);
+//		userDocument.put("cart_items", cartItems);
+//		userDocument.put("purchase_history", historyItems);
+//		userDocument.put("favourite_list", favouriteList);
+//		userDocument.put("wish_list", wishList);
+		collection.insertOne(userDocument);
+		return true;
+	}
+
+	public Document createAddressDocument(String country, String city, String street, String number, String postalcode) {
 		Document addressDocument = new Document();
-		addressDocument.put("country", address.getCountry());
-		addressDocument.put("city", address.getCity());
-		addressDocument.put("street", address.getStreet());
-		addressDocument.put("number", address.getNumber());
-		addressDocument.put("postalcode", address.getPostalCode());
+		addressDocument.put("country", country);
+		addressDocument.put("city", city);
+		addressDocument.put("street", street);
+		addressDocument.put("number", number);
+		addressDocument.put("postalcode", postalcode);
 		return addressDocument;
 	}
 

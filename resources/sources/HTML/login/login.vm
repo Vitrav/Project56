@@ -1,6 +1,6 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="loginForm" method="post">
+<form id="loginForm" method="post", action = "/test">
     #if($authenticationFailed)
         <p class="bad notification">$msg.get("LOGIN_AUTH_FAILED")</p>
     #elseif($authenticationSucceeded)
@@ -11,12 +11,14 @@
     <h1>$msg.get("LOGIN_HEADING")</h1>
     <p>$msg.get("LOGIN_INSTRUCTIONS", $WebPath.getINDEX())</p>
     <label>$msg.get("LOGIN_LABEL_USERNAME")</label>
-    <input type="text" name="username" placeholder="$msg.get("LOGIN_LABEL_USERNAME")" value="" required>
+    <input type="text" name="login_username" placeholder="$msg.get("LOGIN_LABEL_USERNAME")" value="" required>
     <label>$msg.get("LOGIN_LABEL_PASSWORD")</label>
-    <input type="password" name="password" placeholder="$msg.get("LOGIN_LABEL_PASSWORD")" value="" required>
+    <input type="password" name="login_password" placeholder="$msg.get("LOGIN_LABEL_PASSWORD")" value="" required>
     #if($loginRedirect)
         <input type="hidden" name="loginRedirect" value="$loginRedirect">
     #end
     <input type="submit" value="$msg.get("LOGIN_BUTTON_LOGIN")">
 </form>
+
+
 #end

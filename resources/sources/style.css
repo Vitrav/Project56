@@ -971,24 +971,66 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 }
 
 
-#login-form-wrap, #coupon-collapse-wrap {
-    background: none repeat scroll 0 0 #f4f4f4;
-    margin-bottom: 30px;
-    padding: 25px;
+#loginForm {
+    max-width: 400px;
+    margin: 0 auto;
 }
-#login-form-wrap label {
+
+#loginForm label {
     display: block;
-    margin-bottom: 5px;
+    width: 100%
 }
-#login-form-wrap input[type="text"], #login-form-wrap input[type="password"] {
-    margin-bottom: 10px;
-    width: 250px;
+
+#loginForm input {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    width: 100%;
+    border-radius: 3px;
+    margin: 2px 0 20px 0;
 }
-#login-form-wrap input[type="submit"] {
+
+/*#loginForm input[type="submit"] {*/
+    /*color: white;*/
+    /*background: #274555;*/
+    /*border: 0;*/
+    /*cursor: pointer;*/
+/*}*/
+
+#loginForm input[type="submit"] {
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 
+#registrationForm {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#registrationForm label {
+    display: block;
+    width: 100%
+}
+
+#registrationForm input {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    width: 100%;
+    border-radius: 3px;
+    margin: 2px 0 20px 0;
+}
+
+/*#loginForm input[type="submit"] {*/
+/*color: white;*/
+/*background: #274555;*/
+/*border: 0;*/
+/*cursor: pointer;*/
+/*}*/
+
+#registrationForm input[type="submit"] {
+    margin-bottom: 15px;
+    cursor: pointer;
+}
 
 .single-shop-product h2 {
     font-size: 20px;

@@ -20,6 +20,8 @@ public class RegistrationController {
         Map<String, Object> model = new HashMap<>();
         model.put("loggedOut", removeSessionAttrLoggedOut(request));
         model.put("loginRedirect", removeSessionAttrLoginRedirect(request));
+
         return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+
     };
 }
