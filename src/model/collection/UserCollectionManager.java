@@ -45,10 +45,7 @@ public class UserCollectionManager extends CollectionManager {
 		collection.insertOne(userDocument);
 	}
 
-	public boolean insertUserRegister(String username, String password, String age, String email	) {
-		if (databaseHasUser(username))
-			return false;
-
+	public void insertUserRegister(String username, String password, String age, String email	) {
 		Document userDocument = new Document();
 //		String date = dateFormat.format(dateOfBirth);
 		userDocument.put("username", username);
@@ -64,7 +61,6 @@ public class UserCollectionManager extends CollectionManager {
 //		userDocument.put("favourite_list", favouriteList);
 //		userDocument.put("wish_list", wishList);
 		collection.insertOne(userDocument);
-		return true;
 	}
 
 	public Document createAddressDocument(Address address) {

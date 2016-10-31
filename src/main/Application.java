@@ -19,6 +19,7 @@ public final class Application {
 
     public static void main(final String[] args) {
 //        Spark.staticFileLocation("/sources");
+        UserCollectionManager userCollect = new UserCollectionManager();
 
         port(4567);
         staticFiles.location("/sources");
