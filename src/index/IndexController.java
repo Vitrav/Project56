@@ -14,14 +14,14 @@ import java.util.Map;
 /**
  * Created by Dave on 26-10-16.
  */
-public class cartController {
-    public static Route cartPage=(Request request, Response response) -> {
+public class IndexController {
+    public static Route indexPage=(Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
 
 
         // The sources.HTML files are located under the resources directory
 //        return new ModelAndView(main.model, main.viewutil.Path.Template.INDEX);
-        return ViewUtil.render(request, model, viewutil.Path.Template.CART);
+        return ViewUtil.render(request, model, viewutil.Path.Template.INDEX);
 
 
     };

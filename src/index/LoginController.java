@@ -2,10 +2,9 @@ package index;
 
 
 import spark.Route;
-import user.userController;
+import user.UserController;
 import viewutil.Path;
 import viewutil.ViewUtil;
-import viewutil.RequestUtil;
 import spark.Request;
 import spark.Response;;
 import java.util.HashMap;
@@ -17,7 +16,7 @@ import static viewutil.RequestUtil.*;
 /**
  * Created by Dave on 26-10-16.
  */
-public class loginController {
+public class LoginController {
     public static Route loginPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         model.put("loggedOut", removeSessionAttrLoggedOut(request));
@@ -27,7 +26,7 @@ public class loginController {
 
     public static Route handleLoginPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        if (!userController.authenticate(getQueryUsername(request), getQueryPassword(request))) {
+        if (!UserController.authenticate(getQueryUsername(request), getQueryPassword(request))) {
             model.put("authenticationFailed", true);
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }

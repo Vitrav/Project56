@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by Dave on 26-10-16.
  */
-public class singleProductController {
+public class SingleProductController {
     public static Route singleProductPage=(Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
 

@@ -23,7 +23,7 @@ public class Database {
 		this.userCollection = db.getCollection("users");
 	}
 
-	public Mongo getMongo() {
+	public MongoClient getMongo() {
 		return mongo;
 	}
 
