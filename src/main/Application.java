@@ -17,22 +17,16 @@ import static spark.Spark.get;
  */
 public final class Application {
 
-    public static UserDao UserDao;
-//    public UserCollectionManager userCollect;
     public static void main(final String[] args) {
 //        Spark.staticFileLocation("/sources");
-        UserDao = new UserDao();
-        Database database = Database.getInstance();
-        database.getDatabase();
-        UserCollectionManager userCollect = new UserCollectionManager();
 
         port(4567);
         staticFiles.location("/sources");
         staticFiles.expireTime(600L);
         enableDebugScreen();
 
-        before("*", Filters.addTrailingSlashes);
-        before("*", Filters.handleLocaleChange);
+        before("*",                  Filters.addTrailingSlashes);
+        before("*",                  Filters.handleLocaleChange);
 
         get(Path.Web.INDEX, index.IndexController.indexPage);
         get(Path.Web.SINGLEPAGE, SingleProductController.singleProductPage);

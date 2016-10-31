@@ -2,8 +2,6 @@ package user;
 
 public class Address {
 
-//    public Document createAddressDocument(String country, String city, String street, String number, String postalcode) {
-
     private String country;
     private String city;
     private String street;

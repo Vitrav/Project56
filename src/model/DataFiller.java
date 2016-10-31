@@ -96,8 +96,7 @@ public class DataFiller {
 		try {
 			Integer.parseInt(s);
 			return true;
-		} catch (NumberFormatException exception) {
-		}
+		} catch (NumberFormatException exception) {	}
 		return false;
 	}
 	
