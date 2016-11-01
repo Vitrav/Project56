@@ -3,7 +3,6 @@ package main; /**
  */
 import index.*;
 import model.Database;
-import model.collection.CollectionManager;
 import model.collection.UserCollectionManager;
 import org.mindrot.jbcrypt.BCrypt;
 import user.*;
@@ -25,6 +24,8 @@ import static spark.Spark.get;
  */
 public final class Application {
 
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
     public static void main(final String[] args) {
         String salt = BCrypt.gensalt();
 //        Spark.staticFileLocation("/sources");
@@ -35,48 +36,55 @@ public final class Application {
         staticFiles.expireTime(600L);
         enableDebugScreen();
 
-        before("*",                  Filters.addTrailingSlashes);
-        before("*",                  Filters.handleLocaleChange);
+        before("*", Filters.addTrailingSlashes);
+        before("*", Filters.handleLocaleChange);
 
-        get(Path.Web.INDEX,         index.IndexController.indexPage);
-        get(Path.Web.SINGLEPAGE,    SingleProductController.singleProductPage);
-        get(Path.Web.CART,          CartController.cartPage);
-        get(Path.Web.SHOP,          ShopController.shopPage);
-        get(Path.Web.LOGIN,         LoginController.loginPage);
-        post(Path.Web.LOGIN,        LoginController.handleLoginPost);
-        post(Path.Web.LOGOUT,       LoginController.handleLogoutPost);
-        get(Path.Web.REGISTRATION,  RegistrationController.registrationPage);
+        get(Path.Web.INDEX, index.IndexController.indexPage);
+        get(Path.Web.SINGLEPAGE, SingleProductController.singleProductPage);
+        get(Path.Web.CART, CartController.cartPage);
+        get(Path.Web.SHOP, ShopController.shopPage);
+        get(Path.Web.LOGIN, LoginController.loginPage);
+        post(Path.Web.LOGIN, LoginController.handleLoginPost);
+        post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
+        get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
         after("*", Filters.addGzipHeader);
+
         post("/index", (request, response) -> {
             // Get foo then call your Java method
             String username = request.queryParams("username");
             String password = request.queryParams("password");
-            String doB= request.queryParams("doB");
+            String doB = request.queryParams("doB");
             String email = request.queryParams("email");
             String country = request.queryParams("country");
             String postalCode = request.queryParams("postalcode");
             String city = request.queryParams("city");
             String street = request.queryParams("street");
             String number = request.queryParams("number");
+            doB = doB.replaceAll("-", "/");
 
             // Create a format in which a string containing the date will be parsed
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-            Date dateOfBirth= dateFormat.parse(doB);
+            Date dateOfBirth = dateFormat.parse(doB);
+            final UserController controller = new UserController(username);
+
+            if (controller.databaseHasUser())
+                System.out.println("has user");
+            else
+                System.out.println("no user found");
 
             // calculate age
             int age = calculateAge(dateOfBirth);
+//          userCollectionManager.insertUserRegister(username, password, doB   , email);
 
             // insert a user in the database
             userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, false, false));
-            System.out.println(dateOfBirth);
-            return username;
+            System.out.println("user created");
+
+            return response;
         });
-
-
-
     }
 
-    private static int calculateAge(Date dateOfBirth){
+        private static int calculateAge(Date dateOfBirth) {
         //get the birth date
         Calendar birthDate = Calendar.getInstance();
         birthDate.setTime(dateOfBirth);
@@ -88,4 +96,5 @@ public final class Application {
         //return the current date - the birth date for the age
         return currentDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
     }
+
 }

@@ -65,11 +65,11 @@ public class Main extends Application {
 
     public static void main(String[] args) {
     	//launch(args);
-        Database database = Database.getInstance();
-    	DataFiller filler = new DataFiller();
-    	GameCollectionManager gameCollectionManager = new GameCollectionManager();
+//        Database database = Database.getInstance();
+//    	DataFiller filler = new DataFiller();
+//    	GameCollectionManager gameCollectionManager = new GameCollectionManager();
 //    	gameCollectionManager.dropCollection();
-        UserCollectionManager userCollectionManager = new UserCollectionManager();
+//        UserCollectionManager userCollectionManager = new UserCollectionManager();
 //        userCollectionManager.dropCollection();
 //
 //    	int size = filler.getDataLines().size();
@@ -81,8 +81,8 @@ public class Main extends Application {
 //    	}
     	
 //    	//Insert two games in the game collection.
-    	gameCollectionManager.insertNewGameDocument(gameCollectionManager.createGameDocument(1, "Game", "Awesome game", "EA", 12.22, 18, "PC", "Shooter", 10, new Date()));
-    	gameCollectionManager.insertNewGameDocument(gameCollectionManager.createGameDocument(2, "Great Game", "Great game, play this 24/7", "Nintendo", 20.00, 7, "PS3", "Shooter", 2, new Date()));
+//    	gameCollectionManager.insertNewGameDocument(gameCollectionManager.createGameDocument(1, "Game", "Awesome game", "EA", 12.22, 18, "PC", "Shooter", 10, new Date()));
+//    	gameCollectionManager.insertNewGameDocument(gameCollectionManager.createGameDocument(2, "Great Game", "Great game, play this 24/7", "Nintendo", 20.00, 7, "PS3", "Shooter", 2, new Date()));
 //    	
 //    	//Insert a new User in the User collection.
 //   	userCollectionManager.insertUser("SuperUser12", "pass123", 18, new Date(), "SuperUser12@gmail.com", false, true, userCollectionManager.createAddressDocument("Netherlands", "Rotterdam", "Wijnhaven", "107", "1264 ZF"), Arrays.asList(userCollectionManager.createCartItemDocument(1)), Arrays.asList(), Arrays.asList(), Arrays.asList());

@@ -17,6 +17,7 @@ import static viewutil.RequestUtil.*;
  * Created by Dave on 26-10-16.
  */
 public class LoginController {
+
     public static Route loginPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         model.put("loggedOut", removeSessionAttrLoggedOut(request));
@@ -26,7 +27,9 @@ public class LoginController {
 
     public static Route handleLoginPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
+        System.out.println("test");
         UserController controller = new UserController(getQueryUsername(request));
+        System.out.println(controller.authenticate(getQueryPassword(request)));
         if (!controller.authenticate(getQueryPassword(request))) {
             model.put("authenticationFailed", true);
             return ViewUtil.render(request, model, Path.Template.LOGIN);

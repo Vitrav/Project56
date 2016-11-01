@@ -26,7 +26,7 @@ public class UserController {
     public boolean authenticate(String password) {
         if (username.isEmpty() || password.isEmpty())
             return false;
-        if (!databaseHasUser(username))
+        if (!databaseHasUser())
             return false;
 
         String hashedPassword = BCrypt.hashpw(password, userDocumentManager.getSalt());
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     public boolean chanceUsername(String username) {
-        if (!databaseHasUser(username) && usernameIsValid(username))
+        if (!databaseHasUser() && usernameIsValid(username))
             return false;
         userDocumentManager.setName(username);
         return true;
@@ -81,7 +81,7 @@ public class UserController {
         return true;
     }
 
-    public boolean databaseHasUser(String username) {
+    public boolean databaseHasUser() {
         Document query = new Document();
         query.put("username", username);
         return collection.find(query).iterator().hasNext();

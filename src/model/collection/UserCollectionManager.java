@@ -28,12 +28,11 @@ public class UserCollectionManager extends CollectionManager {
 
 	public void insertUser(User user, List<Document> cartItems, List<Document> historyItems, List<Integer> favouriteList, List<Integer> wishList) {
 		Document userDocument = new Document();
-		String date = dateFormat.format(user.getDateOfBirth());
 		userDocument.put("username", user.getUsername());
 		userDocument.put("password", user.getHashedPassword());
         userDocument.put("salt", user.getSalt());
 		userDocument.put("age", user.getAge());
-		userDocument.put("date_of_birth", date);
+		userDocument.put("date_of_birth", dateFormat.format(user.getDateOfBirth()));
 		userDocument.put("email", user.getEmail());
 		userDocument.put("admin", user.getIsAdmin());
 		userDocument.put("private_wish_list", user.getHasPrivateWishList());
