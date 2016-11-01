@@ -12,7 +12,7 @@ import model.Database;
 
 public class CollectionManager {
 
-	protected final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	protected final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	protected MongoCollection<Document> collection;
 
 	public CollectionManager(MongoCollection<Document> collection) {

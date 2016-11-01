@@ -33,7 +33,7 @@ public class UserCollectionManager extends CollectionManager {
 		userDocument.put("password", user.getHashedPassword());
         userDocument.put("salt", user.getSalt());
 		userDocument.put("age", user.getAge());
-		userDocument.put("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length()));
+		userDocument.put("date_of_birth", date);
 		userDocument.put("email", user.getEmail());
 		userDocument.put("admin", user.getIsAdmin());
 		userDocument.put("private_wish_list", user.getHasPrivateWishList());
@@ -45,14 +45,14 @@ public class UserCollectionManager extends CollectionManager {
 		collection.insertOne(userDocument);
 	}
 
-	public void insertUserRegister(String username, String password, String age, String email	) {
-		Document userDocument = new Document();
+	public void insertUserRegister(String username, String password, String age, String email) {
+//		Document userDocument = new Document();
 //		String date = dateFormat.format(dateOfBirth);
-		userDocument.put("username", username);
-		userDocument.put("password", password);
-		userDocument.put("age", age);
+//		userDocument.put("username", username);
+//		userDocument.put("password", password);
+//		userDocument.put("age", age);
 //		userDocument.put("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length()));
-		userDocument.put("email", email);
+//		userDocument.put("email", email);
 //		userDocument.put("admin", admin);
 //		userDocument.put("private_wish_list", privateWishList);
 //		userDocument.put("address", address);
@@ -60,7 +60,7 @@ public class UserCollectionManager extends CollectionManager {
 //		userDocument.put("purchase_history", historyItems);
 //		userDocument.put("favourite_list", favouriteList);
 //		userDocument.put("wish_list", wishList);
-		collection.insertOne(userDocument);
+//		collection.insertOne(userDocument);
 	}
 
 	public Document createAddressDocument(Address address) {

@@ -15,9 +15,20 @@
     <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>
     <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_PASSWORD")" value="" required>
     <label>$msg.get("REGISTRATION_LABEL_AGE")</label>
-    <input type="date" name="age" placeholder="$msg.get("REGISTRATION_LABEL_AGE")" value="" required>
+    <input type="date" name="doB" placeholder="$msg.get("REGISTRATION_LABEL_AGE")" value="" required>
     <label>$msg.get("REGISTRATION_LABEL_EMAIL")</label>
     <input type="email" name="email" placeholder="$msg.get("REGISTRATION_LABEL_EMAIL")" value="" required>
+    <label>$msg.get("REGISTRATION_LABEL_COUNTRY")</label>
+    <input type="text" name="country" placeholder="$msg.get("REGISTRATION_LABEL_COUNTRY")" value="" required>
+    <label>$msg.get("REGISTRATION_LABEL_POSTALCODE")</label>
+    <input type="text" name="postalcode" placeholder="$msg.get("REGISTRATION_LABEL_POSTALCODE")" value="" required>
+    <label>$msg.get("REGISTRATION_LABEL_CITY")</label>
+    <input type="text" name="city" placeholder="$msg.get("REGISTRATION_LABEL_CITY")" value="" required>
+    <label>$msg.get("REGISTRATION_LABEL_STREET")</label>
+    <input type="text" name="street" placeholder="$msg.get("REGISTRATION_LABEL_STREET")" value="" required>
+    <label>$msg.get("REGISTRATION_LABEL_NUMBER")</label>
+    <input type="text" name="number" placeholder="$msg.get("REGISTRATION_LABEL_NUMBER")" value="" required>
+
     #if($loginRedirect)
         <input type="hidden" name="loginRedirect" value="$loginRedirect">
     #end

@@ -70,6 +70,7 @@ public class Main extends Application {
     	GameCollectionManager gameCollectionManager = new GameCollectionManager();
 //    	gameCollectionManager.dropCollection();
         UserCollectionManager userCollectionManager = new UserCollectionManager();
+//        userCollectionManager.dropCollection();
 //
 //    	int size = filler.getDataLines().size();
 //    	System.out.println(size);
