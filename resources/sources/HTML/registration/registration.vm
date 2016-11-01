@@ -1,6 +1,6 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="registrationForm" method="post", action = "/index">
+<form id="registrationForm" method="post", action = "/registration/">
     #if($authenticationFailed)
         <p class="bad notification">$msg.get("LOGIN_AUTH_FAILED")</p>
     #elseif($authenticationSucceeded)

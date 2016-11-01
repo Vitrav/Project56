@@ -20,6 +20,37 @@ public class RequestUtil {
         return request.queryParams("password");
     }
 
+    public static String getdoB(Request request) {
+        String doB = request.queryParams("doB");
+        if (doB.contains("-"))
+            doB = doB.replaceAll("-", "/");
+        return doB;
+    }
+
+    public static String getEmail(Request request) {
+        return request.queryParams("email");
+    }
+
+    public static String getCountry(Request request) {
+        return request.queryParams("country");
+    }
+
+    public static String getPostal(Request request) {
+        return request.queryParams("postalcode");
+    }
+
+    public static String getCity(Request request) {
+        return request.queryParams("city");
+    }
+
+    public static String getStreet(Request request) {
+        return request.queryParams("street");
+    }
+
+    public static String getNumber(Request request) {
+        return request.queryParams("number");
+    }
+
     public static String getQueryLoginRedirect(Request request) {
         return request.queryParams("loginRedirect");
     }

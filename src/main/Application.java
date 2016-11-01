@@ -49,28 +49,29 @@ public final class Application {
         get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
         after("*", Filters.addGzipHeader);
 
-        post("/index", (request, response) -> {
+        post(Path.Web.REGISTRATION, (request, response) -> {
             // Get foo then call your Java method
+            System.out.println("test");
             String username = request.queryParams("username");
             String password = request.queryParams("password");
-            String doB = request.queryParams("doB");
+            String doB = RequestUtil.getdoB(request);
             String email = request.queryParams("email");
             String country = request.queryParams("country");
             String postalCode = request.queryParams("postalcode");
             String city = request.queryParams("city");
             String street = request.queryParams("street");
             String number = request.queryParams("number");
-            doB = doB.replaceAll("-", "/");
 
             // Create a format in which a string containing the date will be parsed
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date dateOfBirth = dateFormat.parse(doB);
-            final UserController controller = new UserController(username);
 
-            if (controller.databaseHasUser())
-                System.out.println("has user");
-            else
-                System.out.println("no user found");
+            System.out.println(dateOfBirth);
+//            final UserController controller = new UserController(username);
+//
+//            if (controller.databaseHasUser())
+//                System.out.println("has user");
+//            else
+//                System.out.println("no user found");
 
             // calculate age
             int age = calculateAge(dateOfBirth);
