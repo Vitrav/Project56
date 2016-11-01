@@ -19,7 +19,7 @@ public class UserCollectionManager extends CollectionManager {
 	public Document getUserDocument(String username) {
 		Document query = new Document();
 		query.put("username", username);
-		return collection.find(query).iterator().next();
+		return collection.find(query).iterator().hasNext() ? collection.find(query).iterator().next() : null;
 	}
 
 	public void insertUser(User user) {

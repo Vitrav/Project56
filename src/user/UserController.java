@@ -18,7 +18,8 @@ public class UserController {
 
     public UserController(String username) {
         this.username = username;
-        userDocumentManager = new UserDocumentManager(userCollectionManager.getUserDocument(username));
+        if (userCollectionManager.getUserDocument(username) != null)
+            userDocumentManager = new UserDocumentManager(userCollectionManager.getUserDocument(username));
     }
 
     // Authenticate the User by hashing the inputted password using the stored salt,
@@ -34,21 +35,21 @@ public class UserController {
     }
 
     // Authenticate and change the password.
-    public void chancePassword(String username, String oldPassword, String newPassword) {
+    public void chancePassword(String oldPassword, String newPassword) {
         if (!authenticate(oldPassword) || !passwordIsValid(newPassword))
             return;
         String newHashedPassword = BCrypt.hashpw(BCrypt.gensalt(), newPassword);
         userDocumentManager.setPassword(newHashedPassword);
     }
 
-    public boolean chanceUsername(String username) {
-        if (!databaseHasUser() && usernameIsValid(username))
+    public boolean chanceUsername() {
+        if (!databaseHasUser() && usernameIsValid())
             return false;
         userDocumentManager.setName(username);
         return true;
     }
 
-    private boolean usernameIsValid(String username) {
+    public boolean usernameIsValid() {
         if (username.length() < 4 || username.length() > 14)
             return false;
         if (!hasRequiredNumbers(username, 1, username.length() / 2) && !hasValidChars(username))
@@ -56,7 +57,7 @@ public class UserController {
         return true;
     }
 
-    private boolean passwordIsValid(String password) {
+    public boolean passwordIsValid(String password) {
         if (password.length() < 4 || password.length() > 14)
             return false;
         if (!hasRequiredNumbers(password, 2, password.length() / 2) && !hasValidChars(password))

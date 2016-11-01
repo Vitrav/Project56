@@ -7,6 +7,7 @@ import spark.Response;
 import spark.Route;
 import user.Address;
 import user.User;
+import user.UserController;
 import viewutil.Path;
 import viewutil.RequestUtil;
 import viewutil.ViewUtil;
@@ -39,6 +40,8 @@ public class RegistrationController {
 
     public static Route handleRegisterPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
+        UserController controller = new UserController(getQueryUsername(request));
+
         String username = getQueryUsername(request);
         String password = getQueryPassword(request);
         String doB = getdoB(request);
@@ -51,10 +54,41 @@ public class RegistrationController {
         Date dateOfBirth = dateFormat.parse(doB);
         int age = calculateAge(dateOfBirth);
 
+        if (controller.databaseHasUser()) {
+            model.put("userExists", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        } else if (!controller.usernameIsValid()) {
+            model.put("userInvalid", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        } else if (!controller.passwordIsValid(password)) {
+            model.put("passwordInvalid", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        }
+
+
+
+
+
         userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, false, false));
         System.out.println("User created.");
         return ViewUtil.render(request, model, Path.Template.REGISTRATION);
     };
+
+//        public static Route handleLoginPost = (Request request, Response response) -> {
+//        Map<String, Object> model = new HashMap<>();
+//        UserController controller = new UserController(getQueryUsername(request));
+//        if (!controller.authenticate(getQueryPassword(request))) {
+//            model.put("authenticationFailed", true);
+//            return ViewUtil.render(request, model, Path.Template.LOGIN);
+//        }
+//        model.put("authenticationSucceeded", true);
+//        request.session().attribute("currentUser", getQueryUsername(request));
+//        if (getQueryLoginRedirect(request) != null) {
+//            response.redirect(getQueryLoginRedirect(request));
+//        }
+//        return ViewUtil.render(request, model, Path.Template.LOGIN);
+//    };
+
 
     private static int calculateAge(Date dateOfBirth) {
         //get the birth date
@@ -69,29 +103,5 @@ public class RegistrationController {
         return currentDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
     }
 
-//    String doB = RequestUtil.getdoB(request);
-//    String email = request.queryParams("email");
-//    String country = request.queryParams("country");
-//    String postalCode = request.queryParams("postalcode");
-//    String city = request.queryParams("city");
-//    String street = request.queryParams("street");
-//    String number = request.queryParams("number");
-
-
-
-//    public static Route handleLoginPost = (Request request, Response response) -> {
-//        Map<String, Object> model = new HashMap<>();
-//        UserController controller = new UserController(getQueryUsername(request));
-//        if (!controller.authenticate(getQueryPassword(request))) {
-//            model.put("authenticationFailed", true);
-//            return ViewUtil.render(request, model, Path.Template.LOGIN);
-//        }
-//        model.put("authenticationSucceeded", true);
-//        request.session().attribute("currentUser", getQueryUsername(request));
-//        if (getQueryLoginRedirect(request) != null) {
-//            response.redirect(getQueryLoginRedirect(request));
-//        }
-//        return ViewUtil.render(request, model, Path.Template.LOGIN);
-//    };
 
 }
