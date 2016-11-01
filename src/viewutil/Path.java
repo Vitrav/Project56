@@ -12,6 +12,7 @@ public class Path {
         @Getter public static final String CART = "/cart/";
         @Getter public static final String SHOP = "/shop/";
         @Getter public static final String LOGIN = "/login/";
+        @Getter public static final String LOGOUT = "/logout/";
         @Getter public static final String REGISTRATION ="/registration/";
     }
 

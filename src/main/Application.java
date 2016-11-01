@@ -3,6 +3,7 @@ package main; /**
  */
 import index.*;
 import model.Database;
+import model.collection.CollectionManager;
 import model.collection.UserCollectionManager;
 import org.mindrot.jbcrypt.BCrypt;
 import user.*;
@@ -37,12 +38,14 @@ public final class Application {
         before("*",                  Filters.addTrailingSlashes);
         before("*",                  Filters.handleLocaleChange);
 
-        get(Path.Web.INDEX, index.IndexController.indexPage);
-        get(Path.Web.SINGLEPAGE, SingleProductController.singleProductPage);
-        get(Path.Web.CART, CartController.cartPage);
-        get(Path.Web.SHOP, ShopController.shopPage);
-        get(Path.Web.LOGIN, LoginController.loginPage);
-        get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
+        get(Path.Web.INDEX,         index.IndexController.indexPage);
+        get(Path.Web.SINGLEPAGE,    SingleProductController.singleProductPage);
+        get(Path.Web.CART,          CartController.cartPage);
+        get(Path.Web.SHOP,          ShopController.shopPage);
+        get(Path.Web.LOGIN,         LoginController.loginPage);
+        post(Path.Web.LOGIN,        LoginController.handleLoginPost);
+        post(Path.Web.LOGOUT,       LoginController.handleLogoutPost);
+        get(Path.Web.REGISTRATION,  RegistrationController.registrationPage);
         after("*", Filters.addGzipHeader);
         post("/index", (request, response) -> {
             // Get foo then call your Java method
@@ -56,12 +59,14 @@ public final class Application {
             String street = request.queryParams("street");
             String number = request.queryParams("number");
 
+            // Create a format in which a string containing the date will be parsed
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date dateOfBirth= dateFormat.parse(doB);
 
+            // calculate age
             int age = calculateAge(dateOfBirth);
-//            userCollectionManager.insertUserRegister(username, password, doB   , email);
 
+            // insert a user in the database
             userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, false, false));
             System.out.println(dateOfBirth);
             return username;
@@ -72,12 +77,15 @@ public final class Application {
     }
 
     private static int calculateAge(Date dateOfBirth){
+        //get the birth date
         Calendar birthDate = Calendar.getInstance();
         birthDate.setTime(dateOfBirth);
 
+        //get the current date
         Calendar currentDate = Calendar.getInstance();
         currentDate.setTime(new Date());
 
+        //return the current date - the birth date for the age
         return currentDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
     }
 }
