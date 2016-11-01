@@ -24,12 +24,8 @@ import static spark.Spark.get;
  */
 public final class Application {
 
-    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-
     public static void main(final String[] args) {
-        String salt = BCrypt.gensalt();
 //        Spark.staticFileLocation("/sources");
-        UserCollectionManager userCollectionManager = new UserCollectionManager();
 
         port(4567);
         staticFiles.location("/sources");
@@ -47,55 +43,8 @@ public final class Application {
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
+        post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
         after("*", Filters.addGzipHeader);
-
-        post(Path.Web.REGISTRATION, (request, response) -> {
-            // Get foo then call your Java method
-            System.out.println("test");
-            String username = request.queryParams("username");
-            String password = request.queryParams("password");
-            String doB = RequestUtil.getdoB(request);
-            String email = request.queryParams("email");
-            String country = request.queryParams("country");
-            String postalCode = request.queryParams("postalcode");
-            String city = request.queryParams("city");
-            String street = request.queryParams("street");
-            String number = request.queryParams("number");
-
-            // Create a format in which a string containing the date will be parsed
-            Date dateOfBirth = dateFormat.parse(doB);
-
-            System.out.println(dateOfBirth);
-//            final UserController controller = new UserController(username);
-//
-//            if (controller.databaseHasUser())
-//                System.out.println("has user");
-//            else
-//                System.out.println("no user found");
-
-            // calculate age
-            int age = calculateAge(dateOfBirth);
-//          userCollectionManager.insertUserRegister(username, password, doB   , email);
-
-            // insert a user in the database
-            userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, false, false));
-            System.out.println("user created");
-
-            return response;
-        });
-    }
-
-        private static int calculateAge(Date dateOfBirth) {
-        //get the birth date
-        Calendar birthDate = Calendar.getInstance();
-        birthDate.setTime(dateOfBirth);
-
-        //get the current date
-        Calendar currentDate = Calendar.getInstance();
-        currentDate.setTime(new Date());
-
-        //return the current date - the birth date for the age
-        return currentDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
     }
 
 }

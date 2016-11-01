@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a7e481b1-96da-480c-8318-41264a2eafc4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sources/HTML/registration/registration.vm" afterPath="$PROJECT_DIR$/resources/sources/HTML/registration/registration.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index/RegistrationController.java" afterPath="$PROJECT_DIR$/src/index/RegistrationController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Application.java" afterPath="$PROJECT_DIR$/src/main/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/viewutil/RequestUtil.java" afterPath="$PROJECT_DIR$/src/viewutil/RequestUtil.java" />
     </list>
     <ignored path="Project5-6.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +29,7 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
+            <state relative-caret-position="-1100">
               <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
               <folding />
             </state>
@@ -64,8 +62,8 @@
       <file leaf-file-name="RegistrationController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index/RegistrationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+            <state relative-caret-position="286">
+              <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -106,16 +104,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.vm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="32" column="73" selection-start-line="32" selection-start-column="73" selection-end-line="32" selection-end-column="73" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.vm" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/sources/HTML/index/index.vm">
           <provider selected="true" editor-type-id="text-editor">
@@ -129,8 +117,18 @@
       <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="59" column="66" selection-start-line="59" selection-start-column="66" selection-end-line="59" selection-end-column="66" />
+            <state relative-caret-position="274">
+              <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SingleProductController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/index/SingleProductController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -141,7 +139,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="66">
               <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
-              <folding />
+              <folding>
+                <marker date="1478005808079" expanded="true" signature="123:2249" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -170,9 +170,9 @@
         <option value="$PROJECT_DIR$/resources/sources/HTML/login/login.vm" />
         <option value="$PROJECT_DIR$/src/index/LoginController.java" />
         <option value="$PROJECT_DIR$/resources/localization/messages_en.properties" />
-        <option value="$PROJECT_DIR$/src/index/RegistrationController.java" />
         <option value="$PROJECT_DIR$/src/viewutil/RequestUtil.java" />
         <option value="$PROJECT_DIR$/resources/sources/HTML/registration/registration.vm" />
+        <option value="$PROJECT_DIR$/src/index/RegistrationController.java" />
         <option value="$PROJECT_DIR$/src/main/Application.java" />
       </list>
     </option>
@@ -1276,7 +1276,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1477988310944</updated>
-      <workItem from="1477988331449" duration="17299000" />
+      <workItem from="1477988331449" duration="18001000" />
     </task>
     <task id="LOCAL-00002" summary="Login fixed.">
       <created>1478002896554</created>
@@ -1292,11 +1292,18 @@
       <option name="project" value="LOCAL" />
       <updated>1478004421638</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Register fixed.">
+      <created>1478006127674</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1478006127674</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31757000" />
+    <option name="totallyTimeSpent" value="32459000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -1344,7 +1351,8 @@
     <MESSAGE value="UserController added." />
     <MESSAGE value="Login fixed." />
     <MESSAGE value="Login extra fix." />
-    <option name="LAST_COMMIT_MESSAGE" value="Login extra fix." />
+    <MESSAGE value="Register fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Register fixed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1419,14 +1427,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index/SingleProductController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1761,34 +1761,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/sources/HTML/registration/registration.vm">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+          <folding>
+            <marker date="1478005808079" expanded="true" signature="123:2249" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index/SingleProductController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1100">
+          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index/RegistrationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+        <state relative-caret-position="286">
+          <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="59" column="66" selection-start-line="59" selection-start-column="66" selection-end-line="59" selection-end-column="66" />
+        <state relative-caret-position="274">
+          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
           <folding />
         </state>
       </provider>
