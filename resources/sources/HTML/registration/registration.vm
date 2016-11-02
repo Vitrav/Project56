@@ -15,9 +15,9 @@
     <h1>$msg.get("REGISTRATION_HEADING")</h1>
 ##    <p>$msg.get("LOGIN_INSTRUCTIONS", $WebPath.getINDEX())</p>
     <label>$msg.get("REGISTRATION_LABEL_USERNAME")</label>
-    <input type="text" name="username" placeholder="$msg.get("REGISTRATION_LABEL_USERNAME")" value="" required>
+    <input type="text" name="username" placeholder="$msg.get("REGISTRATION_LABEL_USERNAME")" value="" required maxlength="14">
     <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>
-    <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_PASSWORD")" value="" required>
+    <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_PASSWORD")" value="" required maxlength="14">
     <label>$msg.get("REGISTRATION_LABEL_AGE")</label>
     <input type="date" name="doB" placeholder="$msg.get("REGISTRATION_LABEL_AGE")" value="" required>
     <label>$msg.get("REGISTRATION_LABEL_EMAIL")</label>
