@@ -52,7 +52,8 @@ public class UserController {
     public boolean usernameIsValid() {
         if (username.length() < 4 || username.length() > 14)
             return false;
-        if (!hasRequiredNumbers(username, 1, username.length() / 2) && !hasValidChars(username))
+//        if (!hasRequiredNumbers(username, 1, username.length() / 2) && !hasValidChars(username))
+        if (!hasValidChars(username))
             return false;
         return true;
     }
@@ -60,7 +61,8 @@ public class UserController {
     public boolean passwordIsValid(String password) {
         if (password.length() < 4 || password.length() > 14)
             return false;
-        if (!hasRequiredNumbers(password, 2, password.length() / 2) && !hasValidChars(password))
+//        if (!hasRequiredNumbers(password, 2, password.length() / 2) && !hasValidChars(password))
+        if (!hasValidChars(password))
             return false;
         return true;
     }

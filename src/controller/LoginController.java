@@ -1,4 +1,4 @@
-package index;
+package controller;
 
 
 import spark.Route;
@@ -12,10 +12,6 @@ import java.util.Map;
 
 import static viewutil.RequestUtil.*;
 
-
-/**
- * Created by Dave on 26-10-16.
- */
 public class LoginController {
 
     public static Route loginPage = (Request request, Response response) -> {
@@ -34,9 +30,8 @@ public class LoginController {
         }
         model.put("authenticationSucceeded", true);
         request.session().attribute("currentUser", getQueryUsername(request));
-        if (getQueryLoginRedirect(request) != null) {
+        if (getQueryLoginRedirect(request) != null)
             response.redirect(getQueryLoginRedirect(request));
-        }
         return ViewUtil.render(request, model, Path.Template.LOGIN);
     };
 

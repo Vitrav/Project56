@@ -1,4 +1,4 @@
-package index;
+package controller;
 
 import viewutil.Path;
 import viewutil.ViewUtil;
@@ -15,15 +15,13 @@ import java.util.Map;
  * Created by Dave on 26-10-16.
  */
 public class SingleProductController {
+
     public static Route singleProductPage=(Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-
 
         // The sources.HTML files are located under the resources directory
 //        return new ModelAndView(main.model, main.viewutil.Path.Template.INDEX);
         return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
-
-
     };
 
 }

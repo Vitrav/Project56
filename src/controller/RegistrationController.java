@@ -1,4 +1,4 @@
-package index;
+package controller;
 
 import model.collection.UserCollectionManager;
 import org.mindrot.jbcrypt.BCrypt;
@@ -9,7 +9,6 @@ import user.Address;
 import user.User;
 import user.UserController;
 import viewutil.Path;
-import viewutil.RequestUtil;
 import viewutil.ViewUtil;
 
 import java.text.DateFormat;
@@ -21,9 +20,6 @@ import java.util.Map;
 
 import static viewutil.RequestUtil.*;
 
-/**
- * Created by Dave on 31-10-16.
- */
 public class RegistrationController {
 
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -65,30 +61,10 @@ public class RegistrationController {
             return ViewUtil.render(request, model, Path.Template.REGISTRATION);
         }
 
-
-
-
-
         userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, false, false));
         System.out.println("User created.");
         return ViewUtil.render(request, model, Path.Template.REGISTRATION);
     };
-
-//        public static Route handleLoginPost = (Request request, Response response) -> {
-//        Map<String, Object> model = new HashMap<>();
-//        UserController controller = new UserController(getQueryUsername(request));
-//        if (!controller.authenticate(getQueryPassword(request))) {
-//            model.put("authenticationFailed", true);
-//            return ViewUtil.render(request, model, Path.Template.LOGIN);
-//        }
-//        model.put("authenticationSucceeded", true);
-//        request.session().attribute("currentUser", getQueryUsername(request));
-//        if (getQueryLoginRedirect(request) != null) {
-//            response.redirect(getQueryLoginRedirect(request));
-//        }
-//        return ViewUtil.render(request, model, Path.Template.LOGIN);
-//    };
-
 
     private static int calculateAge(Date dateOfBirth) {
         //get the birth date
@@ -102,6 +78,5 @@ public class RegistrationController {
         //return the current date - the birth date for the age
         return currentDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
     }
-
 
 }

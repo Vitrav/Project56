@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 public class JsonUtil {
+
     public static String dataToJson(Object data) {
         try {
             ObjectMapper mapper = new ObjectMapper();

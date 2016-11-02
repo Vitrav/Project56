@@ -1,27 +1,13 @@
 package main; /**
  * Created by Dave on 25-10-16.
  */
-import index.*;
-import model.Database;
-import model.collection.UserCollectionManager;
-import org.mindrot.jbcrypt.BCrypt;
-import user.*;
+import controller.*;
 import viewutil.*;
-import spark.Spark;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.*;
 import static spark.Spark.get;
 
-/**
- * VelocityTemplateRoute example.
- */
 public final class Application {
 
     public static void main(final String[] args) {
@@ -35,7 +21,7 @@ public final class Application {
         before("*", Filters.addTrailingSlashes);
         before("*", Filters.handleLocaleChange);
 
-        get(Path.Web.INDEX, index.IndexController.indexPage);
+        get(Path.Web.INDEX, controller.IndexController.indexPage);
         get(Path.Web.SINGLEPAGE, SingleProductController.singleProductPage);
         get(Path.Web.CART, CartController.cartPage);
         get(Path.Web.SHOP, ShopController.shopPage);
