@@ -42,13 +42,11 @@ public class RegistrationController {
         String password = getQueryPassword(request);
         String doB = getdoB(request);
         String email = getEmail(request);
-        String country = getCountry(request);
+        String country = getCountry(request).toLowerCase();
         String postalCode = getPostal(request);
-        String city = getCity(request);
-        String street = getStreet(request);
-        String number = getNumber(request);
-        Date dateOfBirth = dateFormat.parse(doB);
-        int age = calculateAge(dateOfBirth);
+        String city = getCity(request).toLowerCase();
+        String street = getStreet(request).toLowerCase();
+        String number = getNumber(request).toLowerCase();
 
         if (controller.databaseHasUser()) {
             model.put("userExists", true);
@@ -59,11 +57,34 @@ public class RegistrationController {
         } else if (!controller.passwordIsValid(password)) {
             model.put("passwordInvalid", true);
             return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        } else if (!controller.validDob(doB)) {
+            model.put("dobInvalid", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        } else if (!controller.validEmail(email)) {
+            model.put("emailInvalid", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        } else if (country.length() == 0) {
+            model.put("countryInvalid", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        } else if (!controller.validPostal(postalCode)) {
+            model.put("postalInvalid", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        } else if (city.length() == 0)  {
+            model.put("cityInvalid", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        } else if (street.length() == 0) {
+            model.put("streetInvalid", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        } else if (!controller.validStreetNumber(number)) {
+            model.put("streetNumberInvalid", true);
+            return ViewUtil.render(request, model, Path.Template.REGISTRATION);
         }
 
+        Date dateOfBirth = dateFormat.parse(doB);
+        int age = calculateAge(dateOfBirth);
         userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, false, false));
         System.out.println("User created.");
-        return ViewUtil.render(request, model, Path.Template.REGISTRATION);
+        return ViewUtil.render(request, model, Path.Template.LOGIN);
     };
 
     private static int calculateAge(Date dateOfBirth) {

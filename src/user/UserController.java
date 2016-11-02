@@ -7,12 +7,15 @@ import model.document.UserDocumentManager;
 import org.bson.Document;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 public class UserController {
 
     private final UserCollectionManager userCollectionManager = new UserCollectionManager();
     private final MongoCollection<Document> collection = Database.getInstance().getUserCollection();
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
     private UserDocumentManager userDocumentManager;
     private String username;
 
@@ -52,9 +55,6 @@ public class UserController {
     public boolean usernameIsValid() {
         if (username.length() < 4 || username.length() > 14)
             return false;
-//        if (!hasRequiredNumbers(username, 1, username.length() / 2) && !hasValidChars(username))
-        if (!hasValidChars(username))
-            return false;
         return true;
     }
 
@@ -62,15 +62,6 @@ public class UserController {
         if (password.length() < 4 || password.length() > 14)
             return false;
 //        if (!hasRequiredNumbers(password, 2, password.length() / 2) && !hasValidChars(password))
-        if (!hasValidChars(password))
-            return false;
-        return true;
-    }
-
-    private boolean hasValidChars(String string) {
-        for (char c : string.toCharArray())
-            if(!Character.isLetter(c) && !isNumber(Character.toString(c)))
-                return false;
         return true;
     }
 
@@ -79,9 +70,7 @@ public class UserController {
         for (int i = 0 ; i < string.length() - 1 ; i++)
             if (Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9).contains((string.substring(i, i + 1))))
                 count++;
-        if (count < minimum || count > maximum)
-            return false;
-        return true;
+        return !(count < minimum || count > maximum);
     }
 
     public boolean databaseHasUser() {
@@ -90,10 +79,42 @@ public class UserController {
         return collection.find(query).iterator().hasNext();
     }
 
-    private boolean isNumber(String str) {
-        if (!isInteger(str))
+    public boolean validEmail(String email) {
+        if (email.length() == 0)
             return false;
-        return Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9).contains(Integer.parseInt(str));
+        return !(countSymbols(email, "@") != 1 || countSymbols(email, ".") < 1);
+    }
+
+    public boolean validDob(String doB) {
+        try {
+            dateFormat.parse(doB);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean validPostal(String postal) {
+        for (String s : Arrays.asList("-", "/", "_"))
+            postal.replaceAll(s, "");
+        return postal.length() == 6;
+    }
+
+    public boolean validStreetNumber(String number) {
+        if (number.length() == 0)
+            return false;
+        int count = 0;
+        for (int i : Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9)) {
+            String num = "";
+            num += i;
+            if (number.contains(num))
+                count++;
+        }
+        return count != 0;
+    }
+
+    private boolean isNumber(String str) {
+        return isInteger(str) && Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9).contains(Integer.parseInt(str));
     }
 
     private boolean isInteger(String num) {
@@ -103,5 +124,14 @@ public class UserController {
             return false;
         }
        return true;
+    }
+
+    private int countSymbols(String text, String symbol) {
+        int count = 0;
+        while (text.contains(symbol))  {
+            text = text.replaceAll(symbol, "");
+            count++;
+        }
+        return count;
     }
 }

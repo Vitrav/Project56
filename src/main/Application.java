@@ -27,7 +27,7 @@ public final class Application {
         get(Path.Web.SHOP, ShopController.shopPage);
         get(Path.Web.LOGIN, LoginController.loginPage);
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
-        post(Path.Web.LOGOUT, LoginController.handleLogoutPost);
+        get(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
         post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
         after("*", Filters.addGzipHeader);

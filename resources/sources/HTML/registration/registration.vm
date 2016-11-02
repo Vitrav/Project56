@@ -7,11 +7,26 @@
         <p class="bad notification">$msg.get("REGISTRATION_USERNAME_FAILED")</p>
     #elseif($passwordInvalid)
         <p class="bad notification">$msg.get("REGISTRATION_PASSWORD_FAILED")</p>
+    #elseif($dobInvalid)
+        <p class="bad notification">$msg.get("REGISTRATION_DOB_FAILED")</p>
+    #elseif($emailInvalid)
+        <p class="bad notification">$msg.get("REGISTRATION_EMAIL_FAILED")</p>
+    #elseif($countryInvalid)
+        <p class="bad notification">$msg.get("REGISTRATION_COUNTRY_FAILED")</p>
+    #elseif($postalInvalid)
+        <p class="bad notification">$msg.get("REGISTRATION_POSTAl_FAILED")</p>
+    #elseif($cityInvalid)
+        <p class="bad notification">$msg.get("REGISTRATION_CITY_FAILED")</p>
+    #elseif($streetInvalid)
+        <p class="bad notification">$msg.get("REGISTRATION_STREET_FAILED")</p>
+    #elseif($streetNumberInvalid)
+        <p class="bad notification">$msg.get("REGISTRATION_STREETNUMBER_FAILED")</p>
     #elseif($authenticationSucceeded)
         <p class="good notification">$msg.get("LOGIN_AUTH_SUCCEEDED", $currentUser)</p>
     #elseif($loggedOut)
         <p class="notification">$msg.get("LOGIN_LOGGED_OUT")</p>
     #end
+
     <h1>$msg.get("REGISTRATION_HEADING")</h1>
 ##    <p>$msg.get("LOGIN_INSTRUCTIONS", $WebPath.getINDEX())</p>
     <label>$msg.get("REGISTRATION_LABEL_USERNAME")</label>
