@@ -1,6 +1,8 @@
 package model.collection;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bson.Document;
 
@@ -12,11 +14,13 @@ public class GameCollectionManager extends CollectionManager {
 		super(Database.getInstance().getGameCollection());
 	}
 
+
 	public boolean databaseHasGame(int id) {
 		Document query = new Document();
 		query.put("id", id);
 		return collection.find(query).iterator().hasNext();
 	}
+
 
 	public Document getGameDocument(int id) {
 		Document query = new Document();

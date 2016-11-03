@@ -1,7 +1,8 @@
 package viewutil;
 
+import model.document.GameDocumentManager;
 import spark.Request;
-
+import model.document.GameDocumentManager.*;
 public class RequestUtil {
 
     public static String getQueryLocale(Request request) {

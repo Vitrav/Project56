@@ -1,5 +1,7 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
+##<iframe name="content" src="" frameborder="no" border="0" scrolling="no" width="600" height="800"></iframe>
+
 <form id="loginForm" method="post">
     #if($authenticationFailed)
         <p class="bad notification">$msg.get("LOGIN_AUTH_FAILED")</p>

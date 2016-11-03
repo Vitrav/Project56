@@ -1,6 +1,8 @@
 package controller;
 
 
+import model.collection.GameCollectionManager;
+import model.document.GameDocumentManager;
 import viewutil.ViewUtil;
 import spark.Request;
 import spark.Response;
@@ -17,10 +19,14 @@ import java.util.Map;
 public class ShopController {
 
     public static Route shopPage = (Request request, Response response) -> {
-        Map<String, Object> model = new HashMap<>();
+        GameCollectionManager gameCollection = new GameCollectionManager();
+        GameDocumentManager gameDocument = new GameDocumentManager(gameCollection.getGameDocument(1));
 
+        Map<String, Object> model = new HashMap<>();
+        model.put("GAMES",  gameDocument.getName());
         // The sources.HTML files are located under the resources directory
 //        return new ModelAndView(main.model, main.viewutil.Path.Template.INDEX);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
+
 }

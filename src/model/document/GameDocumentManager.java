@@ -1,18 +1,21 @@
 package model.document;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bson.Document;
 
 import model.Database;
 
 public class GameDocumentManager extends DocumentManager {
-	
+
 	public GameDocumentManager(Document doc) {
 		super(doc, Database.getInstance().getGameCollection());
 		setFilter(new Document("id", getId()));
 	}
-	
+	public String test(){ return "TEST";}
+
 	public int getId() {
 		return document.getInteger("id");
 	}

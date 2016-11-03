@@ -1,7 +1,7 @@
 
-#parse("sources/HTML/layout/layout.vm")
-#@mainLayout()
-
+###parse("sources/HTML/layout/layout.vm")
+###@mainLayout()
+<iframe name="iframe2" src="$WebPath.getCART()"></iframe>
   <body>
 
 

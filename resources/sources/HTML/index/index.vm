@@ -1,5 +1,7 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
+
+
 <body>
 <div class="slider-area">
     <div class="zigzag-bottom"></div>
