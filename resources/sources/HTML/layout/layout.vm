@@ -9,8 +9,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
         <!-- Bootstrap -->
         <link rel="stylesheet" href="/css/bootstrap.min.css">
 
@@ -30,14 +28,15 @@
             <div class="col-md-8">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                        <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                         <li><a href="$WebPath.getCART()"><i class="fa fa-user"></i> My Cart</a></li>
                         <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                         #if (!$authenticationSucceeded)
                             <li><a href="$WebPath.getLOGIN()"><i class="fa fa-user"></i> Login</a></li>
                         #else
+                            <li><a href="$WebPath.getMYACCOUNT()"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="$WebPath.getLOGOUT()"><i class="fa fa-user"></i> Logout</a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+                            <li><a href="$WebPath.getADMINPANEL()"><i class="fa fa-heart"></i> Admin</a></li>
                         #end
                         <li><a href="$WebPath.getREGISTRATION()"><i class="fa fa-user"></i>Register</a></li>
                     </ul>
@@ -107,7 +106,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-6">
                 <div class="footer-about-us">
-                    <h2>:)<span>Project 5-6</span></h2>
+                    <h2>S<span>uperGames</span></h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
                     <div class="footer-social">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>

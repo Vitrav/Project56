@@ -1,0 +1,16 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+<form id="accountForm" method="post", action = "/myaccount/">
+    #if($authenticationSucceeded)
+        <body>
+            <h3>Username</h3>
+            <p>$currentUser</p>
+            <h3>Date of birth</h3>
+        </body>
+    #else
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/login/"
+        </script>
+    #end
+</form>
+#end

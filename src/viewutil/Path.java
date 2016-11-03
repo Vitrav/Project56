@@ -13,7 +13,9 @@ public class Path {
         @Getter public static final String SHOP = "/shop/";
         @Getter public static final String LOGIN = "/login/";
         @Getter public static final String LOGOUT = "/logout/";
-        @Getter public static final String REGISTRATION ="/registration/";
+        @Getter public static final String REGISTRATION = "/registration/";
+        @Getter public static final String MYACCOUNT = "/myaccount/";
+        @Getter public static final String ADMINPANEL = "/adminpanel/";
     }
 
     public static class Template {
@@ -23,7 +25,9 @@ public class Path {
         public static final String SHOP = "/sources/HTML/shop/shop.vm";
         public static final String LOGIN = "/sources/HTML/login/login.vm";
         public static final String NOT_FOUND = "/velocity/notFound.html";
-        public static final String REGISTRATION ="/sources/HTML/registration/registration.vm";
+        public static final String REGISTRATION = "/sources/HTML/registration/registration.vm";
+        public static final String MYACCOUNT = "/sources/HTML/account/account.vm";
+        public static final String ADMINPANEL = "/sources/HTML/admin/admin.vm";
     }
 
 }

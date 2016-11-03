@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class CartController {
 
-    public static Route cartPage=(Request request, Response response) -> {
+    public static Route cartPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
 
         // The sources.HTML files are located under the resources directory

@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class IndexController {
 
-    public static Route indexPage=(Request request, Response response) -> {
+    public static Route indexPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
 
         // The sources.HTML files are located under the resources directory
