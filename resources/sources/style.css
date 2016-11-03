@@ -1039,23 +1039,26 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     /*text-align: left;*/
 /*}*/
 
-/*#adminForm input {*/
-    /*border: 1px solid #ddd;*/
-    /*padding: 2px 12px;*/
-    /*width: 100%;*/
+#adminForm input {
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    width: 100%;
     /*border-radius: 3px;*/
     /*margin: 2px 0 20px 0;*/
-/*}*/
+}
 
-/*#adminForm {*/
-    /*max-width: 400px;*/
-    /*margin: 0 auto;*/
-/*}*/
+#adminForm {
+    position: relative;
+    left: 200px;
+    top: 10px;
+    max-width: 400px;
+    margin: 30px;
+}
 
-/*#adminForm label {*/
-    /*display: block;*/
-    /*width: 20%*/
-/*}*/
+#adminForm label {
+    display: block;
+    width: 100%
+}
 
 /*#accountForm h3,.p {*/
     /*color: #1abc9c;*/

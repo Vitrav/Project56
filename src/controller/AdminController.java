@@ -1,5 +1,7 @@
 package controller;
 
+import model.collection.UserCollectionManager;
+import model.document.UserDocumentManager;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -27,7 +29,8 @@ public class AdminController {
             model.put("userInvalid", true);
             return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
         }
-        request.session().attribute("currentUser", getQueryUsername(request));
+        model.put("checkedUser", true);
+        model.put("checkedUserDocument", new UserDocumentManager(new UserCollectionManager().getUserDocument(getQueryUsername(request))));
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
 

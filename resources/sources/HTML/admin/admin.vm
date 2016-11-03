@@ -1,15 +1,21 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="loginForm" method="post", action = "/adminpanel/">
+<form id="adminForm" method="post", action = "/adminpanel/">
     #if($authenticationSucceeded)
         #if($userInvalid)
             <p>$msg.get("ADMIN_USER_NOT_FOUND")</p>
         #end
 
-        <br>
-        <label>Select user</label><br>
+        <label>Select user</label>
         <input type="text" name="username" placeholder="Username" value="" required maxlength="14"><br><br>
-        <input type="submit" value="Submit"><br><br>
+        <input type="submit" value="Submit">
+        #if ($checkedUser)
+            <p>
+                Username = $checkedUserDocument.getName();
+                Userage = $checkedUserDocument.getAge();
+                UserEmail = $checkedUserDocument.getEmail()
+            </p>
+        #end
     #else
         <script language="javascript">
             window.location.href = "http://localhost:4567/login/"

@@ -18,6 +18,7 @@ public class GameCollectionManager extends CollectionManager {
 	public boolean databaseHasGame(int id) {
 		Document query = new Document();
 		query.put("id", id);
+		collection.find().iterator().hasNext();
 		return collection.find(query).iterator().hasNext();
 	}
 
