@@ -15,12 +15,10 @@ import static spark.Spark.get;
 public final class Application {
 
     public static void main(final String[] args) {
-//        Spark.staticFileLocation("/sources");
         port(4567);
         staticFiles.location("/sources");
         staticFiles.expireTime(600L);
         enableDebugScreen();
-        Map<String, Object> attributes = new HashMap<>();
         before("*", Filters.addTrailingSlashes);
         before("*", Filters.handleLocaleChange);
         get(Path.Web.INDEX, controller.IndexController.indexPage);
@@ -36,6 +34,7 @@ public final class Application {
         post(Path.Web.ADMINPANEL, AdminController.handleSubmitPost);
         post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
         after("*", Filters.addGzipHeader);
+
     }
 
 }
