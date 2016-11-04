@@ -84,7 +84,7 @@ public class RegistrationController {
         int age = calculateAge(dateOfBirth);
         userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, false, false));
         System.out.println("User created.");
-        return ViewUtil.render(request, model, Path.Template.LOGIN);
+        return ViewUtil.render(request, model, Path.Template.INDEX);
     };
 
     private static int calculateAge(Date dateOfBirth) {
