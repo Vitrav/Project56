@@ -146,4 +146,9 @@ public class UserDocumentManager extends DocumentManager {
 		setWishList(items);
 	}
 
+	public AddressDocumentManager getAddressDocManager() {
+		Document addressDoc = (Document) document.get("address");
+		return new AddressDocumentManager(addressDoc);
+	}
+
 }

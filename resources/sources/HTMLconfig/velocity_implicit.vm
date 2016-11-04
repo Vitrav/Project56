@@ -11,3 +11,4 @@
 #* @vtlvariable name="loginRedirect" type="java.lang.String" *#
 #* @vtlvariable name="game" type="model.collection.GameCollectionManager" *#
 #* @vtlvariable name="checkedUserDocument" type="model.document.UserDocumentManager" *#
+#* @vtlvariable name="allUsers" type="java.util.ArrayList" *#

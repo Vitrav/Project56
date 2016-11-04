@@ -2,20 +2,36 @@
 #@mainLayout()
 <form id="adminForm" method="post", action = "/adminpanel/">
     #if($authenticationSucceeded)
-        #if($userInvalid)
-            <p>$msg.get("ADMIN_USER_NOT_FOUND")</p>
-        #end
+##        #if($userInvalid)
+    ##            <p>$msg.get("ADMIN_USER_NOT_FOUND")</p>
+    ##        #end
+        <h3 class="byline">User management</h3>
+        <p class="italicp">Manage user information</p><br>
 
-        <label>Select user</label>
-        <input type="text" name="username" placeholder="Username" value="" required maxlength="14"><br><br>
-        <input type="submit" value="Submit">
-        #if ($checkedUser)
-            <p>
-                Username = $checkedUserDocument.getName();
-                Userage = $checkedUserDocument.getAge();
-                UserEmail = $checkedUserDocument.getEmail()
-            </p>
-        #end
+        <table style="width: 100%" >
+            <tr>
+                <th>Username</th>
+                <th>E-mail</th>
+                <th>Date of birth</th>
+            </tr>
+        </table>
+
+    ##        <label>Select user</label>
+##        <input type="text" name="username" placeholder="Username" value="" required maxlength="14"><br><br>
+##        <input type="submit" value="Submit">
+##        #if ($checkedUser)
+##            <p>
+##                <br>
+##                Username = $checkedUserDocument.getName(); <br>
+##                age = $checkedUserDocument.getAge(); <br>
+##                email = $checkedUserDocument.getEmail() <br>
+##                date of birth = $checkedUserDocument.getDateOfBirth(); <br>
+##                city = $checkedUserDocument.getAddressDocManager().getCity(); <br>
+##                street = $checkedUserDocument.getAddressDocManager().getStreet(); <br>
+##                number = $checkedUserDocument.getAddressDocManager().getNumber(); <br>
+##                postal = $checkedUserDocument.getAddressDocManager().getPostalCode(); <br>
+##            </p>
+##        #end
     #else
         <script language="javascript">
             window.location.href = "http://localhost:4567/login/"

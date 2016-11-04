@@ -1033,19 +1033,13 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     /*text-align: left;*/
 /*}*/
 
-/*#adminForm label, input {*/
-    /*position: relative;*/
-    /*left: 250px;*/
-    /*text-align: left;*/
+/*#adminForm input {*/
+    /*border: 1px solid #ddd;*/
+    /*padding: 6px 12px;*/
+    /*width: 100%;*/
+    /*!*border-radius: 3px;*!*/
+    /*!*margin: 2px 0 20px 0;*!*/
 /*}*/
-
-#adminForm input {
-    border: 1px solid #ddd;
-    padding: 6px 12px;
-    width: 100%;
-    /*border-radius: 3px;*/
-    /*margin: 2px 0 20px 0;*/
-}
 
 #adminForm {
     position: relative;
@@ -1055,10 +1049,29 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     margin: 30px;
 }
 
-#adminForm label {
-    display: block;
-    width: 100%
+/*#adminForm label {*/
+    /*display: block;*/
+    /*width: 100%*/
+/*}*/
+
+.byline {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 24px;
 }
+
+.italicp {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 14px;
+    font-style: oblique;
+}
+
+#adminForm table, th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
 
 /*#accountForm h3,.p {*/
     /*color: #1abc9c;*/
