@@ -134,4 +134,12 @@ public class UserController {
         }
         return count;
     }
+
+    public boolean adminStatus(){
+        if (userDocumentManager.isAdmin()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

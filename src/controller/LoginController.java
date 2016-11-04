@@ -28,6 +28,9 @@ public class LoginController {
             model.put("authenticationFailed", true);
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
+        if (controller.adminStatus()){
+            model.put("userIsAdmin", true);
+        }
         model.put("authenticationSucceeded", true);
         request.session().attribute("currentUser", getQueryUsername(request));
         if (getQueryLoginRedirect(request) != null)
