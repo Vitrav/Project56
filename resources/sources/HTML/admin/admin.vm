@@ -1,37 +1,46 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 <form id="adminForm" method="post", action = "/adminpanel/">
+
     #if($authenticationSucceeded)
-##        #if($userInvalid)
+    <body>
+    ##        #if($userInvalid)
     ##            <p>$msg.get("ADMIN_USER_NOT_FOUND")</p>
     ##        #end
         <h3 class="byline">User management</h3>
         <p class="italicp">Manage user information</p><br>
 
-        <table style="width: 100%" >
+        <table style="width: 100%", id="div1">
             <tr>
                 <th>Username</th>
                 <th>E-mail</th>
                 <th>Date of birth</th>
+                <th>Age</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Postal code</th>
+                <th>Street</th>
+                <th>Number</th>
+                <th>Operations</th>
             </tr>
-        </table>
+            #foreach ($manager in $allUserManagers)
+                <tr>
+                    <td>$manager.getName()</td>
+                    <td>$manager.getEmail()</td>
+                    <td>$manager.getDateOfBirth()</td>
+                    <td>$manager.getAge()</td>
+                    <td>$manager.getAddressDocManager().getCountry()</td>
+                    <td>$manager.getAddressDocManager().getCity()</td>
+                    <td> $manager.getAddressDocManager().getPostalCode()</td>
+                    <td> $manager.getAddressDocManager().getStreet()</td>
+                    <td>$manager.getAddressDocManager().getNumber()</td>
+                    <td><button onclick="myFunction()">Modify</button> <button onclick="myFunction()">Delete</button></td>
+                </tr>
+            #end
 
-    ##        <label>Select user</label>
-##        <input type="text" name="username" placeholder="Username" value="" required maxlength="14"><br><br>
-##        <input type="submit" value="Submit">
-##        #if ($checkedUser)
-##            <p>
-##                <br>
-##                Username = $checkedUserDocument.getName(); <br>
-##                age = $checkedUserDocument.getAge(); <br>
-##                email = $checkedUserDocument.getEmail() <br>
-##                date of birth = $checkedUserDocument.getDateOfBirth(); <br>
-##                city = $checkedUserDocument.getAddressDocManager().getCity(); <br>
-##                street = $checkedUserDocument.getAddressDocManager().getStreet(); <br>
-##                number = $checkedUserDocument.getAddressDocManager().getNumber(); <br>
-##                postal = $checkedUserDocument.getAddressDocManager().getPostalCode(); <br>
-##            </p>
-##        #end
+
+        </table>
+    </body>
     #else
         <script language="javascript">
             window.location.href = "http://localhost:4567/login/"

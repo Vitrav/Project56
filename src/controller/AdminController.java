@@ -24,10 +24,9 @@ public class AdminController {
     public static Route adminPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         MongoCollection<Document> userCollection = Database.getInstance().getUserCollection();
-        List<Document> users = new ArrayList<>();
-        while (userCollection.find().iterator().hasNext())
-            users.add(userCollection.find().iterator().next());
-        model.put("allUsers", users);
+        List<UserDocumentManager> users = new ArrayList<>();
+        userCollection.find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
+        model.put("allUserManagers", users);
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
 
