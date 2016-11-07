@@ -1,0 +1,42 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+<form id="adminForm" method="post", action = "/adminpanel/">
+
+    #if($authenticationSucceeded)
+        <body>
+        <h3 class="byline">Are you sure you want to delete: $modifyUser</h3>
+        <p class="italicp">User information</p>
+        <table style='white-space: nowrap', id="div1">
+            <tr>
+                <th>Username</th>
+                <th>E-mail</th>
+                <th>Date of birth</th>
+                <th>Age</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Postal code</th>
+                <th>Street</th>
+                <th>Number</th>
+            </tr>
+            <tr>
+                <td>$modifyUserManager.getName()</td>
+                <td>$modifyUserManager.getEmail()</td>
+                <td>$modifyUserManager.getDateOfBirth()</td>
+                <td>$modifyUserManager.getAge()</td>
+                <td>$modifyUserManager.getAddressDocManager().getCountry()</td>
+                <td>$modifyUserManager.getAddressDocManager().getCity()</td>
+                <td>$modifyUserManager.getAddressDocManager().getPostalCode()</td>
+                <td>$modifyUserManager.getAddressDocManager().getStreet()</td>
+                <td>$modifyUserManager.getAddressDocManager().getNumber()</td>
+            </tr>
+        </table>
+        <input type="submit" name="delete" value="yes">
+        <input type="submit" name="dont delete" value="no">
+        </body>
+    #else
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/login/"
+        </script>
+    #end
+</form>
+#end

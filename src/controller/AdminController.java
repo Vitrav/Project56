@@ -48,11 +48,13 @@ public class AdminController {
                 return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
             } else {
                 System.out.println("Delete button");
-                //return ViewUtil.render(request, model, Path.Template.DELETESCREEN);
-                return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
+                model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
+                return ViewUtil.render(request, model, Path.Template.DELETESCREEN);
+//                return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
             }
         }
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
+
 
 }

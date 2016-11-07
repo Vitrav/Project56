@@ -37,6 +37,7 @@
                     <td>$manager.getAddressDocManager().getNumber()</td>
                     <td>
                         <input type="submit" name="$manager.getName()" value="Modify"></input>
+                        <input type="submit" name="$manager.getName()" value="Delete"></input>
                     </td>
                 </tr>
             #end
