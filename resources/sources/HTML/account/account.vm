@@ -1,21 +1,21 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="accountForm" method="post", action = "/myaccount/">
+<form id="accountForm" method="post" action = "/myaccount/">
     #if($authenticationSucceeded)
-##        <style>
-##            table, td, th {
-##                border: 1px white;
-##            }
-##
-##            table {
-##                border-collapse: collapse;
-##            }
-##
-##            th, td {
-##                padding: 15px;
-##                width: 300px;
-##            }
-##        </style>
+        <style>
+            table, td, th {
+                border: 1px white;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            th, td {
+                padding: 15px;
+                width: 300px;
+            }
+        </style>
         <table align="center">
             <tr>
                 <th>Username:</th>

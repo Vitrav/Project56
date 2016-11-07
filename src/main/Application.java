@@ -34,6 +34,7 @@ public final class Application {
 //        get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
         post(Path.Web.ADMINPANEL, AdminController.handleAdminPost);
         post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
+        post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
 
         after("*", Filters.addGzipHeader);
 

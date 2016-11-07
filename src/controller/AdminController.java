@@ -2,6 +2,7 @@ package controller;
 
 import com.mongodb.client.MongoCollection;
 import model.Database;
+import model.collection.CollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
 import org.bson.Document;
@@ -11,18 +12,16 @@ import spark.Route;
 import viewutil.Path;
 import viewutil.ViewUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AdminController {
-
     public static Route adminPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         MongoCollection<Document> userCollection = Database.getInstance().getUserCollection();
         List<UserDocumentManager> users = new ArrayList<>();
         userCollection.find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
+
+        model.put("userIsAdmin", true);
         model.put("allUserManagers", users);
         model.put("modifyUser", "1");
         model.put("viewUtil", new ViewUtil());
@@ -36,8 +35,26 @@ public class AdminController {
         return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
     };
 
+    public static Route handleDeletePost = (Request request, Response response) -> {
+        Map<String, Object> model = new HashMap<>();
+        model.put("userIsAdmin", true);
+        if (request.queryParams().iterator().hasNext()){
+            String user = request.queryParams().iterator().next();
+            if (request.queryParams(request.queryParams().iterator().next()).equalsIgnoreCase("Yes")){
+                System.out.println("Yes");
+                Database.getInstance().getUserCollection().findOneAndDelete(new UserCollectionManager().getUserDocument(user));
+                return ViewUtil.render(request, model, Path.Template.INDEX);
+            } else {
+                System.out.println("No");
+                return ViewUtil.render(request, model, Path.Template.INDEX);
+            }
+        }
+        return  ViewUtil.render(request, model, Path.Template.DELETESCREEN);
+    };
+
     public static Route handleAdminPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
+        model.put("userIsAdmin", true);
 
         if (request.queryParams().iterator().hasNext()) {
             String user = request.queryParams().iterator().next();
@@ -50,7 +67,6 @@ public class AdminController {
                 System.out.println("Delete button");
                 model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
                 return ViewUtil.render(request, model, Path.Template.DELETESCREEN);
-//                return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
             }
         }
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);

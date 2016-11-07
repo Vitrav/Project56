@@ -1,6 +1,6 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="adminForm" method="post", action = "/adminpanel/">
+<form id="adminForm" method="post", action = "/delete/">
 
     #if($authenticationSucceeded)
         <body>
