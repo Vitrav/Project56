@@ -66,8 +66,8 @@ public class UserDocumentManager extends DocumentManager {
 		return document.getBoolean("admin");
 	}
 
-	public void setAdmin() {
-		update(new Document("admin", true));
+	public void setAdmin(boolean admin) {
+		update(new Document("admin", admin));
 	}
 
 	public boolean wishListIsPrivate() {

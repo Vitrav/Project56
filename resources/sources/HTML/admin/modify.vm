@@ -1,0 +1,16 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+<form id="adminForm" method="post", action = "/adminpanel/">
+
+    #if($authenticationSucceeded)
+        <body>
+            <p> modify the user here </p>
+            <p> $modifyUser</p>
+        </body>
+    #else
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/login/"
+        </script>
+    #end
+</form>
+#end

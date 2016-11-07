@@ -1021,18 +1021,13 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     position: relative;
     left: 200px;
     top: 10px;
-    max-width: 400px;
+    max-width: 500px;
     margin: 30px;
 }
 
 #adminForm table, th, td {
     border: 1px solid black;
-    padding: 5px;
-}
-
-#adminForm button {
-    border: 1px;
-    margin: auto;
+    padding: 10px;
 }
 
 /*#adminForm label {*/

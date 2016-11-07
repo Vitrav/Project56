@@ -16,6 +16,7 @@ public class Path {
         @Getter public static final String REGISTRATION = "/registration/";
         @Getter public static final String MYACCOUNT = "/myaccount/";
         @Getter public static final String ADMINPANEL = "/adminpanel/";
+        @Getter public static final String MODIFYSCREEN = "/modify/";
     }
 
     public static class Template {
@@ -28,6 +29,7 @@ public class Path {
         public static final String REGISTRATION = "/sources/HTML/registration/registration.vm";
         public static final String MYACCOUNT = "/sources/HTML/account/account.vm";
         public static final String ADMINPANEL = "/sources/HTML/admin/admin.vm";
+        public static final String MODIFYSCREEN = "/sources/HTML/admin/modify.vm";
     }
 
 }

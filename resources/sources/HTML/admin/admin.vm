@@ -21,7 +21,7 @@
                 <th>Postal code</th>
                 <th>Street</th>
                 <th>Number</th>
-                <th width="20%">Operations</th>
+                <th>Operations</th>
             </tr>
             #foreach ($manager in $allUserManagers)
                 <tr>
@@ -31,14 +31,24 @@
                     <td>$manager.getAge()</td>
                     <td>$manager.getAddressDocManager().getCountry()</td>
                     <td>$manager.getAddressDocManager().getCity()</td>
-                    <td> $manager.getAddressDocManager().getPostalCode()</td>
-                    <td> $manager.getAddressDocManager().getStreet()</td>
+                    <td>$manager.getAddressDocManager().getPostalCode()</td>
+                    <td>$manager.getAddressDocManager().getStreet()</td>
                     <td>$manager.getAddressDocManager().getNumber()</td>
-                    <td><button onclick="myFunction()">Modify</button> <button onclick="myFunction()">Delete</button></td>
+                    <td>
+                        <input type="submit" value="Delete">
+                        <input type="submit" value="Modify" onclick="function () {
+                            $modifyUser = $manager.getName();
+                                var myvar = $modifyUser;
+                                alert (myvar);
+                                alert ('test');
+                                }">
+##                                }">
+
+##                        <input type="button" onclick="location.href='http://google.com';" value="Delete"/>
+##                        <input type="button" onclick="location.href='http://localhost:4567/modify/';" value="Modify"/>
+                    </td>
                 </tr>
             #end
-
-
         </table>
     </body>
     #else

@@ -2,13 +2,11 @@ package controller;
 
 import com.mongodb.client.MongoCollection;
 import model.Database;
-import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
 import org.bson.Document;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import user.UserController;
 import viewutil.Path;
 import viewutil.ViewUtil;
 
@@ -16,8 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static viewutil.RequestUtil.*;
 
 public class AdminController {
 
@@ -27,21 +23,23 @@ public class AdminController {
         List<UserDocumentManager> users = new ArrayList<>();
         userCollection.find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
         model.put("allUserManagers", users);
+        model.put("modifyUser", "1");
+        request.session().attribute("modifyUser", "1");
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
 
-    public static Route handleSubmitPost = (Request request, Response response) -> {
+    public static Route modifyPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-
-        UserController controller = new UserController(getQueryUsername(request));
-        if (!controller.databaseHasUser()) {
-            model.put("userInvalid", true);
-            return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
-        }
-        model.put("checkedUser", true);
-        model.put("checkedUserDocument", new UserDocumentManager(new UserCollectionManager().getUserDocument(getQueryUsername(request))));
-        return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
+        return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
     };
 
+    public static Route handleAdminPost = (Request request, Response response) -> {
+        Map<String, Object> model = new HashMap<>();
+        request.session().attributes().forEach(System.out::println);
+        String modifyUser = request.session().attribute("modifyUser");
+        System.out.println(modifyUser);
+        model.put("modifyUser", modifyUser);
+        return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
+    };
 
 }
