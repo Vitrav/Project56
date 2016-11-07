@@ -1,7 +1,19 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 <form id="adminForm" method="post", action = "/delete/">
-
+    <style>
+        form{
+            position: relative;
+            left: 200px;
+            top: 10px;
+            max-width: 500px;
+            margin: 30px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
     #if($authenticationSucceeded)
         <body>
         <h3 class="byline">Are you sure you want to delete: $modifyUser</h3>

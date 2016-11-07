@@ -37,15 +37,17 @@ public class AdminController {
 
     public static Route handleDeletePost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
+        request.session().attributes().forEach(req -> {
+            String att = req.toString();
+            model.put(att, request.session().attribute(att));
+        });
+        String modifyUser = (String) model.get("modifyUser");
         model.put("userIsAdmin", true);
         if (request.queryParams().iterator().hasNext()){
-            String user = request.queryParams().iterator().next();
             if (request.queryParams(request.queryParams().iterator().next()).equalsIgnoreCase("Yes")){
-                System.out.println("Yes");
-                Database.getInstance().getUserCollection().findOneAndDelete(new UserCollectionManager().getUserDocument(user));
+                Database.getInstance().getUserCollection().deleteOne(new UserCollectionManager().getUserDocument(modifyUser));
                 return ViewUtil.render(request, model, Path.Template.INDEX);
             } else {
-                System.out.println("No");
                 return ViewUtil.render(request, model, Path.Template.INDEX);
             }
         }
@@ -59,6 +61,7 @@ public class AdminController {
         if (request.queryParams().iterator().hasNext()) {
             String user = request.queryParams().iterator().next();
             model.put("modifyUser", user);
+            request.session().attribute("modifyUser", user);
             if (request.queryParams(request.queryParams().iterator().next()).equalsIgnoreCase("Modify")) {
                 System.out.println("Modify button");
                 model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
