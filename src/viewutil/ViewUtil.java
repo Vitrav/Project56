@@ -1,5 +1,6 @@
 package viewutil;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.velocity.app.VelocityEngine;
 import org.eclipse.jetty.http.HttpStatus;
 import spark.ModelAndView;
@@ -16,6 +17,8 @@ import static viewutil.RequestUtil.getSessionLocale;
 
 public class ViewUtil {
 
+    public static String modifyUser = "1";
+
     // Renders a template given a main.model and a request
     // The request is needed to check the User session for language settings
     // and to see if the User is logged in
@@ -26,6 +29,11 @@ public class ViewUtil {
         if (getSessionCurrentUser(request) != null)
             model.put("authenticationSucceeded", true);
         return strictVelocityEngine().render(new ModelAndView(model, templatePath));
+    }
+
+    public static void renderModifyScreen(String user) {
+        System.out.println(modifyUser);
+        modifyUser = user;
     }
 
     public static Route notAcceptable = (Request request, Response response) -> {

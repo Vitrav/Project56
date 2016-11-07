@@ -17,3 +17,4 @@
 #* @vtlvariable name="allUsers" type="java.util.ArrayList" *#
 #* @vtlvariable name="allUserManagers" type="java.util.ArrayList<model.document.UserDocumentManager>" *#
 #* @vtlvariable name="userInfo" type="model.document.UserDocumentManager" *#
+#* @vtlvariable name="modifyUserManager" type="model.document.UserDocumentManager" *#

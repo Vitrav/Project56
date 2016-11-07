@@ -2,6 +2,7 @@ package controller;
 
 import com.mongodb.client.MongoCollection;
 import model.Database;
+import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
 import org.bson.Document;
 import spark.Request;
@@ -24,6 +25,8 @@ public class AdminController {
         userCollection.find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
         model.put("allUserManagers", users);
         model.put("modifyUser", "1");
+        model.put("viewUtil", new ViewUtil());
+        request.session().attribute("viewUtil", new ViewUtil());
         request.session().attribute("modifyUser", "1");
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
@@ -35,11 +38,21 @@ public class AdminController {
 
     public static Route handleAdminPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        request.session().attributes().forEach(System.out::println);
-        String modifyUser = request.session().attribute("modifyUser");
-        System.out.println(modifyUser);
-        model.put("modifyUser", modifyUser);
-        return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
+
+        if (request.queryParams().iterator().hasNext()) {
+            String user = request.queryParams().iterator().next();
+            model.put("modifyUser", user);
+            if (request.queryParams(request.queryParams().iterator().next()).equalsIgnoreCase("Modify")) {
+                System.out.println("Modify button");
+                model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
+                return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
+            } else {
+                System.out.println("Delete button");
+                //return ViewUtil.render(request, model, Path.Template.DELETESCREEN);
+                return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
+            }
+        }
+        return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
 
 }

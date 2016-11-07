@@ -4,8 +4,52 @@
 
     #if($authenticationSucceeded)
         <body>
-            <p> modify the user here </p>
-            <p> $modifyUser</p>
+            <h3 class="byline">Modify user: $modifyUser</h3>
+            <p class="italicp">Current information</p>
+            <table style='white-space: nowrap', id="div1">
+                <tr>
+                    <th>Username</th>
+                    <th>E-mail</th>
+                    <th>Date of birth</th>
+                    <th>Age</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Postal code</th>
+                    <th>Street</th>
+                    <th>Number</th>
+                </tr>
+                <tr>
+                    <td>$modifyUserManager.getName()</td>
+                    <td>$modifyUserManager.getEmail()</td>
+                    <td>$modifyUserManager.getDateOfBirth()</td>
+                    <td>$modifyUserManager.getAge()</td>
+                    <td>$modifyUserManager.getAddressDocManager().getCountry()</td>
+                    <td>$modifyUserManager.getAddressDocManager().getCity()</td>
+                    <td>$modifyUserManager.getAddressDocManager().getPostalCode()</td>
+                    <td>$modifyUserManager.getAddressDocManager().getStreet()</td>
+                    <td>$modifyUserManager.getAddressDocManager().getNumber()</td>
+                </tr>
+            </table>
+            <br>
+            <p class="italicp">Change information</p>   <br>
+            <label>$msg.get("REGISTRATION_LABEL_USERNAME")</label>   <br>
+            <input type="text" name="username" placeholder="$msg.get("REGISTRATION_LABEL_USERNAME")" value="" required maxlength="14">   <br>
+            <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>   <br>
+            <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_PASSWORD")" value="" required maxlength="14">   <br>
+            <label>$msg.get("REGISTRATION_LABEL_AGE")</label>   <br>
+            <input type="date" name="doB" placeholder="$msg.get("REGISTRATION_LABEL_AGE")" value="" required>   <br>
+            <label>$msg.get("REGISTRATION_LABEL_EMAIL")</label>  <br>
+            <input type="email" name="email" placeholder="$msg.get("REGISTRATION_LABEL_EMAIL")" value="" required>   <br>
+            <label>$msg.get("REGISTRATION_LABEL_COUNTRY")</label>   <br>
+            <input type="text" name="country" placeholder="$msg.get("REGISTRATION_LABEL_COUNTRY")" value="" required>   <br>
+            <label>$msg.get("REGISTRATION_LABEL_POSTALCODE")</label>   <br>
+            <input type="text" name="postalcode" placeholder="$msg.get("REGISTRATION_LABEL_POSTALCODE")" value="" required>   <br>
+            <label>$msg.get("REGISTRATION_LABEL_CITY")</label>   <br>
+            <input type="text" name="city" placeholder="$msg.get("REGISTRATION_LABEL_CITY")" value="" required>   <br>
+            <label>$msg.get("REGISTRATION_LABEL_STREET")</label>   <br>
+            <input type="text" name="street" placeholder="$msg.get("REGISTRATION_LABEL_STREET")" value="" required>   <br>
+            <label>$msg.get("REGISTRATION_LABEL_NUMBER")</label>   <br>
+            <input type="text" name="number" placeholder="$msg.get("REGISTRATION_LABEL_NUMBER")" value="" required>   <br>
         </body>
     #else
         <script language="javascript">
