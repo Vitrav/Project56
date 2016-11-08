@@ -87,7 +87,7 @@ public class RegistrationController {
         return ViewUtil.render(request, model, Path.Template.INDEX);
     };
 
-    private static int calculateAge(Date dateOfBirth) {
+    public static int calculateAge(Date dateOfBirth) {
         //get the birth date
         Calendar birthDate = Calendar.getInstance();
         birthDate.setTime(dateOfBirth);

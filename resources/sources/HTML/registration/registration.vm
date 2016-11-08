@@ -1,6 +1,6 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="registrationForm" method="post", action = "/registration/">
+<form id="loginForm" method="post", action = "/registration/">
     #if($userExists)
         <p class="bad notification">$msg.get("REGISTRATION_USER_EXISTS")</p>
     #elseif($userInvalid)
@@ -27,8 +27,6 @@
         <p class="notification">$msg.get("LOGIN_LOGGED_OUT")</p>
     #end
 
-    <h1>$msg.get("REGISTRATION_HEADING")</h1>
-##    <p>$msg.get("LOGIN_INSTRUCTIONS", $WebPath.getINDEX())</p>
     <label>$msg.get("REGISTRATION_LABEL_USERNAME")</label>
     <input type="text" name="username" placeholder="$msg.get("REGISTRATION_LABEL_USERNAME")" value="" required maxlength="14">
     <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>

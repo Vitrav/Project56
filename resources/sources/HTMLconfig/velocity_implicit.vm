@@ -5,7 +5,6 @@
 #* @vtlvariable name="book" type="app.book.Book" *#
 #* @vtlvariable name="users" type="java.lang.Iterable<user.User>" *#
 #* @vtlvariable name="currentUser" type="java.lang.String" *#
-#* @vtlvariable name="modifyUser" type="java.lang.String" *#
 #* @vtlvariable name="currentEmail" type="java.lang.String" *#
 #* @vtlvariable name="loggedOut" type="java.lang.String" *#
 #* @vtlvariable name="authenticationFailed" type="java.lang.String" *#

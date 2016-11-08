@@ -53,7 +53,11 @@ public class UserController {
     }
 
     public boolean usernameIsValid() {
-        if (username.length() < 4 || username.length() > 14)
+        return usernameIsValid(username);
+    }
+
+    public boolean usernameIsValid(String name) {
+        if (name.length() < 4 || name.length() > 14)
             return false;
         return true;
     }
@@ -76,6 +80,12 @@ public class UserController {
     public boolean databaseHasUser() {
         Document query = new Document();
         query.put("username", username);
+        return collection.find(query).iterator().hasNext();
+    }
+
+    public boolean databaseHasUser(String name) {
+        Document query = new Document();
+        query.put("username", name);
         return collection.find(query).iterator().hasNext();
     }
 

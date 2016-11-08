@@ -37,6 +37,7 @@
                 <th>Operations</th>
             </tr>
 
+
             #foreach ($manager in $allUserManagers)
                 <tr>
                     <td>$manager.getName()</td>

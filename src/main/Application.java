@@ -31,7 +31,8 @@ public final class Application {
         get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
         get(Path.Web.MYACCOUNT, MyAccountController.accountPage);
         get(Path.Web.ADMINPANEL, AdminController.adminPage);
-//        get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
+        get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
+        post(Path.Web.MODIFYSCREEN, AdminController.handleModifyPost);
         post(Path.Web.ADMINPANEL, AdminController.handleAdminPost);
         post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);

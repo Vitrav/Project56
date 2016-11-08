@@ -1000,6 +1000,15 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     cursor: pointer;
 }
 
+#accountForm table, th, td{
+    border: 1px white;
+}
+
+#accountForm th, td {
+    padding: 15px;
+    width: 300px;
+}
+
 /*#adminForm input {*/
 /*border: 1px solid #ddd;*/
 /*padding: 6px 12px;*/
@@ -1007,6 +1016,19 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 /*!*border-radius: 3px;*!*/
 /*!*margin: 2px 0 20px 0;*!*/
 /*}*/
+
+#adminForm,  #modifyForm {
+    position: relative;
+    left: 200px;
+    top: 10px;
+    max-width: 500px;
+    margin: 30px;
+}
+
+#adminForm table, th, td {
+    border: 1px solid black;
+    padding: 10px;
+}
 
 /*#adminForm label {*/
     /*display: block;*/
@@ -1017,6 +1039,12 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 24px;
+}
+
+.bylineSmall {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 20px;
 }
 
 .italicp {
@@ -1036,7 +1064,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     width: 100%
 }
 
-#registrationForm input {
+#registrationForm, #modifyForm input {
     border: 1px solid #ddd;
     padding: 8px 12px;
     width: 100%;

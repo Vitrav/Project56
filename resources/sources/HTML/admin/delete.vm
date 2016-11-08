@@ -42,6 +42,7 @@
                 <td>$modifyUserManager.getAddressDocManager().getNumber()</td>
             </tr>
         </table>
+        <br>
         <input type="submit" name="delete" value="yes">
         <input type="submit" name="dont delete" value="no">
         </body>

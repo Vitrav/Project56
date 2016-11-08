@@ -10,7 +10,7 @@ import com.mongodb.client.MongoCollection;
 
 public class DocumentManager {
 
-	protected final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	protected final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
 	protected Document document;
 	protected MongoCollection<Document> collection;

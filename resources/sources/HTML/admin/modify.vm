@@ -1,8 +1,34 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="adminForm" method="post" action = "/adminpanel/">
 
+<form id="modifyForm" method="post", action = "/modify/">
     #if($authenticationSucceeded)
+        #if($userExists)
+            <p class="bad notification">$msg.get("REGISTRATION_USER_EXISTS")</p>
+        #elseif($userInvalid)
+            <p class="bad notification">$msg.get("REGISTRATION_USERNAME_FAILED")</p>
+        #elseif($passwordInvalid)
+            <p class="bad notification">$msg.get("REGISTRATION_PASSWORD_FAILED")</p>
+        #elseif($dobInvalid)
+            <p class="bad notification">$msg.get("REGISTRATION_DOB_FAILED")</p>
+        #elseif($emailInvalid)
+            <p class="bad notification">$msg.get("REGISTRATION_EMAIL_FAILED")</p>
+        #elseif($countryInvalid)
+            <p class="bad notification">$msg.get("REGISTRATION_COUNTRY_FAILED")</p>
+        #elseif($postalInvalid)
+            <p class="bad notification">$msg.get("REGISTRATION_POSTAl_FAILED")</p>
+        #elseif($cityInvalid)
+            <p class="bad notification">$msg.get("REGISTRATION_CITY_FAILED")</p>
+        #elseif($streetInvalid)
+            <p class="bad notification">$msg.get("REGISTRATION_STREET_FAILED")</p>
+        #elseif($streetNumberInvalid)
+            <p class="bad notification">$msg.get("REGISTRATION_STREETNUMBER_FAILED")</p>
+        #elseif($loggedOut)
+            <p class="notification">$msg.get("LOGIN_LOGGED_OUT")</p>
+        #elseif($valuesUpdated)
+            <p class="notification">Values have been updated</p>
+        #end
+
         <body>
             <h3 class="byline">Modify user: $modifyUser</h3>
             <p class="italicp">Current information</p>
@@ -30,31 +56,34 @@
                     <td>$modifyUserManager.getAddressDocManager().getNumber()</td>
                 </tr>
             </table>
-            <br>
-            <p class="italicp">Change information</p>   <br>
-            <label>$msg.get("REGISTRATION_LABEL_USERNAME")</label>   <br>
-            <input type="text" name="username" placeholder="$msg.get("REGISTRATION_LABEL_USERNAME")" value="" required maxlength="14">   <br>
-            <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>   <br>
-            <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_PASSWORD")" value="" required maxlength="14">   <br>
-            <label>$msg.get("REGISTRATION_LABEL_AGE")</label>   <br>
-            <input type="date" name="doB" placeholder="$msg.get("REGISTRATION_LABEL_AGE")" value="" required>   <br>
-            <label>$msg.get("REGISTRATION_LABEL_EMAIL")</label>  <br>
-            <input type="email" name="email" placeholder="$msg.get("REGISTRATION_LABEL_EMAIL")" value="" required>   <br>
-            <label>$msg.get("REGISTRATION_LABEL_COUNTRY")</label>   <br>
-            <input type="text" name="country" placeholder="$msg.get("REGISTRATION_LABEL_COUNTRY")" value="" required>   <br>
-            <label>$msg.get("REGISTRATION_LABEL_POSTALCODE")</label>   <br>
-            <input type="text" name="postalcode" placeholder="$msg.get("REGISTRATION_LABEL_POSTALCODE")" value="" required>   <br>
-            <label>$msg.get("REGISTRATION_LABEL_CITY")</label>   <br>
-            <input type="text" name="city" placeholder="$msg.get("REGISTRATION_LABEL_CITY")" value="" required>   <br>
-            <label>$msg.get("REGISTRATION_LABEL_STREET")</label>   <br>
-            <input type="text" name="street" placeholder="$msg.get("REGISTRATION_LABEL_STREET")" value="" required>   <br>
-            <label>$msg.get("REGISTRATION_LABEL_NUMBER")</label>   <br>
-            <input type="text" name="number" placeholder="$msg.get("REGISTRATION_LABEL_NUMBER")" value="" required>   <br>
+            <br> <br>
+            <h4 class="bylineSmall">Change information</h4>
+            <p>Only fill in the fields you want to change.</p>
+            <label>$msg.get("REGISTRATION_LABEL_USERNAME")</label>
+            <input type="text" name="username" placeholder="$msg.get("REGISTRATION_LABEL_USERNAME")" value="" maxlength="14">
+            <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>
+            <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_PASSWORD")" value="" maxlength="14">
+            <label>$msg.get("REGISTRATION_LABEL_AGE")</label>
+            <input type="date" name="doB" placeholder="$msg.get("REGISTRATION_LABEL_AGE")" >
+            <label>$msg.get("REGISTRATION_LABEL_EMAIL")</label>
+            <input type="email" name="email" placeholder="$msg.get("REGISTRATION_LABEL_EMAIL")" >
+            <label>$msg.get("REGISTRATION_LABEL_COUNTRY")</label>
+            <input type="text" name="country" placeholder="$msg.get("REGISTRATION_LABEL_COUNTRY")" >
+            <label>$msg.get("REGISTRATION_LABEL_POSTALCODE")</label>
+            <input type="text" name="postalcode" placeholder="$msg.get("REGISTRATION_LABEL_POSTALCODE")" >
+            <label>$msg.get("REGISTRATION_LABEL_CITY")</label>
+            <input type="text" name="city" placeholder="$msg.get("REGISTRATION_LABEL_CITY")" >
+            <label>$msg.get("REGISTRATION_LABEL_STREET")</label>
+            <input type="text" name="street" placeholder="$msg.get("REGISTRATION_LABEL_STREET")" >
+            <label>$msg.get("REGISTRATION_LABEL_NUMBER")</label>
+            <input type="text" name="number" placeholder="$msg.get("REGISTRATION_LABEL_NUMBER")" >
+
+            <input type="submit" value="Submit changes")">
         </body>
     #else
-        <script language="javascript">
-            window.location.href = "http://localhost:4567/login/"
-        </script>
+            <script language="javascript">
+                window.location.href = "http://localhost:4567/login/"
+            </script>
     #end
 </form>
 #end

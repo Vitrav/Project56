@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import controller.RegistrationController;
 import org.bson.Document;
 
 import model.Database;
 import model.collection.UserCollectionManager;
 import main.Application.*;
+
+import javax.xml.crypto.Data;
+
 public class UserDocumentManager extends DocumentManager {
+
+    private AddressDocumentManager addressDocManager;
 
 	public UserDocumentManager(Document doc) {
 		super(doc, Database.getInstance().getUserCollection());
@@ -49,9 +55,46 @@ public class UserDocumentManager extends DocumentManager {
 		return document.getString("date_of_birth");
 	}
 
+	public Date getDateOfBirthAsDate() {
+        try {
+            return dateFormat.parse((String) document.getString("date_of_birth"));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private Date getDateOfBirthAsDate(String date) {
+        try {
+            return dateFormat.parse(date);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 	public void setDateOfBirth(Date dateOfBirth) {
-		String date = dateFormat.format(dateOfBirth);
-		update(new Document("date_of_birth", date.substring(date.indexOf(" ") + 1, date.length())));
+        String date = "";
+        try {
+            date = dateFormat.format(dateOfBirth);
+        } catch (Exception e) {
+            return;
+        }
+        int age = RegistrationController.calculateAge(dateOfBirth);
+        setAge(age);
+        update(new Document("date_of_birth", dateFormat.format(dateOfBirth)));
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		String date = "";
+		try {
+			date = dateFormat.format(dateOfBirth);
+		} catch (Exception e) {
+			date = dateOfBirth;
+		}
+		if (getDateOfBirthAsDate(date) != null)
+            setAge(RegistrationController.calculateAge(getDateOfBirthAsDate(date)));
+        System.out.println(RegistrationController.calculateAge(getDateOfBirthAsDate(date)));
+
+		update(new Document("date_of_birth", date));
 	}
 
 	public String getEmail() {
@@ -147,8 +190,9 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public AddressDocumentManager getAddressDocManager() {
-		Document addressDoc = (Document) document.get("address");
-		return new AddressDocumentManager(addressDoc);
+        if (addressDocManager == null)
+            addressDocManager = new AddressDocumentManager((Document) document.get("address"));
+		return addressDocManager;
 	}
 
 }
