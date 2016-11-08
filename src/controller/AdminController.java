@@ -66,6 +66,8 @@ public class AdminController {
         String oldCity = manager.getAddressDocManager().getCity();
         String oldStreet = manager.getAddressDocManager().getStreet();
         String oldNumber = manager.getAddressDocManager().getNumber();
+        String oldPass = manager.getPassword();
+        String oldEmail = manager.getEmail();
 
         //All new user values
         String password = BCrypt.hashpw(getQueryPassword(request), salt);
@@ -122,19 +124,20 @@ public class AdminController {
         //Update the address
         Address newAddress = new Address(country.length() > 1 ? country : oldCounty, city.length() > 1 ? city : oldCity, street.length() > 1 ? street : oldStreet, number.length() >= 1 ? number : oldNumber, postalCode.length() >= 6 ?  postalCode : oldPostalCode);
         manager.setAddress(new UserCollectionManager().createAddressDocument(newAddress));
-        //Replace the user brcause it might be modified.
-        request.session().attribute("modifyUser", username);
-        model.put("modifyUser", username);
         if (username != modifiedUser) {
+            System.out.println(manager.getEmail());
             //Insert the new user and drop the old one.
-            new UserCollectionManager().insertUser(new User(username, salt, password, newAddress, manager.getAge(), manager.getDateOfBirthAsDate(), manager.getEmail(), manager.isAdmin(), manager.wishListIsPrivate(), false));
             Database.getInstance().getUserCollection().deleteOne(new UserCollectionManager().getUserDocument(modifiedUser));
+            new UserCollectionManager().insertUser(new User(username, salt, getQueryPassword(request).length() >= 4 ? password : oldPass, newAddress, getdoB(request).length() >= 6 ? RegistrationController.calculateAge(doB) : manager.getAge(), getdoB(request).length() >= 6 && doB != null ? DATE_FORMAT.parse(getdoB(request)) : manager.getDateOfBirthAsDate(), getEmail(request).length() > 1 ? getEmail(request) : oldEmail, manager.isAdmin(), manager.wishListIsPrivate(), manager.isAdmin()));
             request.session().attribute("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(username)));
             model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(username)));
-        } else {
-            request.session().attribute("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(username)));
-            model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(modifiedUser)));
+            model.put("valuesUpdated", true);
+            request.session().attribute("modifyUser", username);
+            model.put("modifyUser", username);
+            return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
         }
+        request.session().attribute("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(username)));
+        model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(modifiedUser)));
         model.put("valuesUpdated", true);
         return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
     };
