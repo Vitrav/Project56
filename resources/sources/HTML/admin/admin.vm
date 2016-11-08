@@ -37,8 +37,8 @@
                 <th>Operations</th>
             </tr>
 
-
             #foreach ($manager in $allUserManagers)
+                #if ($currentUser != $manager.getName())
                 <tr>
                     <td>$manager.getName()</td>
                     <td>$manager.getEmail()</td>
@@ -52,8 +52,14 @@
                     <td>
                         <input type="submit" name="$manager.getName()" value="Modify"></input>
                         <input type="submit" name="$manager.getName()" value="Delete"></input>
+                        #if ($manager.isBlocked)
+                            <input type="submit" name="$manager.getName()" value="Unblock"></input>
+                        #else
+                            <input type="submit" name="$manager.getName()" value="Block"></input>
+                        #end
                     </td>
                 </tr>
+                #end
             #end
         </table>
     </body>

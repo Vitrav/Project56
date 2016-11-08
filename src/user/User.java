@@ -13,8 +13,9 @@ public class User {
     private String email;
     private boolean isAdmin;
     private boolean hasPrivateWishList;
+    private boolean isBlocked;
 
-    public User(String username, String salt, String hashedPassword, Address address, int age, Date dateOfBirth, String email, boolean isAdmin, boolean hasPrivateWishList) {
+    public User(String username, String salt, String hashedPassword, Address address, int age, Date dateOfBirth, String email, boolean isAdmin, boolean hasPrivateWishList, boolean isBlocked) {
         this.username = username;
         this.salt = salt;
         this.hashedPassword = hashedPassword;
@@ -24,6 +25,7 @@ public class User {
         this.email = email;
         this.isAdmin = isAdmin;
         this.hasPrivateWishList = hasPrivateWishList;
+        this.isBlocked = isBlocked;
     }
 
     public String getUsername() {
@@ -60,5 +62,9 @@ public class User {
 
     public boolean getHasPrivateWishList() {
         return hasPrivateWishList;
+    }
+
+    public boolean getIsBlocked() {
+        return isBlocked;
     }
 }

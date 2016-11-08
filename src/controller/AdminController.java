@@ -2,6 +2,7 @@ package controller;
 
 import com.mongodb.client.MongoCollection;
 import model.Database;
+import model.collection.CollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
 import org.bson.Document;
@@ -20,10 +21,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static viewutil.RequestUtil.*;
+import java.util.*;
 
 public class AdminController {
 
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
+    private static final String salt = BCrypt.gensalt();
 
     public static Route adminPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
@@ -33,10 +36,7 @@ public class AdminController {
 
         model.put("userIsAdmin", true);
         model.put("allUserManagers", users);
-        model.put("modifyUser", "1");
-        model.put("viewUtil", new ViewUtil());
-        request.session().attribute("viewUtil", new ViewUtil());
-        request.session().attribute("modifyUser", "1");
+        request.session().attribute("allUserManagers", users);
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
 
@@ -47,12 +47,12 @@ public class AdminController {
 
     public static Route handleModifyPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
+        //Insert the session attributes in the model (so we keep modifyUser and modifyUserManager
         request.session().attributes().forEach(req -> {
             String att = req.toString();
             model.put(att, request.session().attribute(att));
         });
         model.put("userIsAdmin", true);
-        String salt = BCrypt.gensalt();
 
         String modifiedUser = (String) model.get("modifyUser");
         String username = getQueryUsername(request).length() >= 4 ? getQueryUsername(request) : modifiedUser;
@@ -60,13 +60,15 @@ public class AdminController {
         UserController controller = new UserController(modifiedUser);
         UserDocumentManager manager = (UserDocumentManager) model.get("modifyUserManager");
 
+        //All current user values
         String oldCounty = manager.getAddressDocManager().getCountry();
         String oldPostalCode = manager.getAddressDocManager().getPostalCode();
         String oldCity = manager.getAddressDocManager().getCity();
         String oldStreet = manager.getAddressDocManager().getStreet();
         String oldNumber = manager.getAddressDocManager().getNumber();
 
-        String password =  BCrypt.hashpw(getQueryPassword(request), salt);
+        //All new user values
+        String password = BCrypt.hashpw(getQueryPassword(request), salt);
         Date doB = getdoB(request).length() >= 6 ? DATE_FORMAT.parse(getdoB(request)) : null;
         String email = getEmail(request);
         String country = getCountry(request);
@@ -75,6 +77,7 @@ public class AdminController {
         String street = getStreet(request).toLowerCase();
         String number = getNumber(request).toLowerCase();
 
+        //Check inserted values and return the current screen with a message when it's invalid.
         if (getQueryUsername(request).length() >= 1) {
             if (controller.databaseHasUser(getQueryUsername(request))) {
                 model.put("userExists", true);
@@ -116,12 +119,15 @@ public class AdminController {
         if (getEmail(request).length() > 1)
             manager.setEmail(email);
 
+        //Update the address
         Address newAddress = new Address(country.length() > 1 ? country : oldCounty, city.length() > 1 ? city : oldCity, street.length() > 1 ? street : oldStreet, number.length() >= 1 ? number : oldNumber, postalCode.length() >= 6 ?  postalCode : oldPostalCode);
         manager.setAddress(new UserCollectionManager().createAddressDocument(newAddress));
+        //Replace the user brcause it might be modified.
         request.session().attribute("modifyUser", username);
         model.put("modifyUser", username);
         if (username != modifiedUser) {
-            new UserCollectionManager().insertUser(new User(username, salt, password, newAddress, manager.getAge(), manager.getDateOfBirthAsDate(), manager.getEmail(), manager.isAdmin(), manager.wishListIsPrivate()));
+            //Insert the new user and drop the old one.
+            new UserCollectionManager().insertUser(new User(username, salt, password, newAddress, manager.getAge(), manager.getDateOfBirthAsDate(), manager.getEmail(), manager.isAdmin(), manager.wishListIsPrivate(), false));
             Database.getInstance().getUserCollection().deleteOne(new UserCollectionManager().getUserDocument(modifiedUser));
             request.session().attribute("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(username)));
             model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(username)));
@@ -163,15 +169,22 @@ public class AdminController {
             String user = request.queryParams().iterator().next();
             model.put("modifyUser", user);
             request.session().attribute("modifyUser", user);
-            if (request.queryParams(request.queryParams().iterator().next()).equalsIgnoreCase("Modify")) {
-                model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
+            model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
+
+            String buttonName = request.queryParams(request.queryParams().iterator().next());
+            if (buttonName.equalsIgnoreCase("Modify")) {
                 request.session().attribute("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
                 return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
-            } else {
-                model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
+            } else if (buttonName.equalsIgnoreCase("Delete"))
                 return ViewUtil.render(request, model, Path.Template.DELETESCREEN);
-            }
+            else if (buttonName.equalsIgnoreCase("Block"))
+                new UserDocumentManager(new UserCollectionManager().getUserDocument(user)).setBlocked(true);
+            else if (buttonName.equalsIgnoreCase("Unblock"))
+                new UserDocumentManager(new UserCollectionManager().getUserDocument(user)).setBlocked(false);
         }
+        List<UserDocumentManager> users = new ArrayList<>();
+        new UserCollectionManager().getCollection().find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
+        model.put("allUserManagers", users);
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
 

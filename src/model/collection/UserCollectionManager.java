@@ -41,6 +41,7 @@ public class UserCollectionManager extends CollectionManager {
 		userDocument.put("purchase_history", historyItems);
 		userDocument.put("favourite_list", favouriteList);
 		userDocument.put("wish_list", wishList);
+		userDocument.put("is_blocked", user.getIsBlocked());
 		collection.insertOne(userDocument);
 	}
 

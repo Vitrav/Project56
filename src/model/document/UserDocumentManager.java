@@ -189,6 +189,14 @@ public class UserDocumentManager extends DocumentManager {
 		setWishList(items);
 	}
 
+	public boolean getIsBlocked() {
+		return (boolean) document.get("is_blocked");
+	}
+
+	public void setBlocked(boolean block) {
+		update(new Document("is_blocked", block));
+	}
+
 	public AddressDocumentManager getAddressDocManager() {
         if (addressDocManager == null)
             addressDocManager = new AddressDocumentManager((Document) document.get("address"));

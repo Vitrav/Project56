@@ -1,6 +1,8 @@
 package controller;
 
 
+import model.collection.UserCollectionManager;
+import model.document.UserDocumentManager;
 import spark.Route;
 import user.UserController;
 import viewutil.Path;
@@ -28,9 +30,13 @@ public class LoginController {
             model.put("authenticationFailed", true);
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
-        if (controller.adminStatus()){
-            model.put("userIsAdmin", true);
+        if (new UserDocumentManager(new UserCollectionManager().getUserDocument(getQueryUsername(request))).getIsBlocked()) {
+            model.put("blocked", true);
+            return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
+        if (controller.adminStatus())
+            model.put("userIsAdmin", true);
+
         model.put("authenticationSucceeded", true);
         request.session().attribute("currentUser", getQueryUsername(request));
         return ViewUtil.render(request, model, Path.Template.INDEX);

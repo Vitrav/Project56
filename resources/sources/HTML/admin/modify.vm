@@ -77,13 +77,12 @@
             <input type="text" name="street" placeholder="$msg.get("REGISTRATION_LABEL_STREET")" >
             <label>$msg.get("REGISTRATION_LABEL_NUMBER")</label>
             <input type="text" name="number" placeholder="$msg.get("REGISTRATION_LABEL_NUMBER")" >
-
             <input type="submit" value="Submit changes")">
         </body>
     #else
-            <script language="javascript">
-                window.location.href = "http://localhost:4567/login/"
-            </script>
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/login/"
+        </script>
     #end
 </form>
 #end
