@@ -82,7 +82,7 @@ public class RegistrationController {
 
         Date dateOfBirth = dateFormat.parse(doB);
         int age = calculateAge(dateOfBirth);
-        userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, true, false, false));
+        userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, false, false, false));
         System.out.println("User created.");
         return ViewUtil.render(request, model, Path.Template.INDEX);
     };

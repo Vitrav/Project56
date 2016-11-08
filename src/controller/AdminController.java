@@ -47,7 +47,7 @@ public class AdminController {
 
     public static Route handleModifyPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        //Insert the session attributes in the model (so we keep modifyUser and modifyUserManager
+        //Insert the session attributes in the model (so we keep modifyUser and modifyUserManager)
         request.session().attributes().forEach(req -> {
             String att = req.toString();
             model.put(att, request.session().attribute(att));
@@ -124,11 +124,25 @@ public class AdminController {
         //Update the address
         Address newAddress = new Address(country.length() > 1 ? country : oldCounty, city.length() > 1 ? city : oldCity, street.length() > 1 ? street : oldStreet, number.length() >= 1 ? number : oldNumber, postalCode.length() >= 6 ?  postalCode : oldPostalCode);
         manager.setAddress(new UserCollectionManager().createAddressDocument(newAddress));
+
+        //Replace the user because it might be modified.
+        request.session().attribute("modifyUser", username);
+        model.put("modifyUser", username);
+
         if (username != modifiedUser) {
-            System.out.println(manager.getEmail());
             //Insert the new user and drop the old one.
             Database.getInstance().getUserCollection().deleteOne(new UserCollectionManager().getUserDocument(modifiedUser));
-            new UserCollectionManager().insertUser(new User(username, salt, getQueryPassword(request).length() >= 4 ? password : oldPass, newAddress, getdoB(request).length() >= 6 ? RegistrationController.calculateAge(doB) : manager.getAge(), getdoB(request).length() >= 6 && doB != null ? DATE_FORMAT.parse(getdoB(request)) : manager.getDateOfBirthAsDate(), getEmail(request).length() > 1 ? getEmail(request) : oldEmail, manager.isAdmin(), manager.wishListIsPrivate(), manager.isAdmin()));
+            new UserCollectionManager().insertUser(new User(
+                    username,
+                    salt,
+                    getQueryPassword(request).length() >= 4 ? password : oldPass,
+                    newAddress,
+                    getdoB(request).length() >= 6 ? RegistrationController.calculateAge(doB) : manager.getAge(),
+                    getdoB(request).length() >= 6 && doB != null ? DATE_FORMAT.parse(getdoB(request)) : manager.getDateOfBirthAsDate(),
+                    getEmail(request).length() > 1 ? getEmail(request) : oldEmail,
+                    manager.isAdmin(),
+                    manager.wishListIsPrivate(),
+                    manager.isAdmin()));
             request.session().attribute("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(username)));
             model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(username)));
             model.put("valuesUpdated", true);
@@ -144,6 +158,7 @@ public class AdminController {
 
     public static Route handleDeletePost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
+        //Insert the session attributes in the model (so we keep modifyUser and modifyUserManager)
         request.session().attributes().forEach(req -> {
             String att = req.toString();
             model.put(att, request.session().attribute(att));});
@@ -152,7 +167,8 @@ public class AdminController {
         model.put("userIsAdmin", true);
         if (request.queryParams().iterator().hasNext()){
             //determine which button you press
-            if (request.queryParams(request.queryParams().iterator().next()).equalsIgnoreCase("Yes")){
+            String buttonName = request.queryParams(request.queryParams().iterator().next());
+            if (buttonName.equalsIgnoreCase("Yes")){
                 //delete the selected user from the database
                 Database.getInstance().getUserCollection().deleteOne(new UserCollectionManager().getUserDocument(modifyUser));
                 return ViewUtil.render(request, model, Path.Template.INDEX);
@@ -174,15 +190,20 @@ public class AdminController {
             request.session().attribute("modifyUser", user);
             model.put("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
 
+            //determine which button you press
             String buttonName = request.queryParams(request.queryParams().iterator().next());
             if (buttonName.equalsIgnoreCase("Modify")) {
+                //brings you to the modify section
                 request.session().attribute("modifyUserManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(user)));
                 return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
             } else if (buttonName.equalsIgnoreCase("Delete"))
+                //brings you to the delete section
                 return ViewUtil.render(request, model, Path.Template.DELETESCREEN);
             else if (buttonName.equalsIgnoreCase("Block"))
+                //blocks the selected user
                 new UserDocumentManager(new UserCollectionManager().getUserDocument(user)).setBlocked(true);
             else if (buttonName.equalsIgnoreCase("Unblock"))
+                //unblocks the selected user
                 new UserDocumentManager(new UserCollectionManager().getUserDocument(user)).setBlocked(false);
         }
         List<UserDocumentManager> users = new ArrayList<>();
