@@ -2,7 +2,6 @@ package controller;
 
 import com.mongodb.client.MongoCollection;
 import model.Database;
-import model.collection.CollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
 import org.bson.Document;
@@ -21,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static viewutil.RequestUtil.*;
-import java.util.*;
 
 public class AdminController {
 
@@ -139,15 +137,18 @@ public class AdminController {
         Map<String, Object> model = new HashMap<>();
         request.session().attributes().forEach(req -> {
             String att = req.toString();
-            model.put(att, request.session().attribute(att));
-        });
+            model.put(att, request.session().attribute(att));});
+
         String modifyUser = (String) model.get("modifyUser");
         model.put("userIsAdmin", true);
         if (request.queryParams().iterator().hasNext()){
+            //determine which button you press
             if (request.queryParams(request.queryParams().iterator().next()).equalsIgnoreCase("Yes")){
+                //delete the selected user from the database
                 Database.getInstance().getUserCollection().deleteOne(new UserCollectionManager().getUserDocument(modifyUser));
                 return ViewUtil.render(request, model, Path.Template.INDEX);
             } else {
+                //you don't delete a single thing, just return to the index page
                 return ViewUtil.render(request, model, Path.Template.INDEX);
             }
         }

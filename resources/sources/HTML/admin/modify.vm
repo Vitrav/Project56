@@ -64,7 +64,7 @@
             <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>
             <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_PASSWORD")" value="" maxlength="14">
             <label>$msg.get("REGISTRATION_LABEL_AGE")</label>
-            <input type="date" name="doB" placeholder="$msg.get("REGISTRATION_LABEL_AGE")" >
+            <input type="date" name="doB" placeholder="YYYY/MM/DD" >
             <label>$msg.get("REGISTRATION_LABEL_EMAIL")</label>
             <input type="email" name="email" placeholder="$msg.get("REGISTRATION_LABEL_EMAIL")" >
             <label>$msg.get("REGISTRATION_LABEL_COUNTRY")</label>
