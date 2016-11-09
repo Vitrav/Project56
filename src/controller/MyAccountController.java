@@ -17,11 +17,13 @@ public class MyAccountController {
 
     public static Route accountPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
+        //request the current user information form the database
         UserCollectionManager userCollectionManager = new UserCollectionManager();
         UserDocumentManager userDocumentManager = new UserDocumentManager(userCollectionManager.getUserDocument(getSessionCurrentUser(request)));
         if (userDocumentManager.isAdmin()){
             model.put("userIsAdmin", true);
         }
+        //put the user information in the model
         model.put("userInfo", userDocumentManager);
         return ViewUtil.render(request, model, Path.Template.MYACCOUNT);
     };

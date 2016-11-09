@@ -38,6 +38,7 @@ public class RegistrationController {
         Map<String, Object> model = new HashMap<>();
         UserController controller = new UserController(getQueryUsername(request));
 
+        //get the information from the fields on the website and store it in strings
         String username = getQueryUsername(request);
         String password = getQueryPassword(request);
         String doB = getdoB(request);
@@ -48,6 +49,7 @@ public class RegistrationController {
         String street = getStreet(request).toLowerCase();
         String number = getNumber(request).toLowerCase();
 
+        //validation checks
         if (controller.databaseHasUser()) {
             model.put("userExists", true);
             return ViewUtil.render(request, model, Path.Template.REGISTRATION);
@@ -82,7 +84,18 @@ public class RegistrationController {
 
         Date dateOfBirth = dateFormat.parse(doB);
         int age = calculateAge(dateOfBirth);
-        userCollectionManager.insertUser(new User(username, salt, BCrypt.hashpw(password, salt), new Address(country, city, street, number, postalCode), age, dateOfBirth, email, false, false, false));
+        //insert the validated user into the database
+        userCollectionManager.insertUser(new User(
+                username,
+                salt,
+                BCrypt.hashpw(password, salt),
+                new Address(country, city, street, number, postalCode),
+                age,
+                dateOfBirth,
+                email,
+                false, //admin status
+                false, //wishlist status
+                false));//blocked status is false
         System.out.println("User created.");
         return ViewUtil.render(request, model, Path.Template.INDEX);
     };

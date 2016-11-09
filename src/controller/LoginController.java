@@ -26,17 +26,21 @@ public class LoginController {
     public static Route handleLoginPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         UserController controller = new UserController(getQueryUsername(request));
+        //user authentication
         if (!controller.authenticate(getQueryPassword(request))) {
             model.put("authenticationFailed", true);
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
+        //check if user is blocked or not
         if (new UserDocumentManager(new UserCollectionManager().getUserDocument(getQueryUsername(request))).getIsBlocked()) {
             model.put("blocked", true);
             return ViewUtil.render(request, model, Path.Template.LOGIN);
         }
+        //check if user is admin or not
         if (controller.adminStatus())
             model.put("userIsAdmin", true);
 
+        //request a session for the user so he/she is in fact logged in
         model.put("authenticationSucceeded", true);
         request.session().attribute("currentUser", getQueryUsername(request));
         return ViewUtil.render(request, model, Path.Template.INDEX);

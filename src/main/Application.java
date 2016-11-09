@@ -21,6 +21,8 @@ public final class Application {
         enableDebugScreen();
         before("*", Filters.addTrailingSlashes);
         before("*", Filters.handleLocaleChange);
+
+        //all of the webpaths that are used on the website
         get(Path.Web.INDEX, controller.IndexController.indexPage);
         get(Path.Web.SINGLEPAGE, SingleProductController.singleProductPage);
         get(Path.Web.CART, CartController.cartPage);
