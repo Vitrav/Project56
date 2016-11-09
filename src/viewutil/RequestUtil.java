@@ -3,6 +3,8 @@ package viewutil;
 import model.document.GameDocumentManager;
 import spark.Request;
 import model.document.GameDocumentManager.*;
+
+//Used to get specific queryParams from a request (see RegistrationController).
 public class RequestUtil {
 
     public static String getQueryLocale(Request request) {

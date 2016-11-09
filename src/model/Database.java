@@ -7,6 +7,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+//This class makes a connection with the (mongo) database using the singleton pattern
 public class Database {
 
 	private MongoClient mongo;

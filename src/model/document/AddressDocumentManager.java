@@ -4,6 +4,7 @@ import org.bson.Document;
 
 import model.Database;
 
+//Manager for address documents which are inside an user documents.
 public class AddressDocumentManager extends DocumentManager {
 	
 	public AddressDocumentManager(Document doc) {

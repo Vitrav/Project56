@@ -8,13 +8,13 @@ import org.bson.Document;
 
 import model.Database;
 
+//Manager for game documents, updates are filtered by game_id.
 public class GameDocumentManager extends DocumentManager {
 
 	public GameDocumentManager(Document doc) {
 		super(doc, Database.getInstance().getGameCollection());
 		setFilter(new Document("id", getId()));
 	}
-	public String test(){ return "TEST";}
 
 	public int getId() {
 		return document.getInteger("id");

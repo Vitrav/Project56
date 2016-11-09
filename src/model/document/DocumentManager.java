@@ -8,6 +8,7 @@ import org.bson.conversions.Bson;
 
 import com.mongodb.client.MongoCollection;
 
+//Super class for all the document managers. The document managers are used to get or updates values from a specific document.
 public class DocumentManager {
 
 	protected final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");

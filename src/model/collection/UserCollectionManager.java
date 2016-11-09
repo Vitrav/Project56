@@ -10,6 +10,7 @@ import model.Database;
 import user.Address;
 import user.User;
 
+//This class can be used to get a userDocument by username or to insert a new user in the database.
 public class UserCollectionManager extends CollectionManager {
 
 	public UserCollectionManager() {

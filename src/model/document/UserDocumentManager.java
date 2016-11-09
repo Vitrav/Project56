@@ -13,6 +13,7 @@ import main.Application.*;
 
 import javax.xml.crypto.Data;
 
+//Manager for user documents, updates are filtered by username.
 public class UserDocumentManager extends DocumentManager {
 
     private AddressDocumentManager addressDocManager;

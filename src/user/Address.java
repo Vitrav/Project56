@@ -1,5 +1,6 @@
 package user;
 
+//Simple class to capture address information, used by the User class.
 public class Address {
 
     private String country;

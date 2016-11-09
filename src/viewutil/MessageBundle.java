@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+//This class is used to show exception messages on the website.
 public class MessageBundle {
 
     private ResourceBundle messages;

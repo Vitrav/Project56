@@ -4,6 +4,7 @@ import org.bson.Document;
 
 import model.Database;
 
+//Manager for cartItem documents which are inside user documents (users have cart items).
 public class CartItemDocumentManager extends DocumentManager {
 
 	public CartItemDocumentManager(Document doc) {

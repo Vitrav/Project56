@@ -2,6 +2,7 @@ package user;
 
 import java.util.Date;
 
+//Simple class to capture User information, is used by the UserCollectionManager to insert a new user.
 public class User {
 
     private String username;

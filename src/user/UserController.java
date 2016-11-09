@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
+//This class is used by the RegistrationController and AdminController to check if a user can be registered or modified.
 public class UserController {
 
     private final UserCollectionManager userCollectionManager = new UserCollectionManager();
@@ -65,7 +66,6 @@ public class UserController {
     public boolean passwordIsValid(String password) {
         if (password.length() < 4 || password.length() > 14)
             return false;
-//        if (!hasRequiredNumbers(password, 2, password.length() / 2) && !hasValidChars(password))
         return true;
     }
 
@@ -123,10 +123,6 @@ public class UserController {
         return count != 0;
     }
 
-    private boolean isNumber(String str) {
-        return isInteger(str) && Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9).contains(Integer.parseInt(str));
-    }
-
     private boolean isInteger(String num) {
         try {
             Integer.parseInt(num);
@@ -146,10 +142,9 @@ public class UserController {
     }
 
     public boolean adminStatus(){
-        if (userDocumentManager.isAdmin()){
+        if (userDocumentManager.isAdmin())
             return true;
-        } else {
+        else
             return false;
-        }
     }
 }

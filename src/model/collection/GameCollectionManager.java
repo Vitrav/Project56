@@ -8,12 +8,12 @@ import org.bson.Document;
 
 import model.Database;
 
+//This class can be used to get a game document by id or to create a new gameDocument.
 public class GameCollectionManager extends CollectionManager {
 
 	public GameCollectionManager() {
 		super(Database.getInstance().getGameCollection());
 	}
-
 
 	public boolean databaseHasGame(int id) {
 		Document query = new Document();
@@ -21,7 +21,6 @@ public class GameCollectionManager extends CollectionManager {
 		collection.find().iterator().hasNext();
 		return collection.find(query).iterator().hasNext();
 	}
-
 
 	public Document getGameDocument(int id) {
 		Document query = new Document();

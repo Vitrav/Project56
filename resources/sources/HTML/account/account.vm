@@ -1,6 +1,7 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 <form id="accountForm" method="post" action = "/myaccount/">
+##    Check if the user is logged in, send to the login page otherwise.
     #if($authenticationSucceeded)
         <style>
             table, td, th {

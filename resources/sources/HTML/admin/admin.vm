@@ -14,12 +14,9 @@
         padding: 10px;
     }
     </style>
-
+##    Check if the user is logged in, send to the login page otherwise.
     #if($authenticationSucceeded)
     <body>
-    ##        #if($userInvalid)
-    ##            <p>$msg.get("ADMIN_USER_NOT_FOUND")</p>
-    ##        #end
         <h3 class="byline">User management</h3>
         <p class="italicp">Manage user information</p><br>
 
@@ -36,7 +33,7 @@
                 <th>Number</th>
                 <th>Operations</th>
             </tr>
-
+##          Show all the registered users with their information by using the UserDocumentManager class.
             #foreach ($manager in $allUserManagers)
                 #if ($currentUser != $manager.getName())
                 <tr>
