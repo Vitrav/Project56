@@ -1,6 +1,5 @@
-package main; /**
- * Created by Dave on 25-10-16.
- */
+package main;
+
 import controller.*;
 import model.collection.GameCollectionManager;
 import viewutil.*;

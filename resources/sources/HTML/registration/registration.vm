@@ -1,6 +1,7 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 <form id="loginForm" method="post", action = "/registration/">
+##  checks for the information filled in in the fields
     #if($userExists)
         <p class="bad notification">$msg.get("REGISTRATION_USER_EXISTS")</p>
     #elseif($userInvalid)
@@ -26,7 +27,7 @@
     #elseif($loggedOut)
         <p class="notification">$msg.get("LOGIN_LOGGED_OUT")</p>
     #end
-
+##  the fields where you put information
     <label>$msg.get("REGISTRATION_LABEL_USERNAME")</label>
     <input type="text" name="username" placeholder="$msg.get("REGISTRATION_LABEL_USERNAME")" value="" required maxlength="14">
     <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>
