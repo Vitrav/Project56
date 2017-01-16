@@ -14,14 +14,14 @@
 
             <div class="row">
                 #foreach( $details in $GAMES )
-##                <div class="col-md-3 col-sm-6">
 
                     <div class="single-shop-product">
 
-                        <div class="product-upper">
 
-##                                $details.name
-                        <h2><a href="/single-page/$details.id"></a>$details.name</h2>
+                    <div class="product-upper">
+                        <div class="col-md-3 col-sm-6">
+##              q                  $details.name
+                        <h2><a href=/single-page/>$details.name</a></h2>
                         <h4>$details.platform</h4>
                         <p>$details.genre</p>
                         <div class="product-carousel-price">

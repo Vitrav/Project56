@@ -36,5 +36,9 @@ public class ShopController {
 //        return new ModelAndView(main.model, main.viewutil.Path.Template.INDEX);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
+//
+//    public ShopController getBookByIsbn(String isbn) {
+//        return shopPage(b -> b.getShopPage(isbn));
+//    }
 
 }
