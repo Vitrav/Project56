@@ -94,7 +94,7 @@ public class RegistrationController {
                 dateOfBirth,
                 email,
                 false, //admin status
-                false, //wishlist status
+                false, //wishlist.vm status
                 false));//blocked status is false
         System.out.println("User created.");
         return ViewUtil.render(request, model, Path.Template.INDEX);

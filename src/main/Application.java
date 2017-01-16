@@ -23,7 +23,7 @@ public final class Application {
 
         //all of the webpaths that are used on the website
         get(Path.Web.INDEX, controller.IndexController.indexPage);
-        get(Path.Web.SINGLEPAGE, SingleProductController.singleProductPage);
+        get(Path.Web.SINGLEPAGE, SingleProductController.fetchOneBook);
         get(Path.Web.CART, CartController.cartPage);
         get(Path.Web.SHOP, ShopController.shopPage);
         get(Path.Web.LOGIN, LoginController.loginPage);
@@ -37,9 +37,10 @@ public final class Application {
         post(Path.Web.ADMINPANEL, AdminController.handleAdminPost);
         post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
+        get(Path.Web.WISHLIST, WishListController.wishlistPage);
+        post(Path.Web.WISHLIST, WishListController.handleWishlistPost);
 
         after("*", Filters.addGzipHeader);
-
     }
 
 }

@@ -1,8 +1,13 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 <form id="adminForm" method="post" action = "/adminpanel/">
+    #if(!$authenticationSucceeded)
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/login/"
+        </script>
+    #end
     <style>
-    form{
+    form {
         position: relative;
         left: 200px;
         top: 10px;
@@ -15,7 +20,6 @@
     }
     </style>
 ##    Check if the user is logged in, send to the login page otherwise.
-    #if($authenticationSucceeded)
     <body>
         <h3 class="byline">User management</h3>
         <p class="italicp">Manage user information</p><br>
@@ -60,10 +64,5 @@
             #end
         </table>
     </body>
-    #else
-        <script language="javascript">
-            window.location.href = "http://localhost:4567/login/"
-        </script>
-    #end
 </form>
 #end

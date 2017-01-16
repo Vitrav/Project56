@@ -2,59 +2,58 @@
 #@mainLayout()
 <form id="accountForm" method="post" action = "/myaccount/">
 ##    Check if the user is logged in, send to the login page otherwise.
-    #if($authenticationSucceeded)
-        <style>
-            table, td, th {
-                border: 1px white;
-            }
-
-            table {
-                border-collapse: collapse;
-            }
-
-            th, td {
-                padding: 15px;
-                width: 300px;
-            }
-        </style>
-        <table align="center">
-            <tr>
-                <th>Username:</th>
-                <td>$userInfo.getName()</td>
-            </tr>
-            <tr>
-                <th>Email:</th>
-                <td>$userInfo.getEmail()</td>
-            </tr>
-            <tr>
-                <th>Date of Birth:</th>
-                <td>$userInfo.getDateOfBirth()</td>
-            </tr>
-            <tr>
-                <th>Age:</th>
-                <td>$userInfo.getAge()</td>
-            </tr>
-            <tr>
-                <th>Address:</th>
-                <td>$userInfo.getAddressDocManager().getCountry()</td>
-            </tr>
-            <tr>
-                <th></th>
-                <td>$userInfo.getAddressDocManager().getCity()</td>
-            </tr>
-            <tr>
-                <th></th>
-                <td>$userInfo.getAddressDocManager().getStreet()</td>
-            </tr>
-            <tr>
-                <th></th>
-                <td>$userInfo.getAddressDocManager().getNumber()</td>
-            </tr>
-        </table>
-    #else
+    #if(!$authenticationSucceeded)
         <script language="javascript">
             window.location.href = "http://localhost:4567/login/"
         </script>
     #end
+    <style>
+        table, td, th {
+            border: 1px white;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            width: 300px;
+        }
+    </style>
+    <table align="center">
+        <tr>
+            <th>Username:</th>
+            <td>$userInfo.getName()</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>$userInfo.getEmail()</td>
+        </tr>
+        <tr>
+            <th>Date of Birth:</th>
+            <td>$userInfo.getDateOfBirth()</td>
+        </tr>
+        <tr>
+            <th>Age:</th>
+            <td>$userInfo.getAge()</td>
+        </tr>
+        <tr>
+            <th>Address:</th>
+            <td>$userInfo.getAddressDocManager().getCountry()</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>$userInfo.getAddressDocManager().getCity()</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>$userInfo.getAddressDocManager().getStreet()</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>$userInfo.getAddressDocManager().getNumber()</td>
+        </tr>
+    </table>
 </form>
 #end

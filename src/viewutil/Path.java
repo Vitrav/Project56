@@ -18,6 +18,7 @@ public class Path {
         @Getter public static final String ADMINPANEL = "/adminpanel/";
         @Getter public static final String MODIFYSCREEN = "/modify/";
         @Getter public static final String DELETESCREEN = "/delete/";
+        @Getter public static final String WISHLIST = "/wishlist/";
     }
 
     public static class Template {
@@ -32,6 +33,7 @@ public class Path {
         public static final String ADMINPANEL = "/sources/HTML/admin/admin.vm";
         public static final String MODIFYSCREEN = "/sources/HTML/admin/modify.vm";
         public static final String DELETESCREEN = "/sources/HTML/admin/delete.vm";
+        public static final String WISHLIST = "/sources/HTML/account/wishlist.vm";
     }
 
 }

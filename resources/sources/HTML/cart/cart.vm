@@ -3,9 +3,6 @@
 ###@mainLayout()
 <iframe name="iframe2" src="$WebPath.getCART()"></iframe>
   <body>
-
-
-
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
@@ -441,7 +438,6 @@
                                 </section>
                             </form>
 
-
                             </div>
                         </div>
                     </div>
@@ -450,10 +446,6 @@
         </div>
     </div>
 
-
-
   </body>
 </html>
 
-
-#end

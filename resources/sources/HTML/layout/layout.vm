@@ -34,17 +34,14 @@
                             <li><a href="$WebPath.getLOGIN()"><i class="fa fa-user"></i> Login</a></li>
                             <li><a href="$WebPath.getREGISTRATION()"><i class="fa fa-user"></i>Register</a></li>
                         #else
-
-                            <li><a href="$WebPath.getMYACCOUNT()"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="$WebPath.getLOGOUT()"><i class="fa fa-user"></i> Logout</a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+                            <li><a href="$WebPath.getMYACCOUNT()"><i class="fa fa-user"></i>My Account</a></li>
+                            <li><a href="$WebPath.getLOGOUT()"><i class="fa fa-user"></i>Logout</a></li>
+                            <li><a href="$WebPath.getWISHLIST()"><i class="fa fa-heart"></i>Wishlist</a></li>
                             #if($userIsAdmin)
-                                <li><a href="$WebPath.getADMINPANEL()"><i class="fa fa-heart"></i> Admin</a></li>
+                                <li><a href="$WebPath.getADMINPANEL()"><i class="fa fa-heart"></i>Admin</a></li>
                             #end
-                            <li><a href="$WebPath.getMYACCOUNT()"<i class="fa fa-user"</i> Logged in as $currentUser</a></li>
-
+                            <li><a href="$WebPath.getMYACCOUNT()"<i class="fa fa-user"</i>Logged in as $currentUser</a></li>
                         #end
-
                     </ul>
                 </div>
             </div>
@@ -206,7 +203,6 @@
 
 <!-- Main Script -->
 <script src="../../js/main.js"></script>
-
 
 </html>
 #end

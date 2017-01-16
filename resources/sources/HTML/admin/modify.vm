@@ -3,7 +3,11 @@
 
 <form id="modifyForm" method="post", action = "/modify/">
 ##    Check if the user is logged in, send to the login page otherwise.
-    #if($authenticationSucceeded)
+    #if(!$authenticationSucceeded)
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/login/"
+        </script>
+    #end
         #if($userExists)
             <p class="bad notification">$msg.get("REGISTRATION_USER_EXISTS")</p>
         #elseif($userInvalid)
@@ -80,10 +84,5 @@
             <input type="text" name="number" placeholder="$msg.get("REGISTRATION_LABEL_NUMBER")" >
             <input type="submit" value="Submit changes")">
         </body>
-    #else
-        <script language="javascript">
-            window.location.href = "http://localhost:4567/login/"
-        </script>
-    #end
 </form>
 #end
