@@ -40,10 +40,10 @@ public class GameCollectionManager extends CollectionManager {
 	public void insertNewGame(Game game) {
         if(databaseHasGame(game.getId()))
             return;
-        collection.insertOne(createGameDocument(game.getId(), game.getName(), game.getDescription(), game.getPublisher(), game.getPrice(), game.getAge(), game.getPlatform(), game.getGenre(), game.getAmount(), game.getReleaseDate()));
+        collection.insertOne(createGameDocument(game.getId(), game.getName(), game.getDescription(), game.getPublisher(), game.getPrice(), game.getAge(), game.getPlatform(), game.getGenre(), game.getAmount(), game.getReleaseDate(), game.getImage()));
     }
 
-	public Document createGameDocument(int id, String name, String description, String publisher, double price, int age, String platform, String genre, int amount, Date releaseDate) {
+	public Document createGameDocument(int id, String name, String description, String publisher, double price, int age, String platform, String genre, int amount, Date releaseDate, String image) {
 		if (databaseHasGame(id))
 			return getGameDocument(id);
 		Document gameDocument = new Document();
@@ -57,6 +57,8 @@ public class GameCollectionManager extends CollectionManager {
 		gameDocument.put("genre", genre);
 		gameDocument.put("amount_in_stock", amount);
 		gameDocument.put("release_date", dateFormat.format(releaseDate));
+		gameDocument.put("image", image);
+		System.out.println(image);
 		return gameDocument;
 	}
 

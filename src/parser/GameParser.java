@@ -59,7 +59,7 @@ public class GameParser {
             try {
                 games.add(new Game(Integer.parseInt(lineParts.get(0)), lineParts.get(1), lineParts.get(2),
                         Double.parseDouble(lineParts.get(3)), Integer.parseInt(lineParts.get(4)), lineParts.get(5), lineParts.get(6),
-                        20, dateFormat.parse(reverseDate(lineParts.get(7))), lineParts.get(8))
+                        20, dateFormat.parse(reverseDate(lineParts.get(7))), lineParts.get(8), lineParts.get(9))
                 );
             } catch (Exception e) {
                 System.out.println("Exception: game parsing went wrong." );
