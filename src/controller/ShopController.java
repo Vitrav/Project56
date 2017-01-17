@@ -3,6 +3,7 @@ package controller;
 import model.collection.GameCollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.GameDocumentManager;
+import user.UserController;
 import viewutil.Path;
 import model.document.UserDocumentManager;
 import org.bson.Document;
@@ -39,6 +40,7 @@ public class ShopController {
     };
 
     public static Route gameToCart = (Request request, Response response) -> {
+        UserController controller = new UserController(getSessionCurrentUser(request));
         GameCollectionManager gameCollection = new GameCollectionManager();
         List<GameDocumentManager> docManagers = new ArrayList<>();
         gameCollection.getCollection().find().iterator().forEachRemaining(game -> docManagers.add(getGameDocManager(game.getInteger("id"))));
@@ -53,7 +55,9 @@ public class ShopController {
 
         String gameID = request.queryParams().iterator().next();
         int actualGameID = Integer.parseInt(gameID);
-        userDocumentManager.addCartItem(actualGameID);
+        if (!controller.userHasGame(actualGameID)) {
+            userDocumentManager.addCartItem(actualGameID);
+        }
 
         model.put("games", docManagers);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);

@@ -89,6 +89,15 @@ public class UserController {
         return collection.find(query).iterator().hasNext();
     }
 
+    public boolean userHasGame(int gameID){
+        for (Document item : userDocumentManager.getCartItems()){
+            if (item.getInteger("id") == gameID){
+                return  true;
+            }
+        }
+        return false;
+    }
+
     public boolean validEmail(String email) {
         if (email.length() == 0)
             return false;
