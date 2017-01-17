@@ -28,14 +28,13 @@
             <div class="col-md-8">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="$WebPath.getCART()"><i class="fa fa-user"></i> My Cart</a></li>
-                        <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                         #if (!$authenticationSucceeded)
                             <li><a href="$WebPath.getLOGIN()"><i class="fa fa-user"></i> Login</a></li>
                             <li><a href="$WebPath.getREGISTRATION()"><i class="fa fa-user"></i>Register</a></li>
                         #else
-                            <li><a href="$WebPath.getMYACCOUNT()"><i class="fa fa-user"></i>My Account</a></li>
-                            <li><a href="$WebPath.getLOGOUT()"><i class="fa fa-user"></i>Logout</a></li>
+                            <li><a href="$WebPath.getCART()"><i class="fa fa-user"></i> My Cart</a></li>
+                            <li><a href="$WebPath.getMYACCOUNT()"><i class="fa fa-user"></i> My Account</a></li>
+                            <li><a href="$WebPath.getLOGOUT()"><i class="fa fa-user"></i> Logout</a></li>
                             <li><a href="$WebPath.getWISHLIST()"><i class="fa fa-heart"></i>Wishlist</a></li>
                             #if($userIsAdmin)
                                 <li><a href="$WebPath.getADMINPANEL()"><i class="fa fa-heart"></i>Admin</a></li>
@@ -60,7 +59,7 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="$WebPath.getCART()">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                    <a href="$WebPath.getCART()">Cart - <span class="cart-amunt">$0</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">0</span></a>
                 </div>
             </div>
         </div>
@@ -86,8 +85,6 @@
                     <li><a href="$WebPath.getINDEX()">Home</a></li>
                     <li><a href="$WebPath.getSHOP()">Shop page</a></li>
                     <li><a href="$WebPath.getSINGLEPAGE()">Single product</a></li>
-                    <li><a href="$WebPath.getCART()">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
                     <li><a href="#">Category</a></li>
                     <li><a href="#">Others</a></li>
                     <li><a href="#">Contact</a></li>

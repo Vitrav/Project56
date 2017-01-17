@@ -26,22 +26,23 @@ public final class Application {
         //all of the webpaths that are used on the website
         get(Path.Web.INDEX, controller.IndexController.indexPage);
         get(Path.Web.SINGLEPAGE, SingleProductController.singlePage);
-        post(Path.Web.SHOP, ShopController.shopPost);
         get(Path.Web.CART, CartController.cartPage);
         get(Path.Web.SHOP, ShopController.shopPage);
         get(Path.Web.LOGIN, LoginController.loginPage);
-        post(Path.Web.LOGIN, LoginController.handleLoginPost);
         get(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
         get(Path.Web.MYACCOUNT, MyAccountController.accountPage);
         get(Path.Web.ADMINPANEL, AdminController.adminPage);
         get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
+        get(Path.Web.WISHLIST, WishListController.wishlistPage);
+
+        post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.MODIFYSCREEN, AdminController.handleModifyPost);
         post(Path.Web.ADMINPANEL, AdminController.handleAdminPost);
         post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
-        get(Path.Web.WISHLIST, WishListController.wishlistPage);
         post(Path.Web.WISHLIST, WishListController.handleWishlistPost);
+        post(Path.Web.SHOP, ShopController.gameToCart);
 
         Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game ->
             get("/single-page/" + game.getInteger("id") + "/", SingleProductController.singlePage)

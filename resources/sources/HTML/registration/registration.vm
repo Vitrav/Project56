@@ -1,6 +1,7 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="loginForm" method="post", action = "/registration/">
+
+<form id="loginForm" method="post" action = "/registration/">
 ##  checks for the information filled in in the fields
     #if($userExists)
         <p class="bad notification">$msg.get("REGISTRATION_USER_EXISTS")</p>
