@@ -8,24 +8,43 @@
             window.location.href = "http://localhost:4567/login/"
         </script>
     #end
+        <style>
+            form {
+                position: relative;
+                left: 200px;
+                top: 10px;
+                max-width: 500px;
+                margin: 30px;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
     <body>
         #if($userInfo.wishListIsPrivate())
-            <p class="bylineSmall">Your wishlist is private</p>
             <input type="submit" value="Set wishlist public">
         #else
-            <p class="bylineSmall">Your wishlist is public</p>
             <input type="submit" value="Set wishlist private">
         #end
     <br></br>
-    <div class="single-shop-product">
-        <div class="col-md-3 col-md-6">
-            #foreach ($manager in $gameManagers)
-                <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
-            #end
-        <div>
-    <div>
-    </body>
 
+        <table style='white-space: nowrap' id="div1">
+            <tr>
+                <th>Name</th>
+                <th>Platform</th>
+                <th>Price</th>
+            </tr>
+            #foreach ($manager in $gameManagers)
+            <tr>
+                <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
+                <td>$manager.getPlatform()</td>
+                <td>$manager.getPrice()</td>
+            </tr>
+            #end
+        </table>
+
+    </body>
     <div>
 </form>
 #end

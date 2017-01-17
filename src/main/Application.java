@@ -3,6 +3,7 @@ package main;
 import controller.*;
 import model.Database;
 import model.collection.GameCollectionManager;
+import parser.GameParser;
 import viewutil.*;
 
 import java.util.HashMap;
@@ -47,6 +48,7 @@ public final class Application {
         );
 
         after("*", Filters.addGzipHeader);
+        new GameParser().addGamesToDB();
     }
 
 }

@@ -12,17 +12,14 @@
                             <div class="col-md-3 col-md-6">
 
                                 #foreach($manager in $games)
-                                <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
-                                <h4>$manager.getPlatform()</h4>
-                                <p>$manager.getGenre()</p>
-                                <div class="product-carousel-price">
-                                    <ins>$manager.getPrice()</ins>
-                                    <p></p>
-                                </div>
-
-                                <div class="product-option-shop">
-                                    <a class="add_to_cart_button" data-quantity="1" data-product_sku="$manager.getPrice()" data-product_id="$manager.getId()" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                                </div>
+                                    <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
+                                    <h4>$manager.getPlatform()</h4>
+                                    <p>$manager.getGenre()</p>
+                                    <div class="product-carousel-price">
+                                        <ins>$manager.getPrice()</ins>
+                                        <p></p>
+                                    </div>
+                                    <input type="submit" name="$manager.getName()" value="Add to cart"></input>
                                 #end
                             </div>
                          </div>

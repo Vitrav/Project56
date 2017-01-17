@@ -7,6 +7,7 @@ import java.util.Map;
 import org.bson.Document;
 
 import model.Database;
+import parser.Game;
 
 //This class can be used to get a game document by id or to create a new gameDocument.
 public class GameCollectionManager extends CollectionManager {
@@ -35,6 +36,12 @@ public class GameCollectionManager extends CollectionManager {
 		}
 		return false;
 	}
+
+	public void insertNewGame(Game game) {
+        if(databaseHasGame(game.getId()))
+            return;
+        collection.insertOne(createGameDocument(game.getId(), game.getName(), game.getDescription(), game.getPublisher(), game.getPrice(), game.getAge(), game.getPlatform(), game.getGenre(), game.getAmount(), game.getReleaseDate()));
+    }
 
 	public Document createGameDocument(int id, String name, String description, String publisher, double price, int age, String platform, String genre, int amount, Date releaseDate) {
 		if (databaseHasGame(id))
