@@ -14,8 +14,9 @@ public class Game {
     private final int amount;
     private final Date releaseDate;
     private final String description;
+    private final String image;
 
-    public Game(int id, String name, String publisher, double price, int age, String platform, String genre, int amount, Date releaseDate, String description) {
+    public Game(int id, String name, String publisher, double price, int age, String platform, String genre, int amount, Date releaseDate, String description, String image) {
         this.id = id;
         this.name = name;
         this.publisher = publisher;
@@ -26,6 +27,7 @@ public class Game {
         this.amount = amount;
         this.releaseDate = releaseDate;
         this.description = description;
+        this.image = image;
     }
 
     public int getId() {
@@ -67,5 +69,7 @@ public class Game {
     public String getDescription() {
         return description;
     }
+
+    public String getImage() { return image;}
 
 }

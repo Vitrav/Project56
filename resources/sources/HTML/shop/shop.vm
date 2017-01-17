@@ -1,3 +1,4 @@
+
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 
@@ -12,26 +13,21 @@
                             <div class="col-md-8 col-md-6">
 
 
-                                    <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
-                                    <h4>$manager.getPlatform()</h4>
-                                    <p>$manager.getGenre()</p>
-                                    <div class="product-carousel-price">
-                                        <ins>$manager.getPrice()</ins>
-                                        <p></p>
-                                    </div>
+                                <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
+                                <h4>$manager.getPlatform()</h4>
+                                <p>$manager.getGenre()</p>
+                                <div class="product-carousel-price">
+                                    <ins>$manager.getPrice()</ins>
+                                    <p></p>
+                                </div>
 
-                                    <form id="add_to_cart" method="post">
-                                    <div class="product-option-shop">
-                                        #if($authenticationSucceeded)
-                                            <input class="add_to_cart_button" type="submit" name="$manager.getId()" href="http://localhost:4567/index/" value="Add to cart">
-                                        #else
-                                            <a class="add_to_cart_button" href="http://localhost:4567/login/">Add to cart</a>
-                                        #end
-                                    </div>
-                                    </form>
+                                <div class="product-option-shop">
+                                    <a class="add_to_cart_button" data-quantity="1" data-product_sku="$manager.getPrice()" data-product_id="$manager.getId()" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+                                </div>
                             </div>
                         </div>
-                    #end
+                                #end
+
 
             <div class="row">
                 <div class="col-md-12">
@@ -54,11 +50,14 @@
                               </a>
                             </li>
                           </ul>
-                        </nav>
+                        </nav>                        
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
 
-</body>
+  </body>
+</html>
 #end
