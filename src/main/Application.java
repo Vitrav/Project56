@@ -1,6 +1,7 @@
 package main;
 
 import controller.*;
+import model.Database;
 import model.collection.GameCollectionManager;
 import viewutil.*;
 
@@ -23,7 +24,8 @@ public final class Application {
 
         //all of the webpaths that are used on the website
         get(Path.Web.INDEX, controller.IndexController.indexPage);
-        get(Path.Web.SINGLEPAGE, SingleProductController.fetchOneBook);
+        get(Path.Web.SINGLEPAGE, SingleProductController.singlePage);
+        post(Path.Web.SHOP, ShopController.shopPost);
         get(Path.Web.CART, CartController.cartPage);
         get(Path.Web.SHOP, ShopController.shopPage);
         get(Path.Web.LOGIN, LoginController.loginPage);
@@ -39,6 +41,10 @@ public final class Application {
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
         get(Path.Web.WISHLIST, WishListController.wishlistPage);
         post(Path.Web.WISHLIST, WishListController.handleWishlistPost);
+
+        Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game ->
+            get("/single-page/" + game.getInteger("id") + "/", SingleProductController.singlePage)
+        );
 
         after("*", Filters.addGzipHeader);
     }

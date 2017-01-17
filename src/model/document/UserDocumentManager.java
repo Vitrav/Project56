@@ -186,8 +186,10 @@ public class UserDocumentManager extends DocumentManager {
 
 	public void addWishItem(int gameId) {
 		List<Integer> items = getWishList() == null ? new ArrayList<>() : getWishList();
-		items.add(gameId);
-		setWishList(items);
+		if (!items.contains(gameId)) {
+			items.add(gameId);
+			setWishList(items);
+		}
 	}
 
 	public boolean getIsBlocked() {

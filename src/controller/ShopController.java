@@ -2,6 +2,7 @@ package controller;
 
 import model.collection.GameCollectionManager;
 import model.document.GameDocumentManager;
+import viewutil.Path;
 import viewutil.ViewUtil;
 import spark.Request;
 import spark.Response;
@@ -24,6 +25,21 @@ public class ShopController {
         model.put("games", docManagers);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
+
+    public static Route shopPost = (Request request, Response response) -> {
+        System.out.println("test");
+        HashMap<String, Object> model = new HashMap<>();
+        System.out.println((request.url()));
+
+        model.put("book", model);
+//            return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
+
+//        if (clientAcceptsJson(request)) {
+//            return dataToJson(bookDao.getBookByIsbn(getParamIsbn(request)));
+//        }
+        return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
+    };
+
 //
 //    public ShopController getBookByIsbn(String isbn) {
 //        return shopPage(b -> b.getShopPage(isbn));

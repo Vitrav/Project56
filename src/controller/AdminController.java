@@ -161,7 +161,8 @@ public class AdminController {
         //Insert the session attributes in the model (so we keep modifyUser and modifyUserManager)
         request.session().attributes().forEach(req -> {
             String att = req.toString();
-            model.put(att, request.session().attribute(att));});
+            model.put(att, request.session().attribute(att));
+        });
 
         String modifyUser = (String) model.get("modifyUser");
         model.put("userIsAdmin", true);

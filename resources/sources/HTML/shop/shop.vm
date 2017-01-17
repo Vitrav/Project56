@@ -2,39 +2,30 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 
-
-
 <body>
-
-
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
-
-        <div class="container">
-
-            <div class="row">
-                #foreach($manager in $games)
-
+            <div class="container">
+                <div class="row">
                     <div class="single-shop-product">
-
                         <div class="product-upper">
                             <div class="col-md-3 col-md-6">
 
-                        <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
-                        <h4>$manager.getPlatform()</h4>
-                        <p>$manager.getGenre()</p>
-                        <div class="product-carousel-price">
-                            <ins>$manager.getPrice()</ins>
-                            <p></p>
-                        </div>
+                                #foreach($manager in $games)
+                                <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
+                                <h4>$manager.getPlatform()</h4>
+                                <p>$manager.getGenre()</p>
+                                <div class="product-carousel-price">
+                                    <ins>$manager.getPrice()</ins>
+                                    <p></p>
+                                </div>
 
-
-                <div class="product-option-shop">
-                    <a class="add_to_cart_button" data-quantity="1" data-product_sku="$manager.getPrice()" data-product_id="$manager.getId()" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                </div>
+                                <div class="product-option-shop">
+                                    <a class="add_to_cart_button" data-quantity="1" data-product_sku="$manager.getPrice()" data-product_id="$manager.getId()" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+                                </div>
+                                #end
                             </div>
-                        </div>
-                #end
+                         </div>
 
             <div class="row">
                 <div class="col-md-12">

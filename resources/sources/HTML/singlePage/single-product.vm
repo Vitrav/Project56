@@ -16,6 +16,7 @@
             </div>
         </div>
     </div>
+    <p>$currentGame.getName()</p>
     
     
     <div class="single-product-area">

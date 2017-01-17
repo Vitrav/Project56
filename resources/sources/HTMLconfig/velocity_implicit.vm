@@ -19,6 +19,7 @@
 #* @vtlvariable name="modifyUserManager" type="model.document.UserDocumentManager" *#
 #* @vtlvariable name="gameManagers" type="java.util.ArrayList<model.document.GameDocumentManager>" *#
 #* @vtlvariable name="games" type="java.util.ArrayList<model.document.GameDocumentManager>" *#
+#* @vtlvariable name="currentGame" type="model.document.GameDocumentManager" *#
 
 
 

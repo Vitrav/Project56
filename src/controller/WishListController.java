@@ -1,5 +1,6 @@
 package controller;
 
+import model.Database;
 import model.collection.GameCollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.GameDocumentManager;
@@ -32,8 +33,9 @@ public class WishListController {
         Map<String, Object> model = new HashMap<>();
         UserDocumentManager manager = getUserDocManager(getSessionCurrentUser(request));
         manager.setWishList(manager.wishListIsPrivate() ? false : true);
-        if (manager.getWishList().isEmpty())
-            manager.addWishItem(1);
+
+        //Add games to wishlist.
+        Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game -> manager.addWishItem(game.getInteger("id")));
 
         insertgameManager(model, manager);
         model.put("userInfo", getUserDocManager(getSessionCurrentUser(request)));

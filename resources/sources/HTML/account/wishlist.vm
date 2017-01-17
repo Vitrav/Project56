@@ -1,15 +1,8 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="accountForm" method="post" action = "/wishlist/">
-    <style>
-        form {
-            position: relative;
-            left: 220px;
-            top: 10px;
-            max-width: 500px;
-            margin: 30px;
-        }
-    </style>
+<form id="wishlistForm" method="post" action = "/wishlist/">
+    <div class="container">
+
     #if(!$authenticationSucceeded)
         <script language="javascript">
             window.location.href = "http://localhost:4567/login/"
@@ -23,9 +16,16 @@
             <p class="bylineSmall">Your wishlist is public</p>
             <input type="submit" value="Set wishlist private">
         #end
-    #foreach ($manager in $gameManagers)
-        <h2><a href="/single-page/$manager.getId()"></a>$manager.getName()</h2>
-    #end
+    <br></br>
+    <div class="single-shop-product">
+        <div class="col-md-3 col-md-6">
+            #foreach ($manager in $gameManagers)
+                <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
+            #end
+        <div>
+    <div>
     </body>
+
+    <div>
 </form>
 #end
