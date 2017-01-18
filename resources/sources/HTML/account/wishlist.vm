@@ -23,9 +23,9 @@
         </style>
     <body>
         #if($userInfo.wishListIsPrivate())
-            <input type="submit" value="Set wishlist public">
+            <input type="submit" name="Set wishlist" value="Set wishlist public">
         #else
-            <input type="submit" value="Set wishlist private">
+            <input type="submit" name="Set wishlist" value="Set wishlist private">
         #end
     <br></br>
 
@@ -34,12 +34,14 @@
                 <th>Name</th>
                 <th>Platform</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
             #foreach ($manager in $gameManagers)
             <tr>
                 <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
                 <td>$manager.getPlatform()</td>
                 <td>$manager.getPrice()</td>
+                <td><input type="submit" name="$manager.getId()" value="Remove"></input></td>
             </tr>
             #end
         </table>

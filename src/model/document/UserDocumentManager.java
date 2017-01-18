@@ -135,7 +135,7 @@ public class UserDocumentManager extends DocumentManager {
 		return (List<Document>) document.get("cart_items");
 	}
 
-	public void setCartItems(List<Document> cartItems) {
+	private void setCartItems(List<Document> cartItems) {
 		update(new Document("cart_items", cartItems));
 	}
 
@@ -191,6 +191,17 @@ public class UserDocumentManager extends DocumentManager {
 			setWishList(items);
 		}
 	}
+
+	public void removeWishItem(int gameId) {
+        List<Integer> items = getWishList() == null ? new ArrayList<>() : getWishList();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) == gameId) {
+                items.remove(i);
+                setWishList(items);
+            }
+        }
+    }
+
 
 	public boolean getIsBlocked() {
 		return (boolean) document.get("is_blocked");

@@ -165,10 +165,6 @@
                             <div class="related-products-carousel">
                                  #foreach($manager in $games)
 
-##
-
-
-
                                 <div class="single-product">
                                     <div class="product-f-image">
 

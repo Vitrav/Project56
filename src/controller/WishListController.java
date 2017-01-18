@@ -11,10 +11,7 @@ import spark.Route;
 import viewutil.Path;
 import viewutil.ViewUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static viewutil.RequestUtil.getSessionCurrentUser;
 
@@ -31,14 +28,18 @@ public class WishListController {
 
     public static Route handleWishlistPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
+        String buttonName = request.queryParams(request.queryParams().iterator().next());
         UserDocumentManager manager = getUserDocManager(getSessionCurrentUser(request));
-        manager.setWishList(manager.wishListIsPrivate() ? false : true);
 
-        //Add games to wishlist.
-        Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game -> manager.addWishItem(game.getInteger("id")));
+        if (buttonName.toLowerCase().contains("set wishlist"))
+            manager.setWishList(manager.wishListIsPrivate() ? false : true);
+        else if (buttonName.equalsIgnoreCase("remove"))
+            manager.removeWishItem(Integer.parseInt(request.queryParams().iterator().next()));
 
+
+        manager = getUserDocManager(getSessionCurrentUser(request));
+        model.put("userInfo", manager);
         insertgameManager(model, manager);
-        model.put("userInfo", getUserDocManager(getSessionCurrentUser(request)));
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };
 

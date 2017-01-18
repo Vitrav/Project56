@@ -88,5 +88,5 @@ public class GameDocumentManager extends DocumentManager {
 		update(new Document("release_date", dateFormat.format(date)));
 	}
 
-	public String  getImage(){return document.getString("image"); }
+	public String getImage(){return document.getString("image"); }
 }

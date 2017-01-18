@@ -58,7 +58,6 @@ public class GameCollectionManager extends CollectionManager {
 		gameDocument.put("amount_in_stock", amount);
 		gameDocument.put("release_date", dateFormat.format(releaseDate));
 		gameDocument.put("image", image);
-		System.out.println(image);
 		return gameDocument;
 	}
 

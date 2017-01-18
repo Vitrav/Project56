@@ -49,6 +49,7 @@ public final class Application {
         );
 
         after("*", Filters.addGzipHeader);
+        //Add games to database.
         new GameParser().addGamesToDB();
     }
 

@@ -49,10 +49,17 @@ public class GameParser {
             List<String> lineParts = new ArrayList<>();
 
             while (line.length() > 1) {
-                String part = line.substring(0, line.contains(";") ? line.indexOf(";") : line.length() - 1);
-                lineParts.add(part.length() < 20 ? part.replaceAll(" ", "") : part);
-                if (!line.contains(";"))
+                String part = line.substring(0, line.contains(";") ? line.indexOf(";") : line.length());
+                if (part.length() > 10 && part.substring(0, 6).contains("http:")) {
+                    lineParts.add(part.replaceAll(" ", ""));
+                } else
+                    lineParts.add(part.length() < 20 ? part.replaceAll(" ", "") : part);
+
+                if (!line.contains(";")) {
+                    System.out.println(part);
                     break;
+                }
+
                 line = removeFromLine(line, part);
             }
 
@@ -84,7 +91,8 @@ public class GameParser {
     }
 
     private String removeFromLine(String line, String part) {
-        return line.replaceFirst(part + ";", "");
+        line = line.replaceFirst(part, "");
+        return line.replaceFirst(";", "");
     }
 
 
