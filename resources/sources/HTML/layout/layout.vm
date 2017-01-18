@@ -81,10 +81,9 @@
                 <ul class="nav navbar-nav">
 
                     <li class ="active"></li>
-                    <li><a href ="$WebPath.getINDEX()"></a></li>
+##                    <li><a href ="$WebPath.getINDEX()"></a></li>
                     <li><a href="$WebPath.getINDEX()">Home</a></li>
                     <li><a href="$WebPath.getSHOP()">Shop page</a></li>
-                    <li><a href="$WebPath.getSINGLEPAGE()">Single product</a></li>
                     <li><a href="#">Category</a></li>
                     <li><a href="#">Others</a></li>
                     <li><a href="#">Contact</a></li>

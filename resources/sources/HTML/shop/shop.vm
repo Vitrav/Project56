@@ -13,6 +13,7 @@
 
 
                                     <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
+                                    <img src="$manager.getImage()" height="180" width="124"></img>
                                     <h4>$manager.getPlatform()</h4>
                                     <p>$manager.getGenre()</p>
                                     <div class="product-carousel-price">
