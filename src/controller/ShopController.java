@@ -58,6 +58,9 @@ public class ShopController {
         if (!controller.userHasGame(actualGameID)) {
             userDocumentManager.addCartItem(actualGameID);
         }
+        int total = 0;
+        for (GameDocumentManager docManager : docManagers)
+            total += docManager.getPrice();
 
         model.put("games", docManagers);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);

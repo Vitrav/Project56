@@ -8,6 +8,8 @@ import viewutil.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.*;
@@ -44,13 +46,14 @@ public final class Application {
         post(Path.Web.WISHLIST, WishListController.handleWishlistPost);
         post(Path.Web.SHOP, ShopController.gameToCart);
 
+        //Add games to database.
+//        new GameParser().addGamesToDB();
+
         Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game ->
             get("/single-page/" + game.getInteger("id") + "/", SingleProductController.singlePage)
         );
 
         after("*", Filters.addGzipHeader);
-        //Add games to database.
-        new GameParser().addGamesToDB();
     }
 
 }
