@@ -23,14 +23,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        #foreach($game in $cartGamesInfo)
                                             <tr>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>$game.getName()</td>
+                                                <td>$$game.getPrice()</td>
+                                                <td>1</td>
+                                                <td>$$game.getPrice()</td>
                                             </tr>
+                                        #end
                                             <tr>
                                                 <td class="actions" colspan="6">
                                                     <input type="submit" value="Update Cart" name="update_cart" class="button">
@@ -40,29 +42,6 @@
                                         </tbody>
                                     </table>
                                 </form>
-
-                                <div class="cart_totals ">
-                                    <h2>Cart Totals</h2>
-
-                                    <table cellspacing="0">
-                                        <tbody>
-                                            <tr class="cart-subtotal">
-                                                <th>Cart Subtotal</th>
-                                                <td></td>
-                                            </tr>
-
-                                            <tr class="shipping">
-                                                <th>Shipping and Handling</th>
-                                                <td>Free Shipping</td>
-                                            </tr>
-
-                                            <tr class="order-total">
-                                                <th>Order Total</th>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
