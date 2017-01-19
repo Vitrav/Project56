@@ -6,6 +6,16 @@
         <div class="zigzag-bottom"></div>
             <div class="container">
                 <div class="row">
+                    <div class="single-sidebar">
+                        <h2 class="sidebar-title">Search Products</h2>
+                        #if($notFound)
+                            <p>This game does not exist.</p>
+                        #end
+                        <form action="">
+                            <input type="text"  name="search" placeholder="Search products...">
+                            <input type="submit" name="search button" value="Search">
+                        </form>
+                    </div>
                     #foreach($manager in $games)
                     <div class="single-shop-product">
                         <div class="product-upper">

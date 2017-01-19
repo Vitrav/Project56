@@ -1,5 +1,6 @@
 package controller;
 
+import controller.utils.ConUtil;
 import model.collection.GameCollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.GameDocumentManager;
@@ -22,26 +23,10 @@ public class SingleProductController {
         Map<String, Object> model = new HashMap<>();
         addGames(model);
         addCurrentGame(request, model);
+        ConUtil.searchGame(request, model);
 
-        if (request.queryParams().iterator().hasNext()) {
-            //Search button clicked.
-            if (request.queryParams().iterator().next().equalsIgnoreCase("search")) {
-                String product = request.queryParams("search").replaceAll(" ", "");
-
-                List<GameDocumentManager> docManagers = new ArrayList<>();
-                GameCollectionManager gameCollection = new GameCollectionManager();
-                gameCollection.getCollection().find().iterator().forEachRemaining(game -> {
-                    GameDocumentManager docManager = getGameDocManager(game.getInteger("id"));
-                    if (docManager.getName().toLowerCase().replaceAll(" ", "").contains(product.toLowerCase()))
-                        docManagers.add(docManager);
-                });
-                if (!docManagers.isEmpty()) {
-                    model.put("games", docManagers);
-                    return ViewUtil.render(request, model, Path.Template.SHOP);
-                }
-                model.put("notFound", true);
-            }
-        }
+//        if (model.containsKey("games"))
+//            return ViewUtil.render(request, model, Path.Template.SHOP);
         return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
     };
 

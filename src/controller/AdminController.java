@@ -1,6 +1,7 @@
 package controller;
 
 import com.mongodb.client.MongoCollection;
+import controller.utils.ConUtil;
 import model.Database;
 import model.collection.CollectionManager;
 import model.collection.UserCollectionManager;
@@ -30,11 +31,10 @@ public class AdminController {
 
     public static Route adminPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        MongoCollection<Document> userCollection = Database.getInstance().getUserCollection();
         List<UserDocumentManager> users = new ArrayList<>();
-        userCollection.find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
+        Database.getInstance().getUserCollection().find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
 
-        model.put("userIsAdmin", true);
+        ConUtil.addAdmin(request, model);
         model.put("allUserManagers", users);
         request.session().attribute("allUserManagers", users);
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
@@ -52,7 +52,7 @@ public class AdminController {
             String att = req.toString();
             model.put(att, request.session().attribute(att));
         });
-        model.put("userIsAdmin", true);
+        ConUtil.addAdmin(request, model);
 
         String modifiedUser = (String) model.get("modifyUser");
         String username = getQueryUsername(request).length() >= 4 ? getQueryUsername(request) : modifiedUser;
@@ -183,7 +183,7 @@ public class AdminController {
 
     public static Route handleAdminPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        model.put("userIsAdmin", true);
+        ConUtil.addAdmin(request, model);
 
         if (request.queryParams().iterator().hasNext()) {
             String user = request.queryParams().iterator().next();
