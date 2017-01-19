@@ -1,5 +1,6 @@
 package controller;
 
+import controller.utils.ConUtil;
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
 import spark.Request;
@@ -24,7 +25,7 @@ public class MyAccountController {
             model.put("userIsAdmin", true);
         }
         //put the user information in the model
-        model.put("userInfo", userDocumentManager);
+        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, Path.Template.MYACCOUNT);
     };
 }

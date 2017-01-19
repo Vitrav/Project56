@@ -1,8 +1,6 @@
 #* @implicitly included *#
 #* @vtlvariable name="WebPath" type="viewutil.Path.Web" *#
 #* @vtlvariable name="msg" type="viewutil.MessageBundle.MessageBundle" *#
-#* @vtlvariable name="books" type="java.lang.Iterable<app.book.Book>" *#
-#* @vtlvariable name="book" type="app.book.Book" *#
 #* @vtlvariable name="users" type="java.lang.Iterable<user.User>" *#
 #* @vtlvariable name="currentUser" type="java.lang.String" *#
 #* @vtlvariable name="currentEmail" type="java.lang.String" *#
@@ -21,6 +19,7 @@
 #* @vtlvariable name="gameManagers" type="java.util.ArrayList<model.document.GameDocumentManager>" *#
 #* @vtlvariable name="games" type="java.util.ArrayList<model.document.GameDocumentManager>" *#
 #* @vtlvariable name="currentGame" type="model.document.GameDocumentManager" *#
+#* @vtlvariable name="userDocumentManager" type="model.document.UserDocumentManager" *#
 
 
 

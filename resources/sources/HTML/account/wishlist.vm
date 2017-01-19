@@ -22,7 +22,7 @@
             }
         </style>
     <body>
-        #if($userInfo.wishListIsPrivate())
+        #if($userDocumentManager.wishListIsPrivate())
             <input type="submit" name="Set wishlist" value="Set wishlist public">
         #else
             <input type="submit" name="Set wishlist" value="Set wishlist private">

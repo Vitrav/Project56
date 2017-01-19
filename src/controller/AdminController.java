@@ -1,12 +1,9 @@
 package controller;
 
-import com.mongodb.client.MongoCollection;
 import controller.utils.ConUtil;
 import model.Database;
-import model.collection.CollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
-import org.bson.Document;
 import org.mindrot.jbcrypt.BCrypt;
 import spark.Request;
 import spark.Response;
@@ -22,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static viewutil.RequestUtil.*;
-import java.util.*;
 
 public class AdminController {
 
@@ -31,19 +27,14 @@ public class AdminController {
 
     public static Route adminPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        List<UserDocumentManager> users = new ArrayList<>();
-        Database.getInstance().getUserCollection().find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
-
-        ConUtil.addAdmin(request, model);
-        model.put("allUserManagers", users);
-        request.session().attribute("allUserManagers", users);
+        ConUtil.insertAllUsers(request, model);
+        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
 
-    public static Route modifyPage = (Request request, Response response) -> {
-        Map<String, Object> model = new HashMap<>();
-        return ViewUtil.render(request, model, Path.Template.MODIFYSCREEN);
-    };
+    public static Route modifyPage = (Request request, Response response) ->
+        ViewUtil.render(request, new HashMap<>(), Path.Template.MODIFYSCREEN);
+
 
     public static Route handleModifyPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
@@ -52,7 +43,7 @@ public class AdminController {
             String att = req.toString();
             model.put(att, request.session().attribute(att));
         });
-        ConUtil.addAdmin(request, model);
+        ConUtil.addModelVariables(request, model);
 
         String modifiedUser = (String) model.get("modifyUser");
         String username = getQueryUsername(request).length() >= 4 ? getQueryUsername(request) : modifiedUser;
@@ -183,7 +174,7 @@ public class AdminController {
 
     public static Route handleAdminPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        ConUtil.addAdmin(request, model);
+        ConUtil.addModelVariables(request, model);
 
         if (request.queryParams().iterator().hasNext()) {
             String user = request.queryParams().iterator().next();

@@ -5,13 +5,17 @@ import java.util.Date;
 import java.util.List;
 
 import controller.RegistrationController;
+import model.collection.GameCollectionManager;
 import org.bson.Document;
 
 import model.Database;
 import model.collection.UserCollectionManager;
 import main.Application.*;
+import user.UserController;
 
 import javax.xml.crypto.Data;
+
+import static viewutil.RequestUtil.getSessionCurrentUser;
 
 //Manager for user documents, updates are filtered by username.
 public class UserDocumentManager extends DocumentManager {
@@ -58,7 +62,7 @@ public class UserDocumentManager extends DocumentManager {
 
 	public Date getDateOfBirthAsDate() {
         try {
-            return dateFormat.parse((String) document.getString("date_of_birth"));
+            return dateFormat.parse(document.getString("date_of_birth"));
         } catch (Exception e) {
             return null;
         }
@@ -73,12 +77,6 @@ public class UserDocumentManager extends DocumentManager {
     }
 
 	public void setDateOfBirth(Date dateOfBirth) {
-        String date = "";
-        try {
-            date = dateFormat.format(dateOfBirth);
-        } catch (Exception e) {
-            return;
-        }
         int age = RegistrationController.calculateAge(dateOfBirth);
         setAge(age);
         update(new Document("date_of_birth", dateFormat.format(dateOfBirth)));
@@ -135,7 +133,50 @@ public class UserDocumentManager extends DocumentManager {
 		return (List<Document>) document.get("cart_items");
 	}
 
-	private void setCartItems(List<Document> cartItems) {
+	public double getTotalGamePrice(int gameId) {
+		if (!new UserController(getName()).userHasGame(gameId))
+			return 0.0;
+		for (Document item : getCartItems())
+			if (item.getInteger("id") == gameId)
+				return new GameDocumentManager(new GameCollectionManager().getGameDocument(gameId)).getPrice() * item.getInteger("amount");
+		return 0.0;
+	}
+
+	public int getGameAmount(int gameId) {
+		if (!new UserController(getName()).userHasGame(gameId))
+			return 0;
+		for (Document item : getCartItems())
+			if (item.getInteger("id") == gameId)
+				return item.getInteger("amount");
+		return 0;
+	}
+
+	public void incGameAmount(int gameId) {
+		if (!new UserController(getName()).userHasGame(gameId))
+			return;
+		List<Document> items = getCartItems();
+		items.forEach(item -> {
+			if (item.getInteger("id") == gameId)
+				item.put("amount", item.getInteger("amount") + 1);
+		});
+		setCartItems(items);
+	}
+
+	public int countTotalProducts() {
+        int total = 0;
+        for (Document item : getCartItems())
+            total += item.getInteger("amount");
+        return total;
+    }
+
+    public double countTotalPrice() {
+        double total = 0.0;
+        for (Document item : getCartItems())
+            total += getTotalGamePrice(item.getInteger("id"));
+        return total;
+    }
+
+	public void setCartItems(List<Document> cartItems) {
 		update(new Document("cart_items", cartItems));
 	}
 

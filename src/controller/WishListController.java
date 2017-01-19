@@ -1,5 +1,6 @@
 package controller;
 
+import controller.utils.ConUtil;
 import model.Database;
 import model.collection.GameCollectionManager;
 import model.collection.UserCollectionManager;
@@ -17,28 +18,27 @@ import static viewutil.RequestUtil.getSessionCurrentUser;
 
 public class WishListController {
 
-    public static Route wishlistPage = (Request request, Response response) -> {
+    public static Route wishListPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         UserDocumentManager manager = getUserDocManager(getSessionCurrentUser(request));
 
         insertgameManager(model, manager);
-        model.put("userInfo", manager);
+        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };
 
-    public static Route handleWishlistPost = (Request request, Response response) -> {
+    public static Route handleWishListPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         String buttonName = request.queryParams(request.queryParams().iterator().next());
         UserDocumentManager manager = getUserDocManager(getSessionCurrentUser(request));
+        ConUtil.addModelVariables(request, model);
 
         if (buttonName.toLowerCase().contains("set wishlist"))
             manager.setWishList(manager.wishListIsPrivate() ? false : true);
         else if (buttonName.equalsIgnoreCase("remove"))
             manager.removeWishItem(Integer.parseInt(request.queryParams().iterator().next()));
 
-
         manager = getUserDocManager(getSessionCurrentUser(request));
-        model.put("userInfo", manager);
         insertgameManager(model, manager);
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };
