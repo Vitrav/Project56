@@ -21,12 +21,12 @@ public class SingleProductController {
 
     public static Route singlePage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        addGames(model);
-        addCurrentGame(request, model);
         ConUtil.searchGame(request, model);
 
-//        if (model.containsKey("games"))
-//            return ViewUtil.render(request, model, Path.Template.SHOP);
+        if (model.containsKey("games"))
+            return ViewUtil.render(request, model, Path.Template.SHOP);
+        addCurrentGame(request, model);
+        addGames(model);
         return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
     };
 

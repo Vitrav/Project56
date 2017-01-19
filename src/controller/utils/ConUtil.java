@@ -12,9 +12,6 @@ import java.util.Map;
 
 import static viewutil.RequestUtil.getSessionCurrentUser;
 
-/**
- * Created by Sivar on 19-1-2017.
- */
 public class ConUtil {
 
     public static void searchGame(Request request,  Map<String, Object> model) {
@@ -31,9 +28,9 @@ public class ConUtil {
                         docManagers.add(docManager);
                 });
                 if (!docManagers.isEmpty()) {
-
-                }
-                model.put("notFound", true);
+                    model.put("games", docManagers);
+                } else
+                    model.put("notFound", true);
             }
         }
     }

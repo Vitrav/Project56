@@ -26,6 +26,9 @@ public class ShopController {
         Map<String, Object> model = new HashMap<>();
         ConUtil.addAdmin(request, model);
         ConUtil.searchGame(request, model);
+
+        if (model.containsKey("games"))
+            return ViewUtil.render(request, model, Path.Template.SHOP);
         ConUtil.addGames(model);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
