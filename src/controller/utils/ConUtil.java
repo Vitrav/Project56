@@ -7,35 +7,30 @@ import model.document.GameDocumentManager;
 import model.document.UserDocumentManager;
 import spark.Request;
 import user.UserController;
-import viewutil.RequestUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static viewutil.RequestUtil.getQueryUsername;
 import static viewutil.RequestUtil.getSessionCurrentUser;
 
 public class ConUtil {
 
     public static void searchGame(Request request,  Map<String, Object> model) {
-        if (request.queryParams().iterator().hasNext()) {
-            //Search button clicked.
-            if (request.queryParams().iterator().next().equalsIgnoreCase("search")) {
-                String product = request.queryParams("search").replaceAll(" ", "");
+        if (request.queryParams().iterator().hasNext() && request.queryParams().iterator().next().equalsIgnoreCase("search")) {
+            String product = request.queryParams("search").replaceAll(" ", "");
 
-                List<GameDocumentManager> docManagers = new ArrayList<>();
-                GameCollectionManager gameCollection = new GameCollectionManager();
-                gameCollection.getCollection().find().iterator().forEachRemaining(game -> {
-                    GameDocumentManager docManager = getGameDocManager(game.getInteger("id"));
-                    if (docManager.getName().toLowerCase().replaceAll(" ", "").contains(product.toLowerCase()) || docManager.getPlatform().equalsIgnoreCase(product))
-                        docManagers.add(docManager);
-                });
-                if (!docManagers.isEmpty()) {
-                    model.put("games", docManagers);
-                } else
-                    model.put("notFound", true);
-            }
+            List<GameDocumentManager> docManagers = new ArrayList<>();
+            GameCollectionManager gameCollection = new GameCollectionManager();
+            gameCollection.getCollection().find().iterator().forEachRemaining(game -> {
+                GameDocumentManager docManager = getGameDocManager(game.getInteger("id"));
+                if (docManager.getName().toLowerCase().replaceAll(" ", "").contains(product.toLowerCase()) || docManager.getPlatform().equalsIgnoreCase(product))
+                    docManagers.add(docManager);
+            });
+            if (!docManagers.isEmpty()) {
+                model.put("games", docManagers);
+            } else
+                model.put("notFound", true);
         }
     }
 
@@ -43,9 +38,13 @@ public class ConUtil {
         if (request.session().attribute("currentUser") == null)
             return;
         model.put("authenticationSucceeded", true);
-        model.put("userDocumentManager", new UserDocumentManager(new UserCollectionManager().getUserDocument(request.session().attribute("currentUser"))));
+        model.put("userDocumentManager", getUser(request));
         model.put("hasManager", true);
         addAdmin(request, model);
+    }
+
+    public static UserDocumentManager getUser(Request request) {
+        return new UserDocumentManager(new UserCollectionManager().getUserDocument(request.session().attribute("currentUser")));
     }
 
     private static void addAdmin(Request request, Map<String, Object> model) {

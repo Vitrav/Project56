@@ -35,9 +35,9 @@ public class ShopController {
 
     public static Route gameToCart = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        ConUtil.addModelVariables(request, model);
         ConUtil.addGames(model);
         ConUtil.addToCart(request);
+        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
 

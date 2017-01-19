@@ -28,6 +28,16 @@ public class SingleProductController {
             return ViewUtil.render(request, model, Path.Template.SHOP);
         addCurrentGame(request, model);
         addGames(model);
+
+        //Add game to wishlist.
+        if (request.queryParams().iterator().hasNext() && request.queryParams().iterator().next().equalsIgnoreCase("wishlist")) {
+            if (request.session().attribute("currentUser") == null) {
+                model.put("notLoggedIn", true);
+                return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
+            }
+            ConUtil.getUser(request).addWishItem(getGameDocManager(request, model).getId());
+            model.put("addedToList", true);
+        }
         return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
     };
 
@@ -38,8 +48,12 @@ public class SingleProductController {
     }
 
     private static void addCurrentGame(Request request, Map<String, Object> model) {
+        model.put("currentGame", getGameDocManager(request, model));
+    }
+
+    private static GameDocumentManager getGameDocManager(Request request, Map<String, Object> model) {
         String id = request.url().substring(request.url().indexOf("single-page/"), request.url().length() - 1).replace("single-page/", "");
-        model.put("currentGame", new GameDocumentManager(new GameCollectionManager().getGameDocument(Integer.parseInt(id))));
+        return new GameDocumentManager(new GameCollectionManager().getGameDocument(Integer.parseInt(id)));
     }
 
     private static GameDocumentManager getGameDocManager(Integer gameId) {
