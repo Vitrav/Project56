@@ -1,60 +1,56 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 
-#if($authenticationSucceeded)
-    <body>
-        <div class="single-product-area">
-            <div class="zigzag-bottom"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="product-content-right">
-                            <div class="woocommerce">
-                                <form method="post" action="#">
-                                    <table cellspacing="0" class="shop_table cart">
-                                        <thead>
-                                            <tr>
-                                                <th class="product-remove">&nbsp;</th>
-                                                <th class="product-thumbnail">&nbsp;</th>
-                                                <th class="product-name">Product</th>
-                                                <th class="product-price">Price</th>
-                                                <th class="product-quantity">Quantity</th>
-                                                <th class="product-subtotal">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        #foreach($game in $cartGamesInfo)
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>$game.getName()</td>
-                                                <td>$$game.getPrice()</td>
-                                                <td>1</td>
-                                                <td>$$game.getPrice()</td>
-                                            </tr>
-                                        #end
-                                            <tr>
-                                                <td class="actions" colspan="6">
-                                                    <input type="submit" value="Update Cart" name="update_cart" class="button">
-                                                   ## <input type="submit" value="Proceed to Checkout" name="proceed" class="checkout-button button alt wc-forward">
-                                                    <a class="add_to_cart_button" href="$WebPath.getPURCHASEDSUCCESFUL()">Proceed to Checkout</a>
-                                                </td>
-
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
-                            </div>
+#if(!$authenticationSucceeded)
+<script language="javascript">
+    window.location.href = "http://localhost:4567/login/"
+</script>
+#end
+<body>
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="product-content-right">
+                        <div class="woocommerce">
+                            <form method="post" action="#">
+                                <table cellspacing="0" class="shop_table cart">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-remove">&nbsp;</th>
+                                            <th class="product-thumbnail">&nbsp;</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    #foreach($game in $cartGamesInfo)
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>$game.getName()</td>
+                                            <td>$$game.getPrice()</td>
+                                            <td>$userDocumentManager.getGameAmount($game.getId())</td>
+                                            <td>$userDocumentManager.getTotalGamePrice($game.getId())</td>
+                                        </tr>
+                                    #end
+                                        <tr>
+                                            <td class="actions" colspan="6">
+                                                <input type="submit" value="Update Cart" name="update_cart" class="button">
+                                                <input type="submit" value="Proceed to Checkout" name="proceed" class="checkout-button button alt wc-forward">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
-#else
-    <script language="javascript">
-        window.location.href = "http://localhost:4567/login/"
-    </script>
-#end
-
+    </div>
+</body>
 #end

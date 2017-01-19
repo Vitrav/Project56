@@ -40,7 +40,7 @@
         #end
 
         <body>
-            <h3 class="byline">Modify user: $modifyUser</h3>
+            <h3 class="byline">Modify user: $modifyUserManager.getName()</h3>
             <p class="italicp">Current information</p>
             <table style='white-space: nowrap', id="div1">
                 <tr>

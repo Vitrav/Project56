@@ -24,7 +24,7 @@ public class ShopController {
 
     public static Route shopPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        ConUtil.addAdmin(request, model);
+        ConUtil.addModelVariables(request, model);
         ConUtil.searchGame(request, model);
 
         if (model.containsKey("games"))
@@ -35,21 +35,10 @@ public class ShopController {
 
     public static Route gameToCart = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-
-        UserCollectionManager userCollectionManager = new UserCollectionManager();
-        ConUtil.addAdmin(request, model);
         ConUtil.addGames(model);
-
-        String gameID = request.queryParams().iterator().next();
-        int actualGameID = Integer.parseInt(gameID);
-        if (!new UserController(getSessionCurrentUser(request)).userHasGame(actualGameID))
-            new UserDocumentManager(userCollectionManager.getUserDocument(getSessionCurrentUser(request))).addCartItem(actualGameID);
-
+        ConUtil.addToCart(request);
+        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
-
-    private static GameDocumentManager getGameDocManager(int gameId) {
-        return new GameDocumentManager(new GameCollectionManager().getGameDocument(gameId));
-    }
 
 }

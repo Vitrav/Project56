@@ -36,14 +36,14 @@ public final class Application {
         get(Path.Web.MYACCOUNT, MyAccountController.accountPage);
         get(Path.Web.ADMINPANEL, AdminController.adminPage);
         get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
-        get(Path.Web.WISHLIST, WishListController.wishlistPage);
+        get(Path.Web.WISHLIST, WishListController.wishListPage);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.MODIFYSCREEN, AdminController.handleModifyPost);
         post(Path.Web.ADMINPANEL, AdminController.handleAdminPost);
         post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
-        post(Path.Web.WISHLIST, WishListController.handleWishlistPost);
+        post(Path.Web.WISHLIST, WishListController.handleWishListPost);
         post(Path.Web.SHOP, ShopController.gameToCart);
 
         //Add games to database.

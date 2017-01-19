@@ -1,6 +1,7 @@
 package controller;
 
 
+import controller.utils.ConUtil;
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
 import spark.Route;
@@ -41,8 +42,8 @@ public class LoginController {
             model.put("userIsAdmin", true);
 
         //request a session for the user so he/she is in fact logged in
-        model.put("authenticationSucceeded", true);
         request.session().attribute("currentUser", getQueryUsername(request));
+        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, Path.Template.INDEX);
     };
 

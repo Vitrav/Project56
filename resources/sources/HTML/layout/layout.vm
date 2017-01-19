@@ -59,7 +59,11 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
+                    #if($hasManager)
+                        <a href="$WebPath.getCART()">Cart - <span class="cart-amunt">$$userDocumentManager.countTotalPrice()</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">$userDocumentManager.countTotalProducts()</span></a>
+                    #else
                         <a href="$WebPath.getCART()">Cart - <span class="cart-amunt">$0</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">0</span></a>
+                    #end
                 </div>
             </div>
         </div>

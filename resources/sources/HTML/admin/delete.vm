@@ -26,7 +26,7 @@
     </style>
 ##    Check if the user is logged in, send to the login page otherwise.
         <body>
-        <h3 class="byline">Are you sure you want to delete: $modifyUser</h3>
+        <h3 class="byline">Are you sure you want to delete: $modifyUserManager.getName()</h3>
         <p class="italicp">User information</p>
         <table style='white-space: nowrap', id="div1">
             <tr>
