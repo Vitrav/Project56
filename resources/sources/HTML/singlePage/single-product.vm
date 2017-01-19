@@ -53,7 +53,7 @@
                             <div class="col-sm-6">
                                 <div class="product-images">
                                     <div class="product-main-img">
-                                        <img src="$currentGame.getImage()" alt="">
+                                       ## <img src="$currentGame.getImage()" alt="">
                                     </div>
 
                                 </div>

@@ -36,8 +36,10 @@
                                             <tr>
                                                 <td class="actions" colspan="6">
                                                     <input type="submit" value="Update Cart" name="update_cart" class="button">
-                                                    <input type="submit" value="Proceed to Checkout" name="proceed" class="checkout-button button alt wc-forward">
+                                                   ## <input type="submit" value="Proceed to Checkout" name="proceed" class="checkout-button button alt wc-forward">
+                                                    <a class="add_to_cart_button" href="$WebPath.getPURCHASEDSUCCESFUL()">Proceed to Checkout</a>
                                                 </td>
+
                                             </tr>
                                         </tbody>
                                     </table>

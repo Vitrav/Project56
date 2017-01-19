@@ -19,6 +19,8 @@ public class Path {
         @Getter public static final String MODIFYSCREEN = "/modify/";
         @Getter public static final String DELETESCREEN = "/delete/";
         @Getter public static final String WISHLIST = "/wishlist/";
+        @Getter public static final String HISTORY = "/history-purchased/";
+        @Getter public static final String PURCHASEDSUCCESFUL = "/purchasedSuccesful/";
     }
 
     public static class Template {
@@ -34,6 +36,8 @@ public class Path {
         public static final String MODIFYSCREEN = "/sources/HTML/admin/modify.vm";
         public static final String DELETESCREEN = "/sources/HTML/admin/delete.vm";
         public static final String WISHLIST = "/sources/HTML/account/wishlist.vm";
+        public static final String HISTORY = "/sources/HTML/account/history.vm";
+        public static final String PURCHASEDSUCCESFUL = "/sources/HTML/cart/purchasedSuccesful.vm";
     }
 
 }

@@ -17,7 +17,7 @@ public final class Application {
 
     public static void main(final String[] args) {
         port(4567);
-        staticFiles.location("/sources");
+        staticFiles.location("/sources");//this allows spark to look inside of sources for any non-java related resources.
         staticFiles.expireTime(600L);
         enableDebugScreen();
         before("*", Filters.addTrailingSlashes);
@@ -36,6 +36,8 @@ public final class Application {
         get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
         get(Path.Web.WISHLIST, WishListController.wishlistPage);
 
+        get(Path.Web.PURCHASEDSUCCESFUL, PurchasedSuccesful.purchasedsuccesful);
+
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.MODIFYSCREEN, AdminController.handleModifyPost);
         post(Path.Web.ADMINPANEL, AdminController.handleAdminPost);
@@ -43,6 +45,10 @@ public final class Application {
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
         post(Path.Web.WISHLIST, WishListController.handleWishlistPost);
         post(Path.Web.SHOP, ShopController.gameToCart);
+
+        post(Path.Web.PURCHASEDSUCCESFUL, PurchasedSuccesful.purchasedsuccesful);
+
+
 
         Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game ->
             get("/single-page/" + game.getInteger("id") + "/", SingleProductController.singlePage)
