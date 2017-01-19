@@ -44,7 +44,7 @@ public class GameParser {
         if (lines.isEmpty())
             fillLines();
 
-        for (int i = 0; i < lines.size() - 1; i++ ) {
+        for (int i = 0; i < lines.size(); i++ ) {
             String line = lines.get(i);
             List<String> lineParts = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class GameParser {
                 if (part.length() > 10 && part.substring(0, 6).contains("http:")) {
                     lineParts.add(part.replaceAll(" ", ""));
                 } else
-                    lineParts.add(part.length() < 20 ? part.replaceAll(" ", "") : part);
+                    lineParts.add(part);
 
                 if (!line.contains(";")) {
                     System.out.println(part);
@@ -69,6 +69,7 @@ public class GameParser {
                         20, dateFormat.parse(reverseDate(lineParts.get(7))), lineParts.get(8), lineParts.get(9))
                 );
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("Exception: game parsing went wrong." );
             }
         }

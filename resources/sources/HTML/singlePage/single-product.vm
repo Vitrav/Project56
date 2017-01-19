@@ -26,9 +26,12 @@
                 <div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Search Products</h2>
+                        #if($notFound)
+                            <p>This game does not exist.</p>
+                        #end
                         <form action="">
-                            <input type="text" placeholder="Search products...">
-                            <input type="submit" value="Search">
+                            <input type="text"  name="search" placeholder="Search products...">
+                            <input type="submit" name="search button" value="Search">
                         </form>
                     </div>
 
@@ -74,7 +77,7 @@
                                     </form>
 
                                     <div class="product-inner-category">
-                                        <p>Category: <a href="">Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
+                                        <p>Genre: <a href="">$currentGame.getGenre()</a></p>
                                     </div>
 
                                     <div role="tabpanel">

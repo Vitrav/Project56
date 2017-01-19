@@ -1,5 +1,6 @@
 package controller;
 
+import controller.utils.ConUtil;
 import model.collection.GameCollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.GameDocumentManager;
@@ -22,44 +23,28 @@ import static viewutil.RequestUtil.getSessionCurrentUser;
 public class ShopController {
 
     public static Route shopPage = (Request request, Response response) -> {
-        GameCollectionManager gameCollection = new GameCollectionManager();
-        List<GameDocumentManager> docManagers = new ArrayList<>();
         Map<String, Object> model = new HashMap<>();
+        ConUtil.addAdmin(request, model);
+        ConUtil.searchGame(request, model);
 
-        UserCollectionManager userCollectionManager = new UserCollectionManager();
-        if (userCollectionManager.getUserDocument(getSessionCurrentUser(request)) != null) {
-            UserDocumentManager userDocumentManager = new UserDocumentManager(userCollectionManager.getUserDocument(getSessionCurrentUser(request)));
-            if (userDocumentManager.isAdmin()) {
-                model.put("userIsAdmin", true);
-            }
-        }
-
-        gameCollection.getCollection().find().iterator().forEachRemaining(game -> docManagers.add(getGameDocManager(game.getInteger("id"))));
-        model.put("games", docManagers);
+        if (model.containsKey("games"))
+            return ViewUtil.render(request, model, Path.Template.SHOP);
+        ConUtil.addGames(model);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
 
     public static Route gameToCart = (Request request, Response response) -> {
-        UserController controller = new UserController(getSessionCurrentUser(request));
-        GameCollectionManager gameCollection = new GameCollectionManager();
-        List<GameDocumentManager> docManagers = new ArrayList<>();
-        gameCollection.getCollection().find().iterator().forEachRemaining(game -> docManagers.add(getGameDocManager(game.getInteger("id"))));
-
         Map<String, Object> model = new HashMap<>();
 
         UserCollectionManager userCollectionManager = new UserCollectionManager();
-        UserDocumentManager userDocumentManager = new UserDocumentManager(userCollectionManager.getUserDocument(getSessionCurrentUser(request)));
-        if (userDocumentManager.isAdmin()){
-            model.put("userIsAdmin", true);
-        }
+        ConUtil.addAdmin(request, model);
+        ConUtil.addGames(model);
 
         String gameID = request.queryParams().iterator().next();
         int actualGameID = Integer.parseInt(gameID);
-        if (!controller.userHasGame(actualGameID)) {
-            userDocumentManager.addCartItem(actualGameID);
-        }
+        if (!new UserController(getSessionCurrentUser(request)).userHasGame(actualGameID))
+            new UserDocumentManager(userCollectionManager.getUserDocument(getSessionCurrentUser(request))).addCartItem(actualGameID);
 
-        model.put("games", docManagers);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
 

@@ -145,6 +145,15 @@ public class UserDocumentManager extends DocumentManager {
 		setCartItems(items);
 	}
 
+	public void removeCartItem(int gameId) {
+        List<Document> items = getCartItems();
+        getCartItems().forEach(item -> {
+            if (item.getInteger("id") == gameId)
+                items.remove(item);
+        });
+        setCartItems(items);
+    }
+
 	@SuppressWarnings("unchecked")
 	public List<Integer> getPurchaseHistory() {
 		return (List<Integer>) document.get("purchase_history");
@@ -201,7 +210,6 @@ public class UserDocumentManager extends DocumentManager {
             }
         }
     }
-
 
 	public boolean getIsBlocked() {
 		return (boolean) document.get("is_blocked");

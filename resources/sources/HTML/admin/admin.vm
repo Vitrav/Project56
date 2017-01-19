@@ -6,6 +6,11 @@
             window.location.href = "http://localhost:4567/login/"
         </script>
     #end
+    #if(!$userIsAdmin)
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/index/"
+        </script>
+    #end
     <style>
     form {
         position: relative;

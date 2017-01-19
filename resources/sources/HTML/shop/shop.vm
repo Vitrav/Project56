@@ -6,30 +6,38 @@
         <div class="zigzag-bottom"></div>
             <div class="container">
                 <div class="row">
+                    <div class="single-sidebar">
+                        <h2 class="sidebar-title">Search Products</h2>
+                        #if($notFound)
+                            <p>This game does not exist.</p>
+                        #end
+                        <form action="">
+                            <input type="text"  name="search" placeholder="Search products...">
+                            <input type="submit" name="search button" value="Search">
+                        </form>
+                    </div>
                     #foreach($manager in $games)
                     <div class="single-shop-product">
                         <div class="product-upper">
                             <div class="col-md-8 col-md-6">
+                                <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
+                                <img src="$manager.getImage()" height="180" width="124"></img>
+                                <h4>$manager.getPlatform()</h4>
+                                <p>$manager.getGenre()</p>
+                                <div class="product-carousel-price">
+                                    <ins>$manager.getPrice()</ins>
+                                    <p></p>
+                                </div>
 
-
-                                    <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
-                                    <img src="$manager.getImage()" height="180" width="124"></img>
-                                    <h4>$manager.getPlatform()</h4>
-                                    <p>$manager.getGenre()</p>
-                                    <div class="product-carousel-price">
-                                        <ins>$manager.getPrice()</ins>
-                                        <p></p>
-                                    </div>
-
-                                    <form id="add_to_cart" method="post">
-                                    <div class="product-option-shop">
-                                        #if($authenticationSucceeded)
-                                            <input class="add_to_cart_button" type="submit" name="$manager.getId()" href="http://localhost:4567/index/" value="Add to cart">
-                                        #else
-                                            <a class="add_to_cart_button" href="http://localhost:4567/login/">Add to cart</a>
-                                        #end
-                                    </div>
-                                    </form>
+                                <form id="add_to_cart" method="post">
+                                <div class="product-option-shop">
+                                    #if($authenticationSucceeded)
+                                        <input class="add_to_cart_button" type="submit" name="$manager.getId()" href="http://localhost:4567/index/" value="Add to cart">
+                                    #else
+                                        <a class="add_to_cart_button" href="http://localhost:4567/login/">Add to cart</a>
+                                    #end
+                                </div>
+                                </form>
                             </div>
                         </div>
                     #end
