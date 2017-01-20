@@ -31,13 +31,7 @@
                                     #foreach($game in $cartGamesInfo)
                                         <tr>
                                             <td>
-                                                <button class="add_to_cart_button" type="submit" name="remove">Remove</button>
-##                                                if statement is work in progress! :P
-                                                #if ($addedToList)
-                                                    <p>$game.getName() has been removed</p>
-                                                #elseif($notLoggedIn)
-                                                    <p>Login to remove something from your cart</p>
-                                                #end
+                                                <input type="submit" name="$game.getId()" value="Remove"></input>
                                             </td>
                                             <td>$game.getName()</td>
                                             <td>$game.getPlatform()</td>

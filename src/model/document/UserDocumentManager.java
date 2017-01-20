@@ -194,12 +194,13 @@ public class UserDocumentManager extends DocumentManager {
 
 
 	public void removeCartItem(int gameId) {
-        List<Document> items = getCartItems();
-        getCartItems().forEach(item -> {
-            if (item.getInteger("id") == gameId)
-                items.remove(item);
-        });
-        setCartItems(items);
+        List<Document> items = getCartItems() == null ? new ArrayList<>() : getCartItems();
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i).getInteger("id") == gameId) {
+				items.remove(i);
+				setCartItems(items);
+			}
+		}
     }
 
 
