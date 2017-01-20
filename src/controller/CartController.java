@@ -1,9 +1,6 @@
 package controller;
 
-
 import controller.utils.ConUtil;
-import model.collection.GameCollectionManager;
-import model.collection.UserCollectionManager;
 import model.document.GameDocumentManager;
 import model.document.UserDocumentManager;
 import viewutil.ViewUtil;
@@ -15,9 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static viewutil.RequestUtil.getSessionCurrentUser;
-
 
 public class CartController {
 

@@ -1,0 +1,43 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+<form id="favlistForm" method="post" action = "/favList/">
+    #if(!$authenticationSucceeded)
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/login/"
+        </script>
+    #end
+    <style>
+        form {
+            position: relative;
+            left: 200px;
+            top: 10px;
+            max-width: 500px;
+            margin: 30px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+
+    <h2 class="sidebar-title">Your favorite list.</h2>
+    <table style='white-space: nowrap' id="div1">
+        <tr>
+            <th>Name</th>
+            <th>Platform</th>
+            <th>Price</th>
+            <th>Genre</th>
+            <th>Action</th>
+        </tr>
+        #foreach ($manager in $gameManagers)
+            <tr>
+                <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
+                <td>$manager.getPlatform()</td>
+                <td>$manager.getPrice()</td>
+                <td>$manager.getGenre()</td>
+                <td><input type="submit" name="$manager.getId()" value="Remove"></input></td>
+            </tr>
+        #end
+    </table>
+</form>
+#end
