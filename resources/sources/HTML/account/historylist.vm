@@ -43,7 +43,7 @@
             </table>
             #else
                 #if(!$view)
-                <h2 class="sidebar-title">My history list</h2>
+                <h1 class="sidebar-title">My history list</h1>
 
                 #end
 
@@ -52,9 +52,8 @@
 
                     <th>Platform</th>
                     <th>Price</th>
-                    #if(!$view)
-                        <th>Action</th>
-                    #end
+                    <th>Date of purchase</th>
+
                 </tr>
                 #foreach ($manager in $gameManagers)
                     <tr>
