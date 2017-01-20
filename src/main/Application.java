@@ -1,6 +1,8 @@
 package main;
 
 import controller.*;
+import controller.utils.HistoryListController;
+import controller.utils.MyHistoryListController;
 import model.Database;
 import model.collection.GameCollectionManager;
 import parser.GameParser;
@@ -38,6 +40,7 @@ public final class Application {
         get(Path.Web.ADMINPANEL, AdminController.adminPage);
         get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
         get(Path.Web.WISHLIST, WishListController.wishListPage);
+        get(Path.Web.HISTORYLIST, HistoryListController.historyListPage);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.MODIFYSCREEN, AdminController.handleModifyPost);
@@ -45,6 +48,7 @@ public final class Application {
         post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
         post(Path.Web.WISHLIST, WishListController.handleWishListPost);
+
         post(Path.Web.SHOP, ShopController.gameToCart);
 
         //Add games to database.

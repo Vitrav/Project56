@@ -6,21 +6,20 @@
         <script language="javascript">
             window.location.href = "http://localhost:4567/login/"
         </script>
-    #end
-    <style>
-        table, td, th {
-            border: 1px white;
-        }
+    #end <style>
+    table, td, th {
+        border: 1px white;
+    }
 
-        table {
-            border-collapse: collapse;
-        }
+    table {
+        border-collapse: collapse;
+    }
 
-        th, td {
-            padding: 15px;
-            width: 300px;
-        }
-    </style>
+    th, td {
+        padding: 15px;
+        width: 300px;
+    }
+</style>
 
     <br>
     <table align="center">
@@ -65,34 +64,20 @@
     <br>
     <br>
 
-    ##<div class="container">
+##<div class="container">
 
     <style>
         table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
+            border: 1px solid black;
+            border-collapse: collapse;
             style="width:50%";
         }
     </style>
-        <table align="center" >
-            <tr>
-              ##  <th>Name</th>
-                <th>Platform</th>
-                <th>Price</th>
-                <th>Date.</th>
-            </tr>
-        </table>
-             #foreach ($manager in $gameManagers)
-                <tr>
-                    <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
-                    <td>$manager.getPlatform()</td>
-                    <td>$manager.getPrice()</td>
-                </tr>
-            #end
 
 
-      ##  </body>
-       ## </div>
+
+##  </body>
+## </div>
 
     <br>
     <br>
@@ -101,4 +86,5 @@
 
 
 </form>
+
 #end

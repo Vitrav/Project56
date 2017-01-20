@@ -36,6 +36,7 @@
                             <li><a href="$WebPath.getMYACCOUNT()"><i class="fa fa-user"></i>My Account</a></li>
                             <li><a href="$WebPath.getLOGOUT()"><i class="fa fa-user"></i>Logout</a></li>
                             <li><a href="$WebPath.getWISHLIST()"><i class="fa fa-heart"></i>Wishlist</a></li>
+                            <li><a href="$WebPath.getHISTORYLIST()"><i class="fa fa-heart"></i>history</a></li>
                             #if($userIsAdmin)
                                 <li><a href="$WebPath.getADMINPANEL()"><i class="fa fa-heart"></i>Admin</a></li>
                             #end

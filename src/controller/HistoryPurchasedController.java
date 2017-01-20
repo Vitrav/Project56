@@ -23,7 +23,7 @@ import static viewutil.RequestUtil.getSessionCurrentUser;
  */
 public class HistoryPurchasedController {
 
-    public static Route HistoryPage = (Request request, Response response) -> {
+   /* public static Route HistoryPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         UserDocumentManager manager = getUserDocManager(getSessionCurrentUser(request));
 
@@ -58,5 +58,5 @@ public class HistoryPurchasedController {
         List<GameDocumentManager> gameManagers = new ArrayList<>();
         manager.getWishList().forEach(id -> gameManagers.add(getGameDocManager(id)));
         model.put("gameManagers", gameManagers);
-    }
+    }*/
 }

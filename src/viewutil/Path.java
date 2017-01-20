@@ -20,6 +20,8 @@ public class Path {
         @Getter public static final String DELETESCREEN = "/delete/";
         @Getter public static final String WISHLIST = "/wishlist/";
         @Getter public static final String HISTORY = "/history-purchased/";
+        @Getter public static final String HISTORYLIST = "/historylist.vm/";
+        @Getter public static final String MYHISTORYLIST = "/myhistorylist/";
         @Getter public static final String PURCHASEDSUCCESFUL = "/purchasedSuccesful/";
     }
 
@@ -32,6 +34,8 @@ public class Path {
         public static final String NOT_FOUND = "/velocity/notFound.html";
         public static final String REGISTRATION = "/sources/HTML/registration/registration.vm";
         public static final String MYACCOUNT = "/sources/HTML/account/account.vm";
+        public static final String HISTORYLIST = "/sources/HTML/account/historylist.vm";
+        public static final String MYHISTORYLIST = "/sources/HTML/account/myhistorylist.vm";
         public static final String ADMINPANEL = "/sources/HTML/admin/admin.vm";
         public static final String MODIFYSCREEN = "/sources/HTML/admin/modify.vm";
         public static final String DELETESCREEN = "/sources/HTML/admin/delete.vm";
