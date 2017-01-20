@@ -1,6 +1,6 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="wishlistForm" method="post" action = "/wishlist/">
+<form id="wishlistForm" method="post" action = "/wishList/">
     <div class="container">
 
     #if(!$authenticationSucceeded)

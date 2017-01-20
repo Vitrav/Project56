@@ -38,6 +38,7 @@ public final class Application {
         get(Path.Web.ADMINPANEL, AdminController.adminPage);
         get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
         get(Path.Web.WISHLIST, WishListController.wishListPage);
+        get(Path.Web.FAVORITELIST, FavListController.favListPage);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.MODIFYSCREEN, AdminController.handleModifyPost);
