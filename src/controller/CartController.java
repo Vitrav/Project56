@@ -34,9 +34,9 @@ public class CartController {
         UserDocumentManager userDocumentManager = ConUtil.getUser(request);
         ConUtil.addModelVariables(request, model);
 
-        if (buttonName.equalsIgnoreCase("remove"))
+        if (buttonName.equalsIgnoreCase("remove")) {
             ConUtil.getUser(request).removeCartItem(Integer.parseInt(request.queryParams().iterator().next()));
-
+        }
 
         model.put("userManager", ConUtil.getUser(request));
         infoToPage(model, ConUtil.getUser(request));
