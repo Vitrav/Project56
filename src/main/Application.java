@@ -50,8 +50,7 @@ public final class Application {
 //        new GameParser().addGamesToDB();
 
         Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game ->
-            get("/single-page/" + game.getInteger("id") + "/", SingleProductController.singlePage)
-        );
+            get("/single-page/" + game.getInteger("id") + "/", SingleProductController.singlePage));
 
         after("*", Filters.addGzipHeader);
     }

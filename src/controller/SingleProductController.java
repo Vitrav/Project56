@@ -5,6 +5,7 @@ import model.collection.GameCollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.GameDocumentManager;
 import model.document.UserDocumentManager;
+import user.UserController;
 import viewutil.Path;
 import viewutil.ViewUtil;
 import spark.Request;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static viewutil.RequestUtil.getSessionCurrentUser;
 
 
 public class SingleProductController {
@@ -31,6 +34,7 @@ public class SingleProductController {
 
         //Add game to wishlist.
         if (request.queryParams().iterator().hasNext() && request.queryParams().iterator().next().equalsIgnoreCase("wishlist")) {
+            System.out.println(request.queryParams().iterator().next());
             if (request.session().attribute("currentUser") == null) {
                 model.put("notLoggedIn", true);
                 return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
@@ -38,8 +42,28 @@ public class SingleProductController {
             ConUtil.getUser(request).addWishItem(getGameDocManager(request, model).getId());
             model.put("addedToList", true);
         }
+
+        if (request.queryParams().iterator().hasNext() && request.queryParams().iterator().next().equalsIgnoreCase("cart")){
+            System.out.println(request.queryParams().iterator().next());
+            if (request.session().attribute("currentUser") == null) {
+                model.put("notLoggedIn", true);
+                return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
+            }
+            ConUtil.getUser(request).addCartItem(getGameDocManager(request, model).getId());
+            model.put("addedToList", true);
+        }
+
         return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
     };
+
+    private static boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
 
     private static void addGames(Map<String, Object> model) {
         List<GameDocumentManager> docManagers = new ArrayList<>();
