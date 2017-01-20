@@ -79,16 +79,16 @@
               ##  <th>Name</th>
                 <th>Platform</th>
                 <th>Price</th>
-                <th>Date</th>
+                <th>Date.</th>
             </tr>
         </table>
-        ##     #foreach ($manager in $gameManagers)
-        ##        <tr>
-        ##            <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
-        ##            <td>$manager.getPlatform()</td>
-        ##            <td>$manager.getPrice()</td>
-        ##        </tr>
-        ##    #end
+             #foreach ($manager in $gameManagers)
+                <tr>
+                    <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
+                    <td>$manager.getPlatform()</td>
+                    <td>$manager.getPrice()</td>
+                </tr>
+            #end
 
 
       ##  </body>
