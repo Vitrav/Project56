@@ -82,6 +82,12 @@ public class ConUtil {
         model.put("games", docManagers);
     }
 
+    public static void insertGameManager(Map<String, Object> model, List<Integer> managerList) {
+        List<GameDocumentManager> gameManagers = new ArrayList<>();
+        managerList.forEach(id -> gameManagers.add(ConUtil.getGameDocManager(id)));
+        model.put("gameManagers", gameManagers);
+    }
+
     public static GameDocumentManager getGameDocManager(int gameId) {
         return new GameDocumentManager(new GameCollectionManager().getGameDocument(gameId));
     }
