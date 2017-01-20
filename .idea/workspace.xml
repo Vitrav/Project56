@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7e481b1-96da-480c-8318-41264a2eafc4" name="Default" comment="Parser added.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/sources/HTML/account/historylist.vm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/utils/HistoryListController.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/utils/MyHistoryListController.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/sources/HTML/account/history.vm" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sources/HTML/account/account.vm" afterPath="$PROJECT_DIR$/resources/sources/HTML/account/account.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sources/HTML/account/historylist.vm" afterPath="$PROJECT_DIR$/resources/sources/HTML/account/historylist.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm" afterPath="$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/HistoryPurchasedController.java" afterPath="$PROJECT_DIR$/src/controller/HistoryPurchasedController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Application.java" afterPath="$PROJECT_DIR$/src/main/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/viewutil/Path.java" afterPath="$PROJECT_DIR$/src/viewutil/Path.java" />
     </list>
     <ignored path="Project5-6.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/Application.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+              <caret line="42" column="71" selection-start-line="42" selection-start-column="71" selection-end-line="42" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -52,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="historylist.vm" pinned="false" current-in-tab="true">
+      <file leaf-file-name="historylist.vm" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/sources/HTML/account/historylist.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5086705">
-              <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+            <state vertical-scroll-proportion="-10.645162">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -110,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/src/viewutil/Path.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="84" selection-start-line="36" selection-start-column="84" selection-end-line="36" selection-end-column="84" />
+              <caret line="38" column="84" selection-start-line="38" selection-start-column="84" selection-end-line="38" selection-end-column="84" />
               <folding />
             </state>
           </provider>
@@ -120,17 +114,17 @@
         <entry file="file://$PROJECT_DIR$/src/controller/CartController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="31" />
+              <caret line="19" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.vm" pinned="false" current-in-tab="false">
+      <file leaf-file-name="layout.vm" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.741936">
-              <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.6040462">
+              <caret line="39" column="102" selection-start-line="39" selection-start-column="102" selection-end-line="39" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -214,10 +208,10 @@
         <option value="$PROJECT_DIR$/resources/sources/HTML/account/myhistorylist" />
         <option value="$PROJECT_DIR$/src/controller/utils/MyHistoryListController.java" />
         <option value="$PROJECT_DIR$/resources/sources/HTML/account/myhistorylist.vm" />
-        <option value="$PROJECT_DIR$/src/main/Application.java" />
         <option value="$PROJECT_DIR$/src/viewutil/Path.java" />
-        <option value="$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm" />
         <option value="$PROJECT_DIR$/resources/sources/HTML/account/historylist.vm" />
+        <option value="$PROJECT_DIR$/src/main/Application.java" />
+        <option value="$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm" />
       </list>
     </option>
   </component>
@@ -1046,7 +1040,7 @@
       <workItem from="1484654747809" duration="10090000" />
       <workItem from="1484733204589" duration="3676000" />
       <workItem from="1484815982289" duration="21546000" />
-      <workItem from="1484906129969" duration="5133000" />
+      <workItem from="1484906129969" duration="5689000" />
     </task>
     <task id="LOCAL-00002" summary="Login fixed.">
       <created>1478002896554</created>
@@ -1210,11 +1204,17 @@
       <option name="project" value="LOCAL" />
       <updated>1484904548284</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="history page">
+      <created>1484911331379</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1484911331379</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="201351000" />
+    <option name="totallyTimeSpent" value="201907000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1300,7 +1300,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="RegisterController expanded." />
     <MESSAGE value="Some register exception messages added." />
     <MESSAGE value="Code cleanups." />
     <MESSAGE value="Registration exceptions added." />
@@ -1325,7 +1324,8 @@
     <MESSAGE value="Wishlist added to the product page." />
     <MESSAGE value="Exceptions added to product page." />
     <MESSAGE value="Public wishlists added to the wishlist page." />
-    <option name="LAST_COMMIT_MESSAGE" value="Public wishlists added to the wishlist page." />
+    <MESSAGE value="history page" />
+    <option name="LAST_COMMIT_MESSAGE" value="history page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1421,7 +1421,7 @@
     <entry file="file://$PROJECT_DIR$/src/controller/CartController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="31" />
+          <caret line="19" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -1444,28 +1444,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/viewutil/Path.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="84" selection-start-line="36" selection-start-column="84" selection-end-line="36" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.741936">
-          <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+          <caret line="38" column="84" selection-start-line="38" selection-start-column="84" selection-end-line="38" selection-end-column="84" />
           <folding />
         </state>
       </provider>
@@ -1490,8 +1472,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/sources/HTML/account/historylist.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5086705">
-          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+        <state vertical-scroll-proportion="-10.645162">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="71" selection-start-line="42" selection-start-column="71" selection-end-line="42" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6040462">
+          <caret line="39" column="102" selection-start-line="39" selection-start-column="102" selection-end-line="39" selection-end-column="102" />
           <folding />
         </state>
       </provider>

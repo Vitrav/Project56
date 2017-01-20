@@ -1,6 +1,7 @@
 package main;
 
 import controller.*;
+import controller.utils.HistoryListController;
 import model.Database;
 import model.collection.GameCollectionManager;
 import parser.GameParser;
@@ -39,6 +40,7 @@ public final class Application {
         get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
         get(Path.Web.WISHLIST, WishListController.wishListPage);
         get(Path.Web.FAVORITELIST, FavListController.favListPage);
+        get(Path.Web.HISTORYLIST, HistoryListController.historyListPage);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.MODIFYSCREEN, AdminController.handleModifyPost);
