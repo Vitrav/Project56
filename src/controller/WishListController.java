@@ -21,9 +21,7 @@ public class WishListController {
 
     public static Route wishListPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        UserDocumentManager manager = ConUtil.getUserDocManager(getSessionCurrentUser(request));
-
-        insertGameManager(model, manager);
+        ConUtil.insertGameManager(model, ConUtil.getUserDocManager(getSessionCurrentUser(request)).getWishList());
         ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };
@@ -31,7 +29,7 @@ public class WishListController {
     public static Route handleWishListPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         String buttonName = request.queryParams(request.queryParams().iterator().next());
-        UserDocumentManager manager = ConUtil.getUserDocManager(getSessionCurrentUser(request));
+        UserDocumentManager manager = ConUtil.getUser(request);
         ConUtil.addModelVariables(request, model);
 
         if (buttonName.toLowerCase().contains("set your wishlist"))
@@ -49,20 +47,14 @@ public class WishListController {
             model.put("viewList", true);
             return ViewUtil.render(request, model, Path.Template.WISHLIST);
         } else if (buttonName.equalsIgnoreCase("view")) {
-            insertGameManager(model, ConUtil.getUserDocManager(request.queryParams().iterator().next()));
+            ConUtil.insertGameManager(model, ConUtil.getUserDocManager(request.queryParams().iterator().next()).getWishList());
             model.put("view", true);
             model.put("userInfo", ConUtil.getUserDocManager(request.queryParams().iterator().next()));
             return ViewUtil.render(request, model, Path.Template.WISHLIST);
         }
-        model.put("userDocumentManager", ConUtil.getUserDocManager(getSessionCurrentUser(request)));
-        insertGameManager(model, manager);
+        model.put("userDocumentManager", ConUtil.getUser(request));
+        ConUtil.insertGameManager(model, manager.getWishList());
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };
-
-    private static void insertGameManager(Map<String, Object> model, UserDocumentManager manager) {
-        List<GameDocumentManager> gameManagers = new ArrayList<>();
-        manager.getWishList().forEach(id -> gameManagers.add(ConUtil.getGameDocManager(id)));
-        model.put("gameManagers", gameManagers);
-    }
 
 }
