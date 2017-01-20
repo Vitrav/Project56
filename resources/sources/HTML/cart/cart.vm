@@ -1,5 +1,6 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
+<form id="cartForm" method="post" action = "/cart/">
 
 #if(!$authenticationSucceeded)
 <script language="javascript">
@@ -29,7 +30,7 @@
                                     <tbody>
                                     #foreach($game in $cartGamesInfo)
                                         <tr>
-                                            <td><form>
+                                            <td>
                                                 <button class="add_to_cart_button" type="submit" name="remove">Remove</button>
 ##                                                if statement is work in progress! :P
                                                 #if ($addedToList)
@@ -37,7 +38,7 @@
                                                 #elseif($notLoggedIn)
                                                     <p>Login to remove something from your cart</p>
                                                 #end
-                                            </form></td>
+                                            </td>
                                             <td>$game.getName()</td>
                                             <td>$game.getPlatform()</td>
                                             <td>$$game.getPrice()</td>
@@ -61,4 +62,5 @@
         </div>
     </div>
 </body>
+</form>
 #end

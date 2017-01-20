@@ -29,6 +29,7 @@ public final class Application {
         get(Path.Web.INDEX, controller.IndexController.indexPage);
         get(Path.Web.SINGLEPAGE, SingleProductController.singlePage);
         get(Path.Web.CART, CartController.cartPage);
+        post(Path.Web.CART, CartController.cartPage);
         get(Path.Web.SHOP, ShopController.shopPage);
         get(Path.Web.LOGIN, LoginController.loginPage);
         get(Path.Web.LOGOUT, LoginController.handleLogoutPost);

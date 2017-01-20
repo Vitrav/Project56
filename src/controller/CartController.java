@@ -23,7 +23,7 @@ public class CartController {
 
     public static Route cartPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        UserDocumentManager userDocumentManager = new UserDocumentManager(new UserCollectionManager().getUserDocument(getSessionCurrentUser(request)));
+        UserDocumentManager userDocumentManager = ConUtil.getUser(request);
         List<GameDocumentManager> cartGameList = new ArrayList<>();
 
         List<Integer> games = new ArrayList<Integer>();

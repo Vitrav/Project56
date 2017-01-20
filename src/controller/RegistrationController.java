@@ -93,7 +93,7 @@ public class RegistrationController {
                 age,
                 dateOfBirth,
                 email,
-                false, //admin status
+                true, //admin status
                 false, //wishlist.vm status
                 false));//blocked status is false
         System.out.println("User created.");
