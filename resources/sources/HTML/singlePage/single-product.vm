@@ -50,6 +50,8 @@
                                             <p>Game has been added.</p>
                                         #elseif($notLoggedIn)
                                             <p>Login to add something to your wishlist.</p>
+                                        #elseif($hasItem)
+                                            <p>This product is already in your wishlist.</p>
                                         #end
                                     </form>
                                 </div>
@@ -62,6 +64,9 @@
                                         <ins>$currentGame.getPrice()</ins>
                                     </div>
 
+                                    #if($addedToCart)
+                                        <p>The game has been added to your cart.</p>
+                                    #end
 
                                     <form action="">
                                         <button class="add_to_cart_button" type="submit" name="cart">Add to cart</button>
@@ -72,7 +77,6 @@
                                         #end
                                     </form>
                                 </div>
-
 
                                     <div class="product-inner-category">
                                         <p>Genre: <a href="">$currentGame.getGenre()</a></p>

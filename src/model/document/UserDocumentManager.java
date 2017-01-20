@@ -260,6 +260,14 @@ public class UserDocumentManager extends DocumentManager {
         }
     }
 
+    public boolean hasWishListItem(int gameId) {
+        List<Integer> items = getWishList() == null ? new ArrayList<>() : getWishList();
+        for (int i = 0; i < items.size(); i++)
+            if (items.get(i) == gameId)
+                return true;
+        return false;
+    }
+
 	public boolean getIsBlocked() {
 		return (boolean) document.get("is_blocked");
 	}

@@ -54,13 +54,4 @@ public class LoginController {
         return null;
     };
 
-    // The origin of the request (request.pathInfo()) is saved in the session so
-    // the User can be redirected back after login
-    public static void ensureUserIsLoggedIn(Request request, Response response) {
-        if (request.session().attribute("currentUser") == null) {
-            request.session().attribute("loginRedirect", request.pathInfo());
-            response.redirect(Path.Web.LOGIN);
-        }
-    };
-
 }

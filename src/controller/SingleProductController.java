@@ -32,42 +32,30 @@ public class SingleProductController {
         addCurrentGame(request, model);
         addGames(model);
 
-        //Add game to wishlist.
-        if (request.queryParams().iterator().hasNext() && request.queryParams().iterator().next().equalsIgnoreCase("wishlist")) {
-            System.out.println(request.queryParams().iterator().next());
+        //Add game to wishlist or cart.
+        if (request.queryParams().iterator().hasNext()) {
             if (request.session().attribute("currentUser") == null) {
                 model.put("notLoggedIn", true);
                 return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
             }
-            ConUtil.getUser(request).addWishItem(getGameDocManager(request, model).getId());
-            model.put("addedToList", true);
-        }
-
-        if (request.queryParams().iterator().hasNext() && request.queryParams().iterator().next().equalsIgnoreCase("cart")){
-            System.out.println(request.queryParams().iterator().next());
-            if (request.session().attribute("currentUser") == null) {
-                model.put("notLoggedIn", true);
-                return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
+            if (request.queryParams().iterator().next().equalsIgnoreCase("wishlist")) {
+                if (ConUtil.getUser(request).hasWishListItem(getGameDocManager(request, model).getId())) {
+                    model.put("hasItem", true);
+                    return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
+                }
+                ConUtil.getUser(request).addWishItem(getGameDocManager(request, model).getId());
+                model.put("addedToList", true);
+            } else if(request.queryParams().iterator().next().equalsIgnoreCase("cart")) {
+                ConUtil.getUser(request).addCartItem(getGameDocManager(request, model).getId());
+                model.put("addedToCart", true);
             }
-            ConUtil.getUser(request).addCartItem(getGameDocManager(request, model).getId());
-            model.put("addedToList", true);
         }
-
         return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
     };
 
-    private static boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
-    }
-
     private static void addGames(Map<String, Object> model) {
         List<GameDocumentManager> docManagers = new ArrayList<>();
-        new GameCollectionManager().getCollection().find().iterator().forEachRemaining(game -> docManagers.add(getGameDocManager(game.getInteger("id"))));
+        new GameCollectionManager().getCollection().find().iterator().forEachRemaining(game -> docManagers.add(ConUtil.getGameDocManager(game.getInteger("id"))));
         model.put("games", docManagers);
     }
 
@@ -78,10 +66,6 @@ public class SingleProductController {
     private static GameDocumentManager getGameDocManager(Request request, Map<String, Object> model) {
         String id = request.url().substring(request.url().indexOf("single-page/"), request.url().length() - 1).replace("single-page/", "");
         return new GameDocumentManager(new GameCollectionManager().getGameDocument(Integer.parseInt(id)));
-    }
-
-    private static GameDocumentManager getGameDocManager(Integer gameId) {
-        return new GameDocumentManager(new GameCollectionManager().getGameDocument(gameId));
     }
 
 }

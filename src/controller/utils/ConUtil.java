@@ -11,7 +11,6 @@ import user.UserController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import static viewutil.RequestUtil.getSessionCurrentUser;
 
@@ -85,6 +84,10 @@ public class ConUtil {
 
     public static GameDocumentManager getGameDocManager(int gameId) {
         return new GameDocumentManager(new GameCollectionManager().getGameDocument(gameId));
+    }
+
+    public static UserDocumentManager getUserDocManager(String user) {
+        return new UserDocumentManager(new UserCollectionManager().getUserDocument(user));
     }
 
 
