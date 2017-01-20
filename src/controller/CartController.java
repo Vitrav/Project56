@@ -33,6 +33,11 @@ public class CartController {
         model.put("cartGamesInfo", cartGameList);
         model.put("userManager", userDocumentManager);
         ConUtil.addModelVariables(request, model);
+
+        if (request.queryParams().iterator().hasNext() && (request.queryParams().iterator().next().equalsIgnoreCase("remove"))) {
+            System.out.println("yeeeeee");
+        }
+
         return ViewUtil.render(request, model, viewutil.Path.Template.CART);
     };
 }

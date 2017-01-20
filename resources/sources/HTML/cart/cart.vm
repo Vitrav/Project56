@@ -18,9 +18,9 @@
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                         <tr>
-                                            <th class="product-remove">&nbsp;</th>
-                                            <th class="product-thumbnail">&nbsp;</th>
+                                            <th class="product-remove">Remove product</th>
                                             <th class="product-name">Product</th>
+                                            <th class="product-platform">Platform</th>
                                             <th class="product-price">Price</th>
                                             <th class="product-quantity">Quantity</th>
                                             <th class="product-subtotal">Total</th>
@@ -29,9 +29,17 @@
                                     <tbody>
                                     #foreach($game in $cartGamesInfo)
                                         <tr>
-                                            <td></td>
-                                            <td></td>
+                                            <td><form>
+                                                <button class="add_to_cart_button" type="submit" name="remove">Remove</button>
+##                                                if statement is work in progress! :P
+                                                #if ($addedToList)
+                                                    <p>$game.getName() has been removed</p>
+                                                #elseif($notLoggedIn)
+                                                    <p>Login to remove something from your cart</p>
+                                                #end
+                                            </form></td>
                                             <td>$game.getName()</td>
+                                            <td>$game.getPlatform()</td>
                                             <td>$$game.getPrice()</td>
                                             <td>$userDocumentManager.getGameAmount($game.getId())</td>
                                             <td>$userDocumentManager.getTotalGamePrice($game.getId())</td>
