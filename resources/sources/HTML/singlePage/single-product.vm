@@ -50,6 +50,8 @@
                                             <p>Game has been added.</p>
                                         #elseif($notLoggedIn)
                                             <p>Login to add something to your wishlist.</p>
+                                        #elseif($hasItem)
+                                            <p>This product is already in your wishlist.</p>
                                         #end
                                     </form>
                                 </div>
@@ -62,12 +64,19 @@
                                         <ins>$currentGame.getPrice()</ins>
                                     </div>
 
-                                    <form action="" class="cart">
-                                        <div class="quantity">
-                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                        </div>
-                                        <button class="add_to_cart_button" name="cart" type="submit">Add to cart</button>
+                                    #if($addedToCart)
+                                        <p>The game has been added to your cart.</p>
+                                    #end
+
+                                    <form action="">
+                                        <button class="add_to_cart_button" type="submit" name="cart">Add to cart</button>
+                                        #if ($addedToList)
+                                            <p>Game has been put into your shopping cart</p>
+                                        #elseif($notLoggedIn)
+                                            <p>Login to add something to your cart</p>
+                                        #end
                                     </form>
+                                </div>
 
                                     <div class="product-inner-category">
                                         <p>Genre: <a href="">$currentGame.getGenre()</a></p>

@@ -20,6 +20,7 @@
 #* @vtlvariable name="games" type="java.util.ArrayList<model.document.GameDocumentManager>" *#
 #* @vtlvariable name="currentGame" type="model.document.GameDocumentManager" *#
 #* @vtlvariable name="userDocumentManager" type="model.document.UserDocumentManager" *#
+#* @vtlvariable name="publicPlayers" type="java.util.ArrayList<model.document.UserDocumentManager>" *#
 
 
 

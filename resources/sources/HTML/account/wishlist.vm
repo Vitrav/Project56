@@ -28,24 +28,27 @@
             <input type="submit" name="Set wishlist" value="Set wishlist private">
         #end
     <br></br>
-
-        <table style='white-space: nowrap' id="div1">
-            <tr>
-                <th>Name</th>
-                <th>Platform</th>
-                <th>Price</th>
-                <th>Action</th>
-            </tr>
-            #foreach ($manager in $gameManagers)
+        <input type="submit" name="players" value="View wishlists">
+    <br></br>
+    #if(!$viewList)
+    <h2 class="sidebar-title">Your wishlist</h2>
+    <table style='white-space: nowrap' id="div1">
+        <tr>
+            <th>Name</th>
+            <th>Platform</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        #foreach ($manager in $gameManagers)
             <tr>
                 <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
                 <td>$manager.getPlatform()</td>
                 <td>$manager.getPrice()</td>
                 <td><input type="submit" name="$manager.getId()" value="Remove"></input></td>
             </tr>
-            #end
-        </table>
-
+        #end
+    </table>
+    #end
     </body>
     <div>
 </form>

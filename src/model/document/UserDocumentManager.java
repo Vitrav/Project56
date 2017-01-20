@@ -182,9 +182,16 @@ public class UserDocumentManager extends DocumentManager {
 
 	public void addCartItem(int gameId) {
 		List<Document> items = getCartItems();
+		for (Document item : items){
+			if (item.getInteger("id") == gameId){
+				incGameAmount(gameId);
+				return;
+			}
+		}
 		items.add(new UserCollectionManager().createCartItemDocument(gameId));
 		setCartItems(items);
 	}
+
 
 	public void removeCartItem(int gameId) {
         List<Document> items = getCartItems();
@@ -194,6 +201,7 @@ public class UserDocumentManager extends DocumentManager {
         });
         setCartItems(items);
     }
+
 
 	@SuppressWarnings("unchecked")
 	public List<Integer> getPurchaseHistory() {
@@ -250,6 +258,14 @@ public class UserDocumentManager extends DocumentManager {
                 setWishList(items);
             }
         }
+    }
+
+    public boolean hasWishListItem(int gameId) {
+        List<Integer> items = getWishList() == null ? new ArrayList<>() : getWishList();
+        for (int i = 0; i < items.size(); i++)
+            if (items.get(i) == gameId)
+                return true;
+        return false;
     }
 
 	public boolean getIsBlocked() {

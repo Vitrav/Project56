@@ -86,5 +86,9 @@ public class ConUtil {
         return new GameDocumentManager(new GameCollectionManager().getGameDocument(gameId));
     }
 
+    public static UserDocumentManager getUserDocManager(String user) {
+        return new UserDocumentManager(new UserCollectionManager().getUserDocument(user));
+    }
+
 
 }

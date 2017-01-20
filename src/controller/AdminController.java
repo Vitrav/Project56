@@ -198,9 +198,7 @@ public class AdminController {
                 //unblocks the selected user
                 new UserDocumentManager(new UserCollectionManager().getUserDocument(user)).setBlocked(false);
         }
-        List<UserDocumentManager> users = new ArrayList<>();
-        new UserCollectionManager().getCollection().find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
-        model.put("allUserManagers", users);
+        ConUtil.insertAllUsers(request, model);
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
 
