@@ -47,7 +47,7 @@
                                     <form action="">
                                         <button class="add_to_cart_button" name="wishlist" type="submit">Add to wishlist</button>
                                         #if($addedToList)
-                                            <p>Game has been added.</p>
+                                            <p>Game has been added to your wishlist.</p>
                                         #elseif($notLoggedIn)
                                             <p>Login to add something to your wishlist.</p>
                                         #elseif($hasItem)

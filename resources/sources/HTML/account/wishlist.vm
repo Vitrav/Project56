@@ -23,31 +23,56 @@
         </style>
     <body>
         #if($userDocumentManager.wishListIsPrivate())
-            <input type="submit" name="Set wishlist" value="Set wishlist public">
+            <input type="submit" name="Set wishlist" value="Set your wishlist public">
         #else
-            <input type="submit" name="Set wishlist" value="Set wishlist private">
+            <input type="submit" name="Set wishlist" value="Set your wishlist private">
         #end
     <br></br>
-        <input type="submit" name="players" value="View wishlists">
+        <input type="submit" name="players" value="View public wishlists">
     <br></br>
-    #if(!$viewList)
-    <h2 class="sidebar-title">Your wishlist</h2>
-    <table style='white-space: nowrap' id="div1">
-        <tr>
-            <th>Name</th>
-            <th>Platform</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-        #foreach ($manager in $gameManagers)
+
+    #if($viewList)
+        <table style='white-space: nowrap' id="div1">
             <tr>
-                <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
-                <td>$manager.getPlatform()</td>
-                <td>$manager.getPrice()</td>
-                <td><input type="submit" name="$manager.getId()" value="Remove"></input></td>
+                <th>Name</th>
+                <th>Items</th>
+                <th>Action</th>
             </tr>
+            #foreach ($pl in $publicPlayers)
+                <tr>
+                    <td>$pl.getName()</td>
+                    <td>$pl.getWishList().size()</td>
+                    <td><input type="submit" name="$pl.getName()" value="view"></input></td>
+                </tr>
+            #end
+        </table>
+    #else
+        #if(!$view)
+            <h2 class="sidebar-title">Your wishlist</h2>
+        #else
+            <h2 class="sidebar-title">$userInfo.getName()'s wishlist</h2>
         #end
-    </table>
+
+        <table style='white-space: nowrap' id="div1">
+            <tr>
+                <th>Name</th>
+                <th>Platform</th>
+                <th>Price</th>
+                #if(!$view)
+                    <th>Action</th>
+                #end
+            </tr>
+            #foreach ($manager in $gameManagers)
+                <tr>
+                    <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
+                    <td>$manager.getPlatform()</td>
+                    <td>$manager.getPrice()</td>
+                    #if(!$view)
+                        <td><input type="submit" name="$manager.getId()" value="Remove"></input></td>
+                    #end
+                </tr>
+            #end
+        </table>
     #end
     </body>
     <div>

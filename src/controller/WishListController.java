@@ -34,25 +34,28 @@ public class WishListController {
         UserDocumentManager manager = ConUtil.getUserDocManager(getSessionCurrentUser(request));
         ConUtil.addModelVariables(request, model);
 
-        if (buttonName.toLowerCase().contains("set wishlist"))
+        if (buttonName.toLowerCase().contains("set your wishlist"))
             manager.setWishList(manager.wishListIsPrivate() ? false : true);
         else if (buttonName.equalsIgnoreCase("remove"))
             manager.removeWishItem(Integer.parseInt(request.queryParams().iterator().next()));
-        else if (buttonName.equalsIgnoreCase("players")) {
+        else if (buttonName.equalsIgnoreCase("View public wishlists")) {
             List<DocumentManager> publicPlayers = new ArrayList<>();
             Database.getInstance().getUserCollection().find().iterator().forEachRemaining(u -> {
                 UserDocumentManager m = new UserDocumentManager(u);
-                if (!m.wishListIsPrivate())
+                if (!m.wishListIsPrivate() && m.getWishList().size() > 0)
                     publicPlayers.add(m);
             });
             model.put("publicPlayers", publicPlayers);
             model.put("viewList", true);
+            return ViewUtil.render(request, model, Path.Template.WISHLIST);
+        } else if (buttonName.equalsIgnoreCase("view")) {
+            insertGameManager(model, ConUtil.getUserDocManager(request.queryParams().iterator().next()));
+            model.put("view", true);
+            model.put("userInfo", ConUtil.getUserDocManager(request.queryParams().iterator().next()));
+            return ViewUtil.render(request, model, Path.Template.WISHLIST);
         }
-
         model.put("userDocumentManager", ConUtil.getUserDocManager(getSessionCurrentUser(request)));
         insertGameManager(model, manager);
-        if (!model.containsKey("viewList"))
-            model.put("viewList", false);
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };
 
