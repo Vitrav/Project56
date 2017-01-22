@@ -1,0 +1,46 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+
+<form id="purchaseForm" method="post" action = "/purchaseSuccessful/">
+    #if(!$authenticationSucceeded)
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/login/"
+        </script>
+    #end
+    <style>
+        form {
+            position: relative;
+            left: 200px;
+            top: 10px;
+            max-width: 500px;
+            margin: 30px;
+        }
+    </style>
+
+    <body>
+    <h3>Thank you for buying these products:</h3>
+    <table cellspacing="0" class="shop_table cart">
+        <tr>
+            <th class="product-name">Product</th>
+            <th class="product-platform">Platform</th>
+            <th class="product-price">Price</th>
+            <th class="product-quantity">Quantity</th>
+            <th class="product-subtotal">Total</th>
+        </tr>
+        #foreach($game in $cartGamesInfo)
+            <tr>
+                <td>$game.getName()</td>
+                <td>$game.getPlatform()</td>
+                <td>$$game.getPrice()</td>
+                <td>$userDocumentManager.getGameAmount($game.getId())</td>
+                <td>$userDocumentManager.getTotalGamePrice($game.getId())</td>
+            </tr>
+        #end
+    </table>
+
+    <a class="add_to_cart_button" href="$WebPath.getCART()">Return to cart</a>
+    </body>
+
+</form>
+#end
+

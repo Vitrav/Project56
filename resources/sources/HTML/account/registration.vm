@@ -1,0 +1,56 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+
+<form id="loginForm" method="post" action = "/registration/">
+##  checks for the information filled in in the fields
+    #if($userExists)
+        <p class="bad notification">This user already exists.</p>
+    #elseif($userInvalid)
+        <p class="bad notification">The username information you supplied was incorrect. The length has to be between 4 and 14.</p>
+    #elseif($passwordInvalid)
+        <p class="bad notification">The password information you supplied was incorrect. The length has to be between 4 and 14.</p>
+    #elseif($dobInvalid)
+        <p class="bad notification">The information about your date of birth was incorrect.</p>
+    #elseif($emailInvalid)
+        <p class="bad notification">The email information you supplied was incorrect.</p>
+    #elseif($countryInvalid)
+        <p class="bad notification">The information you supplied about your country is incorrect.</p>
+    #elseif($postalInvalid)
+        <p class="bad notification">The information you supplied about your postal code is incorrect.</p>
+    #elseif($cityInvalid)
+        <p class="bad notification">The information you supplied about your city is incorrect.</p>
+    #elseif($streetInvalid)
+        <p class="bad notification">The information you supplied about your street is incorrect.</p>
+    #elseif($streetNumberInvalid)
+        <p class="bad notification">The information you supplied about your street number is incorrect.</p>
+    #elseif($authenticationSucceeded)
+        <p class="good notification">The login information you supplied was incorrect., $currentUser)</p>
+    #elseif($loggedOut)
+        <p class="notification">You have been logged out.</p>
+    #end
+##  the fields where you put information
+    <label>Username</label>
+    <input type="text" name="username" placeholder="Username" value="" required maxlength="14">
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Password" value="" required maxlength="14">
+    <label>Date of birth</label>
+    <input type="date" name="doB" placeholder="YYYY/MM/DD" value="" required>
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Email" value="" required>
+    <label>Country</label>
+    <input type="text" name="country" placeholder="Country" value="" required>
+    <label>Postal Code</label>
+    <input type="text" name="postalcode" placeholder="Postal Code" value="" required>
+    <label>City</label>
+    <input type="text" name="city" placeholder="City" value="" required>
+    <label>Street</label>
+    <input type="text" name="street" placeholder="Street" value="" required>
+    <label>Street number</label>
+    <input type="text" name="number" placeholder="Street number" value="" required>
+
+    #if($loginRedirect)
+        <input type="hidden" name="loginRedirect" value="$loginRedirect" >
+    #end
+    <input type="submit" value="Register">
+</form>
+#end

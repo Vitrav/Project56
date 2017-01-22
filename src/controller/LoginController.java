@@ -43,7 +43,6 @@ public class LoginController {
 
         //request a session for the user so he/she is in fact logged in
         request.session().attribute("currentUser", getQueryUsername(request));
-        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, Path.Template.INDEX);
     };
 

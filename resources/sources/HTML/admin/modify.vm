@@ -13,32 +13,31 @@
             window.location.href = "http://localhost:4567/index/"
         </script>
     #end
-        #if($userExists)
-            <p class="bad notification">$msg.get("REGISTRATION_USER_EXISTS")</p>
-        #elseif($userInvalid)
-            <p class="bad notification">$msg.get("REGISTRATION_USERNAME_FAILED")</p>
-        #elseif($passwordInvalid)
-            <p class="bad notification">$msg.get("REGISTRATION_PASSWORD_FAILED")</p>
-        #elseif($dobInvalid)
-            <p class="bad notification">$msg.get("REGISTRATION_DOB_FAILED")</p>
-        #elseif($emailInvalid)
-            <p class="bad notification">$msg.get("REGISTRATION_EMAIL_FAILED")</p>
-        #elseif($countryInvalid)
-            <p class="bad notification">$msg.get("REGISTRATION_COUNTRY_FAILED")</p>
-        #elseif($postalInvalid)
-            <p class="bad notification">$msg.get("REGISTRATION_POSTAl_FAILED")</p>
-        #elseif($cityInvalid)
-            <p class="bad notification">$msg.get("REGISTRATION_CITY_FAILED")</p>
-        #elseif($streetInvalid)
-            <p class="bad notification">$msg.get("REGISTRATION_STREET_FAILED")</p>
-        #elseif($streetNumberInvalid)
-            <p class="bad notification">$msg.get("REGISTRATION_STREETNUMBER_FAILED")</p>
-        #elseif($loggedOut)
-            <p class="notification">$msg.get("LOGIN_LOGGED_OUT")</p>
-        #elseif($valuesUpdated)
-            <p class="notification">Values have been updated</p>
-        #end
-
+    #if($userExists)
+        <p class="bad notification">This user already exists.</p>
+    #elseif($userInvalid)
+        <p class="bad notification">The username information you supplied was incorrect. The length has to be between 4 and 14.</p>
+    #elseif($passwordInvalid)
+        <p class="bad notification">The password information you supplied was incorrect. The length has to be between 4 and 14.</p>
+    #elseif($dobInvalid)
+        <p class="bad notification">The information about your date of birth was incorrect.</p>
+    #elseif($emailInvalid)
+        <p class="bad notification">The email information you supplied was incorrect.</p>
+    #elseif($countryInvalid)
+        <p class="bad notification">The information you supplied about your country is incorrect.</p>
+    #elseif($postalInvalid)
+        <p class="bad notification">The information you supplied about your postal code is incorrect.</p>
+    #elseif($cityInvalid)
+        <p class="bad notification">The information you supplied about your city is incorrect.</p>
+    #elseif($streetInvalid)
+        <p class="bad notification">The information you supplied about your street is incorrect.</p>
+    #elseif($streetNumberInvalid)
+        <p class="bad notification">The information you supplied about your street number is incorrect.</p>
+    #elseif($loggedOut)
+        <p class="notification">You have been logged out.</p>
+    #elseif($valuesUpdated)
+        <p class="notification">Values have been updated</p>
+    #end
         <body>
             <h3 class="byline">Modify user: $modifyUserManager.getName()</h3>
             <p class="italicp">Current information</p>
@@ -69,24 +68,24 @@
             <br> <br>
             <h4 class="bylineSmall">Change information</h4>
             <p>Only fill in the fields you want to change.</p>
-            <label>$msg.get("REGISTRATION_LABEL_USERNAME")</label>
-            <input type="text" name="username" placeholder="$msg.get("REGISTRATION_LABEL_USERNAME")" value="" maxlength="14">
-            <label>$msg.get("REGISTRATION_LABEL_PASSWORD")</label>
-            <input type="password" name="password" placeholder="$msg.get("REGISTRATION_LABEL_PASSWORD")" value="" maxlength="14">
-            <label>$msg.get("REGISTRATION_LABEL_AGE")</label>
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Username" value="" maxlength="14">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Password" value="" maxlength="14">
+            <label>Date of birth</label>
             <input type="date" name="doB" placeholder="YYYY/MM/DD" >
-            <label>$msg.get("REGISTRATION_LABEL_EMAIL")</label>
-            <input type="email" name="email" placeholder="$msg.get("REGISTRATION_LABEL_EMAIL")" >
-            <label>$msg.get("REGISTRATION_LABEL_COUNTRY")</label>
-            <input type="text" name="country" placeholder="$msg.get("REGISTRATION_LABEL_COUNTRY")" >
-            <label>$msg.get("REGISTRATION_LABEL_POSTALCODE")</label>
-            <input type="text" name="postalcode" placeholder="$msg.get("REGISTRATION_LABEL_POSTALCODE")" >
-            <label>$msg.get("REGISTRATION_LABEL_CITY")</label>
-            <input type="text" name="city" placeholder="$msg.get("REGISTRATION_LABEL_CITY")" >
-            <label>$msg.get("REGISTRATION_LABEL_STREET")</label>
-            <input type="text" name="street" placeholder="$msg.get("REGISTRATION_LABEL_STREET")" >
-            <label>$msg.get("REGISTRATION_LABEL_NUMBER")</label>
-            <input type="text" name="number" placeholder="$msg.get("REGISTRATION_LABEL_NUMBER")" >
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Email" >
+            <label>Country</label>
+            <input type="text" name="country" placeholder="Country" >
+            <label>Postal Code</label>
+            <input type="text" name="postalcode" placeholder="Postal Code" >
+            <label>City</label>
+            <input type="text" name="city" placeholder="City" >
+            <label>Street</label>
+            <input type="text" name="street" placeholder="Street" >
+            <label>Street number</label>
+            <input type="text" name="number" placeholder="Street number" >
             <input type="submit" value="Submit changes")">
         </body>
 </form>

@@ -1,16 +1,8 @@
 package main;
 
 import controller.*;
-import controller.utils.HistoryListController;
 import model.Database;
-import model.collection.GameCollectionManager;
-import parser.GameParser;
 import viewutil.*;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.*;
@@ -39,7 +31,10 @@ public final class Application {
         get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
         get(Path.Web.WISHLIST, WishListController.wishListPage);
         get(Path.Web.FAVORITELIST, FavListController.favListPage);
+        post(Path.Web.FAVORITELIST, FavListController.favListPage);
+        get(Path.Web.STATISTICS, StatController.statPage);
         get(Path.Web.HISTORYLIST, HistoryListController.historyListPage);
+        post(Path.Web.HISTORYLIST, HistoryListController.historyPost);
 
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.MODIFYSCREEN, AdminController.handleModifyPost);

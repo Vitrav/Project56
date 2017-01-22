@@ -34,26 +34,8 @@ public class ConUtil {
         }
     }
 
-    public static void addModelVariables(Request request, Map<String, Object> model) {
-        if (request.session().attribute("currentUser") == null)
-            return;
-        model.put("authenticationSucceeded", true);
-        model.put("userDocumentManager", getUser(request));
-        model.put("hasManager", true);
-        addAdmin(request, model);
-    }
-
     public static UserDocumentManager getUser(Request request) {
         return new UserDocumentManager(new UserCollectionManager().getUserDocument(request.session().attribute("currentUser")));
-    }
-
-    private static void addAdmin(Request request, Map<String, Object> model) {
-        UserCollectionManager userCollectionManager = new UserCollectionManager();
-        if (userCollectionManager.getUserDocument(getSessionCurrentUser(request)) != null) {
-            UserDocumentManager userDocumentManager = new UserDocumentManager(userCollectionManager.getUserDocument(getSessionCurrentUser(request)));
-            if (userDocumentManager.isAdmin())
-                model.put("userIsAdmin", true);
-        }
     }
 
     public static void addToCart(Request request) {
@@ -70,8 +52,6 @@ public class ConUtil {
     public static void insertAllUsers(Request request, Map<String, Object> model) {
         List<UserDocumentManager> users = new ArrayList<>();
         Database.getInstance().getUserCollection().find().iterator().forEachRemaining(user -> users.add(new UserDocumentManager(user)));
-
-        ConUtil.addAdmin(request, model);
         model.put("allUserManagers", users);
         request.session().attribute("allUserManagers", users);
     }

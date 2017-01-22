@@ -13,6 +13,7 @@ import model.collection.UserCollectionManager;
 import main.Application.*;
 import user.UserController;
 
+import javax.print.Doc;
 import javax.xml.crypto.Data;
 
 import static viewutil.RequestUtil.getSessionCurrentUser;
@@ -21,6 +22,11 @@ import static viewutil.RequestUtil.getSessionCurrentUser;
 public class UserDocumentManager extends DocumentManager {
 
     private AddressDocumentManager addressDocManager;
+
+	public UserDocumentManager(String username) {
+		super(new UserCollectionManager().getUserDocument(username), Database.getInstance().getUserCollection());
+		setFilter(new Document("username", getName()));
+	}
 
 	public UserDocumentManager(Document doc) {
 		super(doc, Database.getInstance().getUserCollection());
@@ -80,20 +86,6 @@ public class UserDocumentManager extends DocumentManager {
         int age = RegistrationController.calculateAge(dateOfBirth);
         setAge(age);
         update(new Document("date_of_birth", dateFormat.format(dateOfBirth)));
-	}
-
-	public void setDateOfBirth(String dateOfBirth) {
-		String date = "";
-		try {
-			date = dateFormat.format(dateOfBirth);
-		} catch (Exception e) {
-			date = dateOfBirth;
-		}
-		if (getDateOfBirthAsDate(date) != null)
-            setAge(RegistrationController.calculateAge(getDateOfBirthAsDate(date)));
-        System.out.println(RegistrationController.calculateAge(getDateOfBirthAsDate(date)));
-
-		update(new Document("date_of_birth", date));
 	}
 
 	public String getEmail() {
@@ -192,7 +184,6 @@ public class UserDocumentManager extends DocumentManager {
 		setCartItems(items);
 	}
 
-
 	public void removeCartItem(int gameId) {
         List<Document> items = getCartItems() == null ? new ArrayList<>() : getCartItems();
 		for (int i = 0; i < items.size(); i++) {
@@ -203,19 +194,18 @@ public class UserDocumentManager extends DocumentManager {
 		}
     }
 
-
 	@SuppressWarnings("unchecked")
-	public List<Integer> getPurchaseHistory() {
-		return (List<Integer>) document.get("purchase_history");
+	public List<Document> getPurchaseHistory() {
+		return (List<Document>) document.get("purchase_history");
 	}
 
-	public void setPurchaseHistory(List<Integer> historyItems) {
+	public void setPurchaseHistory(List<Document> historyItems) {
 		update(new Document("purchase_history", historyItems));
 	}
 
-	public void addHistoryItem(int gameId) {
-		List<Integer> items = getPurchaseHistory() == null ? new ArrayList<>() : getPurchaseHistory();
-		items.add(gameId);
+	public void addHistoryItem(int gameId, int amount) {
+		List<Document> items = getPurchaseHistory() == null ? new ArrayList<>() : getPurchaseHistory();
+		items.add(new UserCollectionManager().createHistoryDocument(gameId, amount));
 		setPurchaseHistory(items);
 	}
 
@@ -233,6 +223,17 @@ public class UserDocumentManager extends DocumentManager {
 		items.add(gameId);
 		setFavouriteList(items);
 	}
+
+	public void removeFavItem(int gameId) {
+        List<Integer> items = getFavouriteList() == null ? new ArrayList<>() : getFavouriteList();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) == gameId) {
+                items.remove(i);
+                break;
+            }
+        }
+        setFavouriteList(items);
+    }
 
 	@SuppressWarnings("unchecked")
 	public List<Integer> getWishList() {
@@ -256,9 +257,10 @@ public class UserDocumentManager extends DocumentManager {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) == gameId) {
                 items.remove(i);
-                setWishList(items);
+                break;
             }
         }
+        setWishList(items);
     }
 
     public boolean hasWishListItem(int gameId) {

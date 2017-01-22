@@ -14,42 +14,38 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static viewutil.RequestUtil.getSessionCurrentUser;
 
 public class CartController {
 
     public static Route cartPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        UserDocumentManager userDocumentManager = ConUtil.getUser(request);
-        model.put("userManager", userDocumentManager);
-
-        infoToPage(model, userDocumentManager);
-        ConUtil.addModelVariables(request, model);
+        infoToPage(model, ConUtil.getUser(request));
         return ViewUtil.render(request, model, viewutil.Path.Template.CART);
     };
 
     public static Route handleCartPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         String buttonName = request.queryParams(request.queryParams().iterator().next());
-        UserDocumentManager userDocumentManager = ConUtil.getUser(request);
-        ConUtil.addModelVariables(request, model);
 
         if (buttonName.equalsIgnoreCase("remove")) {
             ConUtil.getUser(request).removeCartItem(Integer.parseInt(request.queryParams().iterator().next()));
+        } else if (buttonName.contains("Proceed to Checkout")) {
+            infoToPage(model, ConUtil.getUser(request));
+            ConUtil.getUser(request).getCartItems().forEach(item -> ConUtil.getUser(request).addHistoryItem(item.getInteger("id"), item.getInteger("amount")));
+            ConUtil.getUser(request).setCartItems(new ArrayList<>());
+            return ViewUtil.render(request, model, Path.Template.PURCHASESUCCESSFUL);
         }
 
-        model.put("userManager", ConUtil.getUser(request));
         infoToPage(model, ConUtil.getUser(request));
         return ViewUtil.render(request, model, Path.Template.CART);
     };
 
     private static void infoToPage(Map<String, Object> model, UserDocumentManager manager) {
         List<GameDocumentManager> cartGameList = new ArrayList<>();
-        List<Integer> games = new ArrayList<Integer>();
+        List<Integer> games = new ArrayList<>();
 
         manager.getCartItems().iterator().forEachRemaining(game -> games.add(game.getInteger("id")));
         games.forEach(id -> cartGameList.add(ConUtil.getGameDocManager(id)));
-
         model.put("cartGamesInfo", cartGameList);
     }
 }

@@ -25,7 +25,6 @@ public class SingleProductController {
     public static Route singlePage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         ConUtil.searchGame(request, model);
-        ConUtil.addModelVariables(request, model);
 
         if (model.containsKey("games"))
             return ViewUtil.render(request, model, Path.Template.SHOP);

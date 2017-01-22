@@ -1,0 +1,22 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+##<iframe name="content" src="" frameborder="no" border="0" scrolling="no" width="600" height="800"></iframe>
+
+<form id="loginForm" method="post">
+##  check is the provided information corresponds with the information in the database
+    #if($authenticationFailed)
+        <p class="bad notification">The login information you supplied was incorrect.</p>
+    #elseif($loggedOut)
+        <p class="notification">You have been logged out.</p>
+    #elseif($blocked)
+        <label>You're blocked from the website.</label>
+    #end
+    <h1>Login</h1>
+    <p>Please enter your username and password., $WebPath.getINDEX())</p>
+    <label>Username</label>
+    <input type="text" name="username" placeholder="Username" value="" required>
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Password" value="" required>
+    <input type="submit" value="Log in)">
+</form>
+#end

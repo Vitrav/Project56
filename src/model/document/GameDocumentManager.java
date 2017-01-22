@@ -2,12 +2,18 @@ package model.document;
 
 import java.util.Date;
 
+import model.collection.GameCollectionManager;
 import org.bson.Document;
 
 import model.Database;
 
 //Manager for game documents, updates are filtered by game_id.
 public class GameDocumentManager extends DocumentManager {
+
+	public GameDocumentManager(int gameId) {
+		super(new GameCollectionManager().getGameDocument(gameId), Database.getInstance().getGameCollection());
+		setFilter(new Document("id", getId()));
+	}
 
 	public GameDocumentManager(Document doc) {
 		super(doc, Database.getInstance().getGameCollection());

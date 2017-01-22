@@ -22,7 +22,6 @@ public class WishListController {
     public static Route wishListPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         ConUtil.insertGameManager(model, ConUtil.getUserDocManager(getSessionCurrentUser(request)).getWishList());
-        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };
 
@@ -30,7 +29,6 @@ public class WishListController {
         Map<String, Object> model = new HashMap<>();
         String buttonName = request.queryParams(request.queryParams().iterator().next());
         UserDocumentManager manager = ConUtil.getUser(request);
-        ConUtil.addModelVariables(request, model);
 
         if (buttonName.toLowerCase().contains("set your wishlist"))
             manager.setWishList(manager.wishListIsPrivate() ? false : true);
@@ -52,7 +50,6 @@ public class WishListController {
             model.put("userInfo", ConUtil.getUserDocManager(request.queryParams().iterator().next()));
             return ViewUtil.render(request, model, Path.Template.WISHLIST);
         }
-        model.put("userDocumentManager", ConUtil.getUser(request));
         ConUtil.insertGameManager(model, manager.getWishList());
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };

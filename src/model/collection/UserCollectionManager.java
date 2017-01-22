@@ -63,9 +63,14 @@ public class UserCollectionManager extends CollectionManager {
 		return cartItemDocument;
 	}
 
-	public Document createHistoryDocument(int gameId, Date purchaseDate) {
+	public Document createHistoryDocument(int gameId, int amount) {
+		return createHistoryDocument(gameId, amount, new Date());
+	}
+
+	public Document createHistoryDocument(int gameId, int amount, Date purchaseDate) {
 		Document historyDocument = new Document();
 		historyDocument.put("id", gameId);
+		historyDocument.put("amount", amount);
 		historyDocument.put("purchase_date", dateFormat.format(purchaseDate));
 		return historyDocument;
 	}

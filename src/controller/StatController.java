@@ -9,10 +9,12 @@ import viewutil.ViewUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyAccountController {
+public class StatController {
 
-    public static Route accountPage = (Request request, Response response) -> {
+    public static Route statPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        return ViewUtil.render(request, model, Path.Template.MYACCOUNT);
+        return ViewUtil.render(request, model, Path.Template.STATISTICS);
     };
+
+
 }

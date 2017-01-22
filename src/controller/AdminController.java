@@ -28,7 +28,6 @@ public class AdminController {
     public static Route adminPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         ConUtil.insertAllUsers(request, model);
-        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, Path.Template.ADMINPANEL);
     };
 
@@ -43,7 +42,6 @@ public class AdminController {
             String att = req.toString();
             model.put(att, request.session().attribute(att));
         });
-        ConUtil.addModelVariables(request, model);
 
         String modifiedUser = (String) model.get("modifyUser");
         String username = getQueryUsername(request).length() >= 4 ? getQueryUsername(request) : modifiedUser;
@@ -174,7 +172,6 @@ public class AdminController {
 
     public static Route handleAdminPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        ConUtil.addModelVariables(request, model);
 
         if (request.queryParams().iterator().hasNext()) {
             String user = request.queryParams().iterator().next();

@@ -1,0 +1,53 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+<form id="historyForm" method="post" action="/historyList/" xmlns="http://www.w3.org/1999/html">
+        #if(!$authenticationSucceeded)
+            <script language="javascript">
+                window.location.href = "http://localhost:4567/login/"
+            </script>
+        #end
+        <style>
+            form {
+                position: relative;
+                left: 200px;
+                top: 10px;
+                max-width: 500px;
+                margin: 30px;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
+    </body>
+    <h2 class="sidebar-title">Your history list</h2>
+    #if ($hasItem)
+        <p>$currentGame.getName() is already in your favlist.</p>
+    #elseif ($itemAdded)
+        <p>$currentGame.getName() has been added to your favlist.</p>
+    #end
+        <table style='white-space: nowrap' id="div1">
+            <tr>
+                <th>Name</th>
+                <th>Platform</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Total price</th>
+                <th>Date of purchase</th>
+                <th>Action</th>
+            </tr>
+            #foreach ($manager in $hisManagers)
+                <tr>
+                    <td><h4><a href="/single-page/$manager.getId()">$manager.getGameManager().getName()</a></h4></td>
+                    <td>$manager.getGameManager().getPlatform()</td>
+                    <td>$manager.getGameManager().getPrice()</td>
+                    <td>$manager.getAmount()</td>
+                    <td>$manager.getPrice()</td>
+                    <td>$manager.getDate()</td>
+                    <td><input type="submit" name="$manager.getId()" value="Add to fav list"></input></td>
+                </tr>
+            #end
+        </table>
+    </body>
+</form>
+#end

@@ -50,40 +50,5 @@
         </tr>
     </table>
     <br>
-##    <br>
-##    <br>
-##    <hr>
-##    <h2 align="center">History of purchased items</h2>
-##    <br>
-##    <br>
-
-    ##<div class="container">
-
-##    <style>
-##        table, th, td {
-##        border: 1px solid black;
-##        border-collapse: collapse;
-##            style="width:50%";
-##        }
-##    </style>
-##        <table align="center" >
-##            <tr>
-##              ##  <th>Name</th>
-##                <th>Platform</th>
-##                <th>Price</th>
-##                <th>Date.</th>
-##            </tr>
-##        </table>
-##             #foreach ($manager in $gameManagers)
-##                <tr>
-##                    <td><h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4></td>
-##                    <td>$manager.getPlatform()</td>
-##                    <td>$manager.getPrice()</td>
-##                </tr>
-##            #end
-##
-##
-##      ##  </body>
-##       ## </div>
 </form>
 #end

@@ -24,7 +24,6 @@ public class ShopController {
 
     public static Route shopPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        ConUtil.addModelVariables(request, model);
         ConUtil.searchGame(request, model);
 
         if (model.containsKey("games"))
@@ -37,7 +36,6 @@ public class ShopController {
         Map<String, Object> model = new HashMap<>();
         ConUtil.addGames(model);
         ConUtil.addToCart(request);
-        ConUtil.addModelVariables(request, model);
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
 

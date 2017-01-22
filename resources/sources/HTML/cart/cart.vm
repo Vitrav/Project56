@@ -43,7 +43,7 @@
                                         <tr>
                                             <td class="actions" colspan="6">
                                                 <input type="submit" value="Update Cart" name="update_cart" class="button">
-                                                <input type="submit" value="Proceed to Checkout" name="proceed" class="checkout-button button alt wc-forward">
+                                                <input type="submit" value="Proceed to Checkout" name="checkout" class="checkout-button button alt wc-forward">
                                             </td>
                                         </tr>
                                     </tbody>

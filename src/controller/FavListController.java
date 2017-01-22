@@ -14,8 +14,10 @@ public class FavListController {
 
     public static Route favListPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        ConUtil.addModelVariables(request, model);
+        if (request.queryParams().iterator().hasNext() && request.queryParams(request.queryParams().iterator().next()).equalsIgnoreCase("remove"))
+            ConUtil.getUser(request).removeFavItem(Integer.parseInt(request.queryParams().iterator().next()));
         ConUtil.insertGameManager(model, ConUtil.getUser(request).getFavouriteList());
         return ViewUtil.render(request, model, Path.Template.FAVORITELIST);
     };
+
 }
