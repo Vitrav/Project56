@@ -1,6 +1,7 @@
 package main;
 
 import controller.*;
+import controller.utils.ForgotPasswordController;
 import model.Database;
 import viewutil.*;
 
@@ -34,8 +35,9 @@ public final class Application {
         post(Path.Web.FAVORITELIST, FavListController.favListPage);
         get(Path.Web.STATISTICS, StatController.statPage);
         get(Path.Web.HISTORYLIST, HistoryListController.historyListPage);
-        post(Path.Web.HISTORYLIST, HistoryListController.historyPost);
+        get(Path.Web.FORGOTPASSWORD, ForgotPasswordController.ForgotPassword);
 
+        post(Path.Web.HISTORYLIST, HistoryListController.historyPost);
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
         post(Path.Web.MODIFYSCREEN, AdminController.handleModifyPost);
         post(Path.Web.ADMINPANEL, AdminController.handleAdminPost);
@@ -43,6 +45,7 @@ public final class Application {
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
         post(Path.Web.WISHLIST, WishListController.handleWishListPost);
         post(Path.Web.SHOP, ShopController.gameToCart);
+        post(Path.Web.CART, CartController.handleCartPost);
         post(Path.Web.CART, CartController.handleCartPost);
 
         //Add games to database.
