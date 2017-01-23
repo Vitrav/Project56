@@ -24,4 +24,5 @@ public class CartItemDocumentManager extends DocumentManager {
 		update(new Document("amount", amount));
 	}
 
+
 }

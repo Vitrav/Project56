@@ -1,35 +1,60 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 <html>
-<head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.js"></script>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<table id="datatable">
+    <thead>
+##    <tr>
+##        <th></th>
+##        <th>$manager.getPlatform()</th>
+##        <th></th>
+##    </tr>
+    </thead>
+    <tbody>
+    #foreach($manager in $games)
+    <tr>
+        <th>$manager.getName()</th>
+        <th>$manager.getAmountInStock()</th>
+##        <th>$manager.getPlatform()</th>
 
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work',     11],
-                ['Eat',      2],
-                ['Commute',  2],
-                ['Watch TV', 2],
-                ['Sleep',    7]
-            ]);
+    </tr>
+#end
+    </tbody>
+</table>
 
-            var options = {
-                title: 'My Daily Activities'
-            };
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-            chart.draw(data, options);
-        }
-    </script>
-</head>
-<body>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
-</body>
+<script type='text/javascript'>//<![CDATA[
+    $(function () {
+        Highcharts.chart('container', {
+            data: {
+                table: 'datatable'
+            },
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Data extracted from a HTML table in the page'
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'Units'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                            this.point.y + ' ' + this.point.name.toLowerCase();
+                }
+            }
+        });
+    });
+</script>
 </html>
 
 #end

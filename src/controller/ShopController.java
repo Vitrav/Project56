@@ -27,9 +27,9 @@ public class ShopController {
         ConUtil.searchGame(request, model);
 
         if (model.containsKey("games"))
-            return ViewUtil.render(request, model, Path.Template.SHOP);
+            return ViewUtil.render(request, model, Path.Template.STATISTICS);
         ConUtil.addGames(model);
-        return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
+        return ViewUtil.render(request, model, Path.Template.STATISTICS);
     };
 
     public static Route gameToCart = (Request request, Response response) -> {

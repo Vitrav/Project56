@@ -16,12 +16,21 @@
                             <input type="submit" name="search button" value="Search">
                         </form>
                     </div>
+
+
                     #foreach($manager in $games)
+                        #set($x = $manager.id)
+##                        #if($x <= 10)
+
+##                        #end
+##                        #end
+##                        #end
+
                     <div class="single-shop-product">
                         <div class="product-upper">
-                            <div class="col-md-8 col-md-6">
+                            <div class="col-sm-8 col-sm-6">
                                     <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
-                                    <img src="$manager.getImage()" height="180" width="124"></img>
+                                    <img src="$manager.getImage()" height="120" width="123"></img>
                                     <h4>$manager.getPlatform()</h4>
                                     <p>$manager.getGenre()</p>
                                     <div class="product-carousel-price">
@@ -40,8 +49,9 @@
                                 </form>
                             </div>
                         </div>
-                    #end
 
+##                    #end
+                #end
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-pagination text-center">
@@ -52,10 +62,10 @@
                                 <span aria-hidden="true">&laquo;</span>
                               </a>
                             </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
+                            <li><a href="/shop/1">1</a></li>
+                            <li><a href="/shop/2">2</a></li>
+                            <li><a href="/shop/3">3</a></li>
+                            <li><a href="/shop/4">4</a></li>
                             <li><a href="#">5</a></li>
                             <li>
                               <a href="#" aria-label="Next">
