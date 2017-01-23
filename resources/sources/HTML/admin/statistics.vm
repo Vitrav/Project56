@@ -5,30 +5,28 @@
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.js"></script>
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-<table id="datatable">
-    <thead>
-##    <tr>
-##        <th></th>
-##        <th>$manager.getPlatform()</th>
-##        <th></th>
-##    </tr>
-    </thead>
-    <tbody>
-    #foreach($manager in $games)
-    <tr>
-        <th>$manager.getName()</th>
-        <th>$manager.getAmountInStock()</th>
-##        <th>$manager.getPlatform()</th>
-
-    </tr>
-#end
-    </tbody>
-</table>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+    <table id="datatable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Game</th>
+            </tr>
+        </thead>
+        <tbody>
+            #foreach($manager in $games)
+            <tr>
+                <th>$manager.getName() $manager.getPlatform()</th>
+                <th>$manager.getAmountInStock()</th>
+            </tr>
+            #end
+        </tbody>
+    </table>
+</div>
 
 
 
-<script type='text/javascript'>//<![CDATA[
+<script type='text/javascript'>
     $(function () {
         Highcharts.chart('container', {
             data: {
@@ -38,18 +36,18 @@
                 type: 'column'
             },
             title: {
-                text: 'Data extracted from a HTML table in the page'
+                text: 'The current stock per game'
             },
             yAxis: {
                 allowDecimals: false,
                 title: {
-                    text: 'Units'
+                    text: 'Stock'
                 }
             },
             tooltip: {
                 formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                            this.point.y + ' ' + this.point.name.toLowerCase();
+                    return '<b>Game: ' + this.point.name + '</b><br/>' +
+                             'Stock: ' + this.point.y;
                 }
             }
         });
