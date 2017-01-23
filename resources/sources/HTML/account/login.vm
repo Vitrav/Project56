@@ -12,7 +12,7 @@
         <label>You're blocked from the website.</label>
     #end
     <h1>Login</h1>
-    <p>Please enter your username and password., $WebPath.getINDEX())</p>
+    <p>Please enter your username and password.</p>
     <label>Username</label>
     <input type="text" name="username" placeholder="Username" value="" required>
     <label>Password</label>
