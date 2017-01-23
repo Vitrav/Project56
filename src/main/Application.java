@@ -3,6 +3,7 @@ package main;
 import controller.*;
 import controller.utils.ForgotPasswordController;
 import model.Database;
+import parser.GameParser;
 import viewutil.*;
 
 import static spark.Spark.*;
@@ -49,7 +50,7 @@ public final class Application {
         post(Path.Web.CART, CartController.handleCartPost);
 
         //Add games to database.
-//        new GameParser().addGamesToDB();
+        new GameParser().addGamesToDB();
 
         Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game ->
             get("/single-page/" + game.getInteger("id") + "/", SingleProductController.singlePage));
