@@ -47,6 +47,7 @@ public final class Application {
         post(Path.Web.WISHLIST, WishListController.handleWishListPost);
         post(Path.Web.CART, CartController.handleCartPost);
         post(Path.Web.CART, CartController.handleCartPost);
+        post(Path.Web.FORGOTPASSWORD, ForgotPasswordController.handleForgotPasswordPost);
 
         //Add games to database.
 //        new GameParser().addGamesToDB();

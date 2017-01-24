@@ -48,6 +48,10 @@ public class SingleProductController {
                 ConUtil.getUser(request).addCartItem(getGameDocManager(request, model).getId());
                 model.put("addedToCart", true);
             }
+            else if(request.queryParams().iterator().next().equalsIgnoreCase("cart")) {
+                ConUtil.getUser(request).addCartItem(getGameDocManager(request, model).getId());
+                model.put("addedToHistoryList", true);
+            }
         }
         return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
     };

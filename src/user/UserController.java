@@ -19,6 +19,7 @@ public class UserController {
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
     private UserDocumentManager userDocumentManager;
     private String username;
+    private String email;
 
     public UserController(String username) {
         this.username = username;
@@ -36,6 +37,15 @@ public class UserController {
 
         String hashedPassword = BCrypt.hashpw(password, userDocumentManager.getSalt());
         return hashedPassword.equals(userDocumentManager.getPassword());
+    }
+
+    public boolean authenticateEmail(String emailadress) {
+
+        if (email.isEmpty() )
+            return false;
+        if (!databaseHasUser())
+            return false;
+        return emailadress.equals(userDocumentManager.getEmail());
     }
 
     // Authenticate and change the password.

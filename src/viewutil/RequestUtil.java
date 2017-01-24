@@ -19,6 +19,11 @@ public class RequestUtil {
         return request.queryParams("username");
     }
 
+    public static String getQueryUserEmail(Request request) {
+        return request.queryParams("email");
+    }
+
+
     public static String getQueryPassword(Request request) {
         return request.queryParams("password");
     }
