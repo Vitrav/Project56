@@ -23,6 +23,8 @@ public class UserController {
 
     public UserController(String username) {
         this.username = username;
+
+
         if (userCollectionManager.getUserDocument(username) != null)
             userDocumentManager = new UserDocumentManager(userCollectionManager.getUserDocument(username));
     }
@@ -43,7 +45,7 @@ public class UserController {
 
         if (email.isEmpty() )
             return false;
-        if (!databaseHasUser())
+        if (!databaseHasEmail(emailadress))
             return false;
         return emailadress.equals(userDocumentManager.getEmail());
     }
@@ -66,6 +68,8 @@ public class UserController {
     public boolean usernameIsValid() {
         return usernameIsValid(username);
     }
+
+
 
     public boolean usernameIsValid(String name) {
         if (name.length() < 4 || name.length() > 14)
@@ -90,6 +94,12 @@ public class UserController {
     public boolean databaseHasUser() {
         Document query = new Document();
         query.put("username", username);
+        return collection.find(query).iterator().hasNext();
+    }
+
+    public boolean databaseHasEmail(String email) {
+        Document query = new Document();
+        query.put("email", email);
         return collection.find(query).iterator().hasNext();
     }
 

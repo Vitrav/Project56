@@ -1,4 +1,4 @@
-package controller.utils;
+package controller;
 
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
@@ -22,24 +22,25 @@ public class ForgotPasswordController {
 
     public static Route ForgotPassword = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        model.put("loggedOut", removeSessionAttrLoggedOut(request));
-        model.put("loginRedirect", removeSessionAttrLoginRedirect(request));
         return ViewUtil.render(request, model, Path.Template.FORGOTPASSWORD);
     };
 
     public static Route handleForgotPasswordPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        UserController controller = new UserController(getEmail(request));
+        UserController controller = new UserController(getQueryEmail(request));
         //get the email adress from the field on the website and store it in strings
 
 
+        String email = getEmail(request);
+
+
         //email validation
-        if (!controller.authenticateEmail(getEmail(request))) {
-            model.put("emailAuthenticationFailed", true);
+        if (controller.databaseHasEmail(email)) {
+            model.put("emailExcists", true);
+            return ViewUtil.render(request, model, Path.Template.FORGOTPASSWORD);
+        } else {
+            model.put("emailDoesntExcists", true);
             return ViewUtil.render(request, model, Path.Template.FORGOTPASSWORD);
         }
-
-        return ViewUtil.render(request, model, Path.Template.FORGOTPASSWORD);
     };
-
 }

@@ -1,7 +1,7 @@
 package main;
 
 import controller.*;
-import controller.utils.ForgotPasswordController;
+import controller.ForgotPasswordController;
 import model.Database;
 import viewutil.*;
 
