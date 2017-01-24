@@ -1,88 +1,80 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<form id="shopForm" method="post" action = "/shop/">
+<form id="shopForm" method="post" action = "/shop/1/">
+    <body>
 
-<body>
-<div class="single-product-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            <div class="single-sidebar">
-                <h2 class="sidebar-title">Search Products</h2>
-                #if($notFound)
-                    <p>This game does not exist.</p>
+    <div class="single-product-area">
+        <div class="container">
+
+            <h2 class="sidebar-title">Search Products</h2>
+            #if($notFound)
+                <p>This game does not exist.</p>
+            #end
+            <input type="text"  name="search" placeholder="Search products...">
+            <input type="submit" name="search button" value="Search">
+            <br></br>
+            <h2 class="sidebar-title">Price</h2>
+            #if ($hasValues)
+                <input type="number" name="min" placeholder="Min" value="$min" required>
+                <p> Tot </p>
+                <input type="number" name="max" placeholder="Max" value="$max" required>
+            #else
+                <input type="number" name="min" placeholder="Min" value="0" required>
+                <p> Tot </p>
+                <input type="number" name="max" placeholder="Max" value="300" required>
+            #end
+            <input type="submit" name=">" value=">">
+            <br></br>
+            <br></br>
+
+            <div class="row">
+                #foreach($manager in $games)
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-shop-product">
+                            <h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4>
+                            <img src="$manager.getImage()" height="120" width="123"></img>
+                            <h4>$manager.getPlatform()</h4>
+                            <p>$manager.getGenre()</p>
+                            <div class="product-carousel-price">
+                                <ins>$manager.getPrice()</ins>
+                            </div>
+
+                            <form id="add_to_cart" method="post">
+                                <input type="submit" name="$manager.getId()" value="Add to cart">
+                            </form>
+                        </div>
+                    </div>
                 #end
-                    <input type="text"  name="search" placeholder="Search products...">
-                    <input type="submit" name="search button" value="Search">
-                    <br></br>
-                    <br></br>
-                <h2 class="sidebar-title">Price</h2>
-                #if ($hasValues)
-                    <input type="number" name="min" placeholder="Min" value="$min" required>
-                    <p> Tot </p>
-                    <input type="number" name="max" placeholder="Max" value="$max" required>
-                #else
-                    <input type="number" name="min" placeholder="Min" value="0" required>
-                    <p> Tot </p>
-                    <input type="number" name="max" placeholder="Max" value="300" required>
-                #end
-                <input type="submit" name=">" value=">">
             </div>
 
-            #foreach($manager in $games)
-            <div class="single-shop-product">
-                <div class="product-upper">
-                    <div class="col-sm-8 col-sm-6">
-                        <h2><a href="/single-page/$manager.getId()">$manager.getName()</a></h2>
-                        <img src="$manager.getImage()" height="120" width="123"></img>
-                        <h4>$manager.getPlatform()</h4>
-                        <p>$manager.getGenre()</p>
-                        <div class="product-carousel-price">
-                            <ins>$manager.getPrice()</ins>
-                            <p></p>
+            #if(!$searched)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-pagination text-center">
+                            <nav>
+                                <ul class="pagination">
+                                    <li>
+                                        <a href="/shop/$prev" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    #foreach ($num in $pages)
+                                        <li><a href="/shop/$num">$num</a></li>
+                                    #end
+                                    <li>
+                                        <a href="/shop/$next" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
-
-                        <form id="add_to_cart" method="post">
-                            <div class="product-option-shop">
-                                #if($authenticationSucceeded)
-                                    <input class="add_to_cart_button" type="submit" name="$manager.getId()"  value="Add to cart">
-                                #else
-                                    <a class="add_to_cart_button" href="http://localhost:4567/login/">Add to cart</a>
-                                #end
-                            </div>
-                        </form>
                     </div>
                 </div>
             #end
 
-       #if(!$searched)
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-pagination text-center">
-                        <nav>
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="/shop/1">1</a></li>
-                                <li><a href="/shop/2">2</a></li>
-                                <li><a href="/shop/3">3</a></li>
-                                <li><a href="/shop/4">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-       #end
-</body>
+        </div>
+    </div>
+    </body>
 </form>
-
 #end

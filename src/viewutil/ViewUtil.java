@@ -1,6 +1,9 @@
 package viewutil;
 
+import controller.ShopController;
 import model.collection.UserCollectionManager;
+import model.document.CartItemDocumentManager;
+import model.document.CartListDocManager;
 import model.document.UserDocumentManager;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.velocity.app.VelocityEngine;
@@ -11,6 +14,7 @@ import spark.Response;
 import spark.Route;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +29,9 @@ public class ViewUtil {
     public static String render(Request request, Map<String, Object> model, String templatePath) {
         model.put("currentUser", getSessionCurrentUser(request));
         model.put("WebPath", Path.Web.class); // Access application URLs from templates
+        if (!ShopController.getUserItems().containsKey(request.session().id()))
+            ShopController.getUserItems().put(request.session().id(), new ArrayList<>());
+
         if (getSessionCurrentUser(request) != null) {
             model.put("authenticationSucceeded", true);
             UserDocumentManager userDocumentManager = new UserDocumentManager(new UserCollectionManager().getUserDocument(getSessionCurrentUser(request)));
@@ -32,7 +39,8 @@ public class ViewUtil {
                 model.put("userIsAdmin", true);
             model.put("userDocumentManager", userDocumentManager);
             model.put("hasManager", true);
-        }
+        } else
+            model.put("cartManager", new CartListDocManager(ShopController.getUserItems().get(request.session().id())));
         return strictVelocityEngine().render(new ModelAndView(model, templatePath));
     }
 

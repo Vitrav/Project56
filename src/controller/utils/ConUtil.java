@@ -11,7 +11,6 @@ import user.UserController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import static viewutil.RequestUtil.getSessionCurrentUser;
@@ -21,18 +20,16 @@ public class ConUtil {
     public static void searchGame(Request request,  Map<String, Object> model) {
         if (request.queryParams().iterator().hasNext() && request.queryParams().iterator().next().equalsIgnoreCase("search")) {
             String product = request.queryParams("search").replaceAll(" ", "");
-
             List<GameDocumentManager> docManagers = new ArrayList<>();
-            GameCollectionManager gameCollection = new GameCollectionManager();
 
-            gameCollection.getCollection().find().iterator().forEachRemaining(game -> {
+            new GameCollectionManager().getCollection().find().iterator().forEachRemaining(game -> {
                 GameDocumentManager docManager = getGameDocManager(game.getInteger("id"));
                 if (docManager.getName().toLowerCase().replaceAll(" ", "").contains(product.toLowerCase())
                         || docManager.getPlatform().equalsIgnoreCase(product) || docManager.getGenre().replaceAll(" ", "").equalsIgnoreCase(product)
                         || docManager.getPublisher().replaceAll(" ", "").equalsIgnoreCase(product))
                     docManagers.add(docManager);
             });
-                model.put("games", docManagers);
+            model.put("games", docManagers);
             if (docManagers.isEmpty())
                 model.put("notFound", true);
         }
@@ -44,7 +41,6 @@ public class ConUtil {
 
     public static void addToCart(Request request) {
         if (request.queryParams().iterator().hasNext()) {
-            System.out.println(request.queryParams().size());
             int actualGameID = getGameId(request);
             if (actualGameID == -1)
                 return;

@@ -23,7 +23,6 @@ public final class Application {
         get(Path.Web.INDEX, controller.IndexController.indexPage);
         get(Path.Web.SINGLEPAGE, SingleProductController.singlePage);
         get(Path.Web.CART, CartController.cartPage);
-        get(Path.Web.SHOP, ShopController.shopPage);
         post(Path.Web.SHOP, ShopController.shopPost);
         get(Path.Web.LOGIN, LoginController.loginPage);
         get(Path.Web.LOGOUT, LoginController.handleLogoutPost);
@@ -51,6 +50,12 @@ public final class Application {
 
         //Add games to database.
 //        new GameParser().addGamesToDB();
+
+        int pages = ((int) Database.getInstance().getGameCollection().count() / 8) + 1;
+        while (pages > 0) {
+            get("/shop/" + pages + "/", ShopController.shopPage);
+            pages -= 1;
+        }
 
         Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game ->
             get("/single-page/" + game.getInteger("id") + "/", SingleProductController.singlePage));

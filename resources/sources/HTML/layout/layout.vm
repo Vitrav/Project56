@@ -65,7 +65,7 @@
                     #if($hasManager)
                         <a href="$WebPath.getCART()">Cart - <span class="cart-amunt">$$userDocumentManager.countTotalPrice()</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">$userDocumentManager.countTotalProducts()</span></a>
                     #else
-                        <a href="$WebPath.getLOGIN()">Cart - <span class="cart-amunt">$0</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">0</span></a>
+                        <a href="$WebPath.getCART()">Cart - <span class="cart-amunt">$$cartManager.countTotalPrice()</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">$cartManager.countTotalProducts()</span></a>
                     #end
                 </div>
             </div>

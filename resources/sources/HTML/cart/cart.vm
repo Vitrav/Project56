@@ -2,12 +2,6 @@
 #@mainLayout()
 <form id="cartForm" method="post" action = "/cart/">
 
-#if(!$authenticationSucceeded)
-<script language="javascript">
-    window.location.href = "http://localhost:4567/login/"
-</script>
-#end
-
 <style>
     form {
         position: relative;
@@ -48,8 +42,13 @@
                     <td>$game.getName()</td>
                     <td>$game.getPlatform()</td>
                     <td>$$game.getPrice()</td>
-                    <td>$userDocumentManager.getGameAmount($game.getId())</td>
-                    <td>$$userDocumentManager.getTotalGamePrice($game.getId())</td>
+                    #if($hasManager)
+                        <td>$userDocumentManager.getGameAmount($game.getId())</td>
+                        <td>$$userDocumentManager.getTotalGamePrice($game.getId())</td>
+                    #else
+                        <td>$cartManager.getGameAmount($game.getId())</td>
+                        <td>$$cartManager.getTotalGamePrice($game.getId())</td>
+                    #end
                 </tr>
             #end
                 <tr>
