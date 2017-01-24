@@ -1,8 +1,10 @@
 package controller;
 
 import controller.utils.ConUtil;
+import model.document.CartItemDocumentManager;
 import model.document.GameDocumentManager;
 import model.document.UserDocumentManager;
+import org.bson.Document;
 import viewutil.Path;
 import viewutil.ViewUtil;
 import spark.Request;
@@ -31,6 +33,21 @@ public class CartController {
             ConUtil.getUser(request).removeCartItem(Integer.parseInt(request.queryParams().iterator().next()));
         } else if (buttonName.contains("Proceed to Checkout")) {
             infoToPage(model, ConUtil.getUser(request));
+            if (ConUtil.getUser(request).getCartItems().isEmpty())
+                return ViewUtil.render(request, model, Path.Template.CART);
+
+            for (Document item : ConUtil.getUser(request).getCartItems()) {
+                if (new GameDocumentManager(item.getInteger("id")).getAmountInStock() <  new CartItemDocumentManager(item).getAmount()) {
+                    model.put("outOfStock", true);
+                    model.put("outOfStockItem", new GameDocumentManager(item.getInteger("id")));
+                    return ViewUtil.render(request, model, Path.Template.CART);
+                }
+            }
+            ConUtil.getUser(request).getCartItems().forEach(item -> {
+                GameDocumentManager manager = new GameDocumentManager(item.getInteger("id"));
+                manager.setAmountInStock(manager.getAmountInStock() - new CartItemDocumentManager(item).getAmount());
+            });
+
             ConUtil.getUser(request).getCartItems().forEach(item -> ConUtil.getUser(request).addHistoryItem(item.getInteger("id"), item.getInteger("amount")));
             ConUtil.getUser(request).setCartItems(new ArrayList<>());
             return ViewUtil.render(request, model, Path.Template.PURCHASESUCCESSFUL);

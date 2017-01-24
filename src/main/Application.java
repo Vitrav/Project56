@@ -3,7 +3,6 @@ package main;
 import controller.*;
 import controller.utils.ForgotPasswordController;
 import model.Database;
-import parser.GameParser;
 import viewutil.*;
 
 import static spark.Spark.*;
@@ -25,6 +24,7 @@ public final class Application {
         get(Path.Web.SINGLEPAGE, SingleProductController.singlePage);
         get(Path.Web.CART, CartController.cartPage);
         get(Path.Web.SHOP, ShopController.shopPage);
+        post(Path.Web.SHOP, ShopController.shopPost);
         get(Path.Web.LOGIN, LoginController.loginPage);
         get(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
@@ -45,12 +45,11 @@ public final class Application {
         post(Path.Web.REGISTRATION, RegistrationController.handleRegisterPost);
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
         post(Path.Web.WISHLIST, WishListController.handleWishListPost);
-        post(Path.Web.SHOP, ShopController.gameToCart);
         post(Path.Web.CART, CartController.handleCartPost);
         post(Path.Web.CART, CartController.handleCartPost);
 
         //Add games to database.
-        new GameParser().addGamesToDB();
+//        new GameParser().addGamesToDB();
 
         Database.getInstance().getGameCollection().find().iterator().forEachRemaining(game ->
             get("/single-page/" + game.getInteger("id") + "/", SingleProductController.singlePage));

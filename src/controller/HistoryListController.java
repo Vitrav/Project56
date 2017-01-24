@@ -27,16 +27,15 @@ public class HistoryListController {
 
     public static Route historyPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        System.out.println(request.queryParams().iterator().next());
-        if (request.queryParams(request.queryParams().iterator().next()).contains("fav list")) {
-            int gameId = Integer.parseInt(request.queryParams().iterator().next());
-            model.put("currentGame", new GameDocumentManager(gameId));
-            if (ConUtil.getUser(request).getFavouriteList().contains(gameId)) {
-                model.put("hasItem", true);
-            } else {
-                ConUtil.getUser(request).addFavouriteItem(gameId);
-                model.put("itemAdded", true);
-            }
+        int gameId = Integer.parseInt(request.queryParams().iterator().next());
+        model.put("currentGame", new GameDocumentManager(gameId));
+
+        if (request.queryParams(request.queryParams().iterator().next()).contains("Add to fav list")) {
+            ConUtil.getUser(request).addFavouriteItem(gameId);
+            model.put("itemAdded", true);
+        } else if (request.queryParams(request.queryParams().iterator().next()).contains("Remove from fav list")) {
+            ConUtil.getUser(request).removeFavItem(gameId);
+            model.put("itemRemoved", true);
         }
         insertHisManagers(request, model);
         return ViewUtil.render(request, model, Path.Template.HISTORYLIST);

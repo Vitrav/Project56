@@ -1,7 +1,6 @@
 package controller;
 
 
-import controller.utils.ConUtil;
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
 import spark.Route;
