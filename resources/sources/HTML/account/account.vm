@@ -57,5 +57,9 @@
         </tr>
     </table>
     <br>
+    <td class="actions" colspan="6">
+        <p> Do yo want to change your password?<a href="$WebPath.getCHANGEPASSWORD()"> click here</a></p>    </td>
+    <br>
+
 </form>
 #end

@@ -24,6 +24,7 @@ public class Path {
         @Getter public static final String HISTORYLIST = "/historyList/";
         @Getter public static final String PURCHASESUCCESSFUL = "/purchaseSuccessful/";
         @Getter public static final String FORGOTPASSWORD = "/forgotpassword/";
+        @Getter public static final String CHANGEPASSWORD = "/changepassword/";
     }
 
     public static class Template {
@@ -44,6 +45,7 @@ public class Path {
         public static final String WISHLIST = "/sources/HTML/account/wishList.vm";
         public static final String PURCHASESUCCESSFUL = "/sources/HTML/cart/purchase.vm";
         public static final String FORGOTPASSWORD = "/sources/HTML/account/forgotpassword.vm";
+        public static final String CHANGEPASSWORD = "/sources/HTML/account/changepassword.vm";
     }
 
 }

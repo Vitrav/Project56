@@ -35,12 +35,13 @@ public class ForgotPasswordController {
 
 
         //email validation
-        if (controller.databaseHasEmail(email)) {
-            model.put("emailExcists", true);
-            return ViewUtil.render(request, model, Path.Template.FORGOTPASSWORD);
-        } else {
+        if (!controller.databaseHasEmail(email)) {
             model.put("emailDoesntExcists", true);
             return ViewUtil.render(request, model, Path.Template.FORGOTPASSWORD);
         }
+        return ViewUtil.render(request, model, Path.Template.FORGOTPASSWORD);
     };
 }
+
+
+
