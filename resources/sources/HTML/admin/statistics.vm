@@ -1,17 +1,105 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
+<html>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.js"></script>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+    <table id="stocktable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Game</th>
+            </tr>
+        </thead>
+        <tbody>
+            #foreach($manager in $games)
+            <tr>
+                <th>$manager.getName() $manager.getPlatform()</th>
+                <th>$manager.getAmountInStock()</th>
+            </tr>
+            #end
+        </tbody>
+    </table>
+</div>
 
-<form id="statForm" method="post", action = "/stat/">
-    #if(!$authenticationSucceeded)
-        <script language="javascript">
-            window.location.href = "http://localhost:4567/login/"
-        </script>
-    #end
-    #if(!$userIsAdmin)
-        <script language="javascript">
-            window.location.href = "http://localhost:4567/index/"
-        </script>
-    #end
-    <h2 class="sidebar-title">Statistics</h2>
-</form>
+<div id="purchase" style="min-width: 310px; height: 400px; margin: 0 auto">
+    <table id="purchasetable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Game</th>
+            </tr>
+        </thead>
+        <tbody>
+            #set($i = 0)
+            #foreach($date in $allDates)
+            <tr>
+                <th>$allDates[$i]</th>
+                <th>$allCounts[$i]</th>
+            </tr>
+            #set($i = $i + 1)
+            #end
+        </tbody>
+    </table>
+</div>
+
+
+<script type='text/javascript'>
+    $(function () {
+        Highcharts.chart('container', {
+            data: {
+                table: 'stocktable'
+            },
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'The current stock per game'
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'Stock'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>Game: ' + this.point.name + '</b><br/>' +
+                            'Stock: ' + this.point.y;
+                }
+            }
+        });
+    });
+</script>
+
+<script type='text/javascript'>
+    $(function () {
+        Highcharts.chart('purchase', {
+            data: {
+                table: 'purchasetable'
+            },
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'The amount of purchased games per date'
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: '# of games purchased'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return 'Amount of purchases: ' + this.point.y;
+                }
+            }
+        });
+    });
+</script>
+</html>
+
 #end

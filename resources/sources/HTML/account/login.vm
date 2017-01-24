@@ -17,7 +17,7 @@
     <input type="text" name="username" placeholder="Username" value="" required>
     <label>Password</label>
     <input type="password" name="password" placeholder="Password" value="" required>
-    <input type="submit" value="Log in)">
+    <input type="submit" value="Log in">
     <p> forgot your password?<a href="$WebPath.getFORGOTPASSWORD()"> click here</a></p>
     <p> new user? create new<a href="$WebPath.getREGISTRATION()"> account</a></p>
 </form>

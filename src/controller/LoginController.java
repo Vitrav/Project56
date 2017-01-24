@@ -1,6 +1,5 @@
 package controller;
 
-
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
 import spark.Route;
@@ -9,6 +8,7 @@ import viewutil.Path;
 import viewutil.ViewUtil;
 import spark.Request;
 import spark.Response;;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +40,9 @@ public class LoginController {
         if (controller.adminStatus())
             model.put("userIsAdmin", true);
 
+        UserDocumentManager manager = new UserDocumentManager(getQueryUsername(request));
+        ShopController.getUserItems().get(request.session().id()).forEach(item -> manager.addCartItem(item));
+        ShopController.getUserItems().put(request.session().id(), new ArrayList<>());
         //request a session for the user so he/she is in fact logged in
         request.session().attribute("currentUser", getQueryUsername(request));
         return ViewUtil.render(request, model, Path.Template.INDEX);

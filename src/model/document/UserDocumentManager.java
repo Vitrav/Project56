@@ -128,19 +128,13 @@ public class UserDocumentManager extends DocumentManager {
 	public double getTotalGamePrice(int gameId) {
 		if (!new UserController(getName()).userHasGame(gameId))
 			return 0.0;
-		for (Document item : getCartItems())
-			if (item.getInteger("id") == gameId)
-				return new GameDocumentManager(new GameCollectionManager().getGameDocument(gameId)).getPrice() * item.getInteger("amount");
-		return 0.0;
+		return new CartListDocManager(getCartItems()).getTotalGamePrice(gameId);
 	}
 
 	public int getGameAmount(int gameId) {
 		if (!new UserController(getName()).userHasGame(gameId))
 			return 0;
-		for (Document item : getCartItems())
-			if (item.getInteger("id") == gameId)
-				return item.getInteger("amount");
-		return 0;
+		return new CartListDocManager(getCartItems()).getGameAmount(gameId);
 	}
 
 	public void incGameAmount(int gameId) {
@@ -155,22 +149,34 @@ public class UserDocumentManager extends DocumentManager {
 	}
 
 	public int countTotalProducts() {
-        int total = 0;
-        for (Document item : getCartItems())
-            total += item.getInteger("amount");
-        return total;
+		return new CartListDocManager(getCartItems()).countTotalProducts();
     }
 
     public double countTotalPrice() {
-        double total = 0.0;
-        for (Document item : getCartItems())
-            total += getTotalGamePrice(item.getInteger("id"));
-        return total;
+        return new CartListDocManager(getCartItems()).countTotalPrice();
     }
 
 	public void setCartItems(List<Document> cartItems) {
 		update(new Document("cart_items", cartItems));
 	}
+
+	public void addCartItem(Document item) {
+        if (hasCartItem(item.getInteger("id")))
+            for (int i = 0 ; i < item.getInteger("amount"); i++)
+                incGameAmount(item.getInteger("id"));
+        else {
+            List<Document> items = getCartItems();
+            items.add(item);
+            setCartItems(items);
+        }
+    }
+
+    private boolean hasCartItem(int gameId) {
+        for (Document item : getCartItems())
+            if (item.getInteger("id") == gameId)
+                return true;
+        return false;
+    }
 
 	public void addCartItem(int gameId) {
 		List<Document> items = getCartItems();

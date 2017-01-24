@@ -19,8 +19,14 @@
 #* @vtlvariable name="games" type="java.util.ArrayList<model.document.GameDocumentManager>" *#
 #* @vtlvariable name="currentGame" type="model.document.GameDocumentManager" *#
 #* @vtlvariable name="userDocumentManager" type="model.document.UserDocumentManager" *#
+#* @vtlvariable name="cartManager" type="model.document.CartListDocManager" *#
 #* @vtlvariable name="publicPlayers" type="java.util.ArrayList<model.document.UserDocumentManager>" *#
 #* @vtlvariable name="hisManagers" type="java.util.ArrayList<model.document.HistoryDocumentManager>" *#
+#* @vtlvariable name="pages" type="java.util.ArrayList<java.lang.Integer>" *#
+#* @vtlvariable name="next" type="java.lang.Integer" *#
+#* @vtlvariable name="prev" type="java.lang.Integer" *#
+#* @vtlvariable name="allCounts" type="java.util.ArrayList" *#
+#* @vtlvariable name="allDates" type="java.util.ArrayList" *#
 
 
 

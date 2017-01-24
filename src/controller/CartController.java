@@ -6,6 +6,7 @@ import model.document.GameDocumentManager;
 import model.document.UserDocumentManager;
 import org.bson.Document;
 import viewutil.Path;
+import viewutil.RequestUtil;
 import viewutil.ViewUtil;
 import spark.Request;
 import spark.Response;
@@ -21,7 +22,7 @@ public class CartController {
 
     public static Route cartPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        infoToPage(model, ConUtil.getUser(request));
+        infoToPage(model, request);
         return ViewUtil.render(request, model, viewutil.Path.Template.CART);
     };
 
@@ -30,9 +31,15 @@ public class CartController {
         String buttonName = request.queryParams(request.queryParams().iterator().next());
 
         if (buttonName.equalsIgnoreCase("remove")) {
-            ConUtil.getUser(request).removeCartItem(Integer.parseInt(request.queryParams().iterator().next()));
+            int gameId = Integer.parseInt(request.queryParams().iterator().next());
+            if (RequestUtil.getSessionCurrentUser(request) == null)
+                ShopController.removeUserItem(request.session().id(),gameId);
+            else
+                ConUtil.getUser(request).removeCartItem(gameId);
         } else if (buttonName.contains("Proceed to Checkout")) {
-            infoToPage(model, ConUtil.getUser(request));
+            if (RequestUtil.getSessionCurrentUser(request) == null)
+                response.redirect(Path.Web.LOGIN);
+            infoToPage(model, request);
             if (ConUtil.getUser(request).getCartItems().isEmpty())
                 return ViewUtil.render(request, model, Path.Template.CART);
 
@@ -53,16 +60,14 @@ public class CartController {
             return ViewUtil.render(request, model, Path.Template.PURCHASESUCCESSFUL);
         }
 
-        infoToPage(model, ConUtil.getUser(request));
+        infoToPage(model, request);
         return ViewUtil.render(request, model, Path.Template.CART);
     };
 
-    private static void infoToPage(Map<String, Object> model, UserDocumentManager manager) {
+    private static void infoToPage(Map<String, Object> model, Request request) {
+        List<Document> cartItems = RequestUtil.getSessionCurrentUser(request) != null ? ConUtil.getUser(request).getCartItems() : ShopController.getUserItems().get(request.session().id());
         List<GameDocumentManager> cartGameList = new ArrayList<>();
-        List<Integer> games = new ArrayList<>();
-
-        manager.getCartItems().iterator().forEachRemaining(game -> games.add(game.getInteger("id")));
-        games.forEach(id -> cartGameList.add(ConUtil.getGameDocManager(id)));
+        cartItems.iterator().forEachRemaining(game -> cartGameList.add(ConUtil.getGameDocManager(game.getInteger("id"))));
         model.put("cartGamesInfo", cartGameList);
     }
 }
