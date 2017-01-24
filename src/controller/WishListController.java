@@ -43,15 +43,19 @@ public class WishListController {
             });
             model.put("publicPlayers", publicPlayers);
             model.put("viewList", true);
-            return ViewUtil.render(request, model, Path.Template.WISHLIST);
         } else if (buttonName.equalsIgnoreCase("view")) {
-            ConUtil.insertGameManager(model, ConUtil.getUserDocManager(request.queryParams().iterator().next()).getWishList());
+            insertPlayerGameManager(model, ConUtil.getUserDocManager(request.queryParams().iterator().next()).getWishList());
             model.put("view", true);
             model.put("userInfo", ConUtil.getUserDocManager(request.queryParams().iterator().next()));
-            return ViewUtil.render(request, model, Path.Template.WISHLIST);
         }
         ConUtil.insertGameManager(model, manager.getWishList());
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };
+
+    private static void insertPlayerGameManager(Map<String, Object> model, List<Integer> managerList) {
+        List<GameDocumentManager> gameManagers = new ArrayList<>();
+        managerList.forEach(id -> gameManagers.add(ConUtil.getGameDocManager(id)));
+        model.put("pGameManagers", gameManagers);
+    }
 
 }

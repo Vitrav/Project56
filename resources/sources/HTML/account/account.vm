@@ -8,14 +8,21 @@
         </script>
     #end
     <style>
+        form {
+            position: relative;
+            left: 200px;
+            top: 10px;
+            max-width: 500px;
+            margin: 30px;
+        }
         table, th, td {
             border: 1px solid black;
-            padding: 10px;
+            border-collapse: collapse;
         }
     </style>
+    <h2 class="sidebar-title">Your account</h2>
 
-    <br>
-    <table align="center">
+    <table style='white-space: nowrap' id="div1">
         <tr>
             <th>Username:</th>
             <td>$userDocumentManager.getName()</td>

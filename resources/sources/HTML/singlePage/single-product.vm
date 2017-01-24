@@ -42,7 +42,7 @@
                             <div class="col-sm-6">
                                 <div class="product-images">
                                     <div class="product-main-img">
-                                        <img src="$currentGame.getImage()" alt="">
+                                       ## <img src="$currentGame.getImage()" alt="">
                                     </div>
                                     <form action="">
                                         <button class="add_to_cart_button" name="wishlist" type="submit">Add to wishlist</button>

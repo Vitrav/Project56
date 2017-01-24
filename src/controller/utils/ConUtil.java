@@ -11,6 +11,8 @@ import user.UserController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 import static viewutil.RequestUtil.getSessionCurrentUser;
 
@@ -22,14 +24,16 @@ public class ConUtil {
 
             List<GameDocumentManager> docManagers = new ArrayList<>();
             GameCollectionManager gameCollection = new GameCollectionManager();
+
             gameCollection.getCollection().find().iterator().forEachRemaining(game -> {
                 GameDocumentManager docManager = getGameDocManager(game.getInteger("id"));
-                if (docManager.getName().toLowerCase().replaceAll(" ", "").contains(product.toLowerCase()) || docManager.getPlatform().equalsIgnoreCase(product))
+                if (docManager.getName().toLowerCase().replaceAll(" ", "").contains(product.toLowerCase())
+                        || docManager.getPlatform().equalsIgnoreCase(product) || docManager.getGenre().replaceAll(" ", "").equalsIgnoreCase(product)
+                        || docManager.getPublisher().replaceAll(" ", "").equalsIgnoreCase(product))
                     docManagers.add(docManager);
             });
-            if (!docManagers.isEmpty()) {
                 model.put("games", docManagers);
-            } else
+            if (docManagers.isEmpty())
                 model.put("notFound", true);
         }
     }
@@ -40,12 +44,31 @@ public class ConUtil {
 
     public static void addToCart(Request request) {
         if (request.queryParams().iterator().hasNext()) {
-            int actualGameID = Integer.parseInt(request.queryParams().iterator().next());
+            System.out.println(request.queryParams().size());
+            int actualGameID = getGameId(request);
+            if (actualGameID == -1)
+                return;
             UserDocumentManager manager = new UserDocumentManager(new UserCollectionManager().getUserDocument(getSessionCurrentUser(request)));
             if (!new UserController(getSessionCurrentUser(request)).userHasGame(actualGameID))
                 manager.addCartItem(actualGameID);
             else
                 manager.incGameAmount(actualGameID);
+        }
+    }
+
+    private static int getGameId(Request request) {
+        for (String param : request.queryParams())
+            if (isInt(param))
+                return Integer.parseInt(param);
+        return -1;
+    }
+
+    private static boolean isInt (String num) {
+        try {
+            Integer.parseInt(num);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -57,9 +80,13 @@ public class ConUtil {
     }
 
     public static void addGames(Map<String, Object> model) {
+        addGames(model, 0, Integer.MAX_VALUE);
+    }
+
+    public static void addGames(Map<String, Object> model, int min, int max) {
         List<GameDocumentManager> docManagers = new ArrayList<>();
         new GameCollectionManager().getCollection().find().iterator().forEachRemaining(game -> docManagers.add(getGameDocManager(game.getInteger("id"))));
-        model.put("games", docManagers);
+        model.put("games", docManagers.stream().filter(doc ->doc.getPrice() > min && doc.getPrice() < max).collect(Collectors.toList()));
     }
 
     public static void insertGameManager(Map<String, Object> model, List<Integer> managerList) {

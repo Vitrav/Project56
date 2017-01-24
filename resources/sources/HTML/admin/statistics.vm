@@ -1,58 +1,17 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-<html>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.js"></script>
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
-    <table id="datatable">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Game</th>
-            </tr>
-        </thead>
-        <tbody>
-            #foreach($manager in $games)
-            <tr>
-                <th>$manager.getName() $manager.getPlatform()</th>
-                <th>$manager.getAmountInStock()</th>
-            </tr>
-            #end
-        </tbody>
-    </table>
-</div>
 
-
-
-<script type='text/javascript'>
-    $(function () {
-        Highcharts.chart('container', {
-            data: {
-                table: 'datatable'
-            },
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'The current stock per game'
-            },
-            yAxis: {
-                allowDecimals: false,
-                title: {
-                    text: 'Stock'
-                }
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>Game: ' + this.point.name + '</b><br/>' +
-                             'Stock: ' + this.point.y;
-                }
-            }
-        });
-    });
-</script>
-</html>
-
+<form id="statForm" method="post", action = "/stat/">
+    #if(!$authenticationSucceeded)
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/login/"
+        </script>
+    #end
+    #if(!$userIsAdmin)
+        <script language="javascript">
+            window.location.href = "http://localhost:4567/index/"
+        </script>
+    #end
+    <h2 class="sidebar-title">Statistics</h2>
+</form>
 #end

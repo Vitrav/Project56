@@ -18,7 +18,11 @@
     </style>
 
     <body>
-    <h3>Thank you for buying these products:</h3>
+    #if ($cartGamesInfo.size() == 1)
+        <h3>Thank you for buying this product:</h3>
+    #else
+        <h3>Thank you for buying these products:</h3>
+    #end
     <table cellspacing="0" class="shop_table cart">
         <tr>
             <th class="product-name">Product</th>
@@ -33,7 +37,7 @@
                 <td>$game.getPlatform()</td>
                 <td>$$game.getPrice()</td>
                 <td>$userDocumentManager.getGameAmount($game.getId())</td>
-                <td>$userDocumentManager.getTotalGamePrice($game.getId())</td>
+                <td>$$userDocumentManager.getTotalGamePrice($game.getId())</td>
             </tr>
         #end
     </table>

@@ -1086,17 +1086,14 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 }
 
 .single-shop-product h2 {
-    margin-bottom: 10px;
-    position: relative;
-    /*height: 128px;*/
-/*width: 100%;*/
-
+    font-size: 20px;
+    margin: 10px 0;
 }
 .product-option-shop {
     margin-top: 15px;
 }
 
-/*.single-shop-product {margin-bottom: 50px}*/
+.single-shop-product {margin-bottom: 50px}
 
 .pagination > li > a, .pagination > li > span {
   color: #1abc9c;

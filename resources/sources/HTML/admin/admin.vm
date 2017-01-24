@@ -1,11 +1,5 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
-
-    #if(!$userIsAdmin)
-    <script language="javascript">
-        window.location.href = "http://localhost:4567/index/"
-    </script>
-    #end
 <form id="adminForm" method="post" action = "/adminpanel/">
     #if(!$authenticationSucceeded)
         <script language="javascript">
