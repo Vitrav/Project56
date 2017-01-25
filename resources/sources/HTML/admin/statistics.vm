@@ -1,6 +1,16 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 <html>
+    #if(!$authenticationSucceeded)
+    <script language="javascript">
+        window.location.href = "http://localhost:4567/login/"
+    </script>
+    #end
+    #if(!$userIsAdmin)
+    <script language="javascript">
+        window.location.href = "http://localhost:4567/index/"
+    </script>
+    #end
 <div align="center">
     <br>
     <h3><a href="/gs">Gamestock</a></h3>
