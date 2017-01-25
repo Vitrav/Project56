@@ -1,0 +1,58 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+<html>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.js"></script>
+
+<div id="purchase" style="min-width: 310px; height: 400px; margin: 0 auto">
+    <table id="purchasetable">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Game</th>
+        </tr>
+        </thead>
+        <tbody>
+            #set($i = 0)
+            #foreach($date in $allDates)
+            <tr>
+                <th>$allDates[$i]</th>
+                <th>$allCounts[$i]</th>
+            </tr>
+                #set($i = $i + 1)
+            #end
+        </tbody>
+    </table>
+</div>
+
+<script type='text/javascript'>
+    $(function () {
+        Highcharts.chart('purchase', {
+            data: {
+                table: 'purchasetable'
+            },
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'The amount of purchased games per date'
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: '# of games purchased'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return 'Amount of purchases: ' + this.point.y;
+                }
+            }
+        });
+    });
+</script>
+
+</html>
+#end

@@ -1,0 +1,53 @@
+#parse("sources/HTML/layout/layout.vm")
+#@mainLayout()
+<html>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.js"></script>
+
+<div id="pie" style="min-width: 310px; height: 400px; margin: 0 auto">
+    <table id="pie">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Game</th>
+        </tr>
+        </thead>
+        <tbody>
+            #set($j = 0)
+            #foreach($age in $allAgeAmounts)
+            <tr>
+                <th>$allAgeGroups[$j]</th>
+                <th>$age</th>
+            </tr>
+                #set($j = $j + 1)
+            #end
+        </tbody>
+    </table>
+</div>
+
+<script type='text/javascript'>
+    $(function () {
+        Highcharts.chart('pie', {
+            data: {
+                table: 'pie'
+            },
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Distribution of age of registered customers'
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>Age group: ' + this.point.name + '</b><br/>' +
+                            'Amount of customers: ' + this.point.y;
+                }
+            }
+        });
+    });
+</script>
+
+</html>
+#end

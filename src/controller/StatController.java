@@ -16,16 +16,47 @@ public class StatController {
 
     public static Route statPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-        ConUtil.searchGame(request, model);
-        ConUtil.insertAllUsers(request, model);
+        loadPage(request, model);
 
         if (model.containsKey("games"))
             return ViewUtil.render(request, model, Path.Template.STATISTICS);
 
-        ConUtil.addGames(model);
-        createAllHisManagers(model);
         return ViewUtil.render(request, model, Path.Template.STATISTICS);
     };
+
+    public static Route gameStockPage = (Request request, Response response) -> {
+        Map<String, Object> model = new HashMap<>();
+        loadPage(request, model);
+        if (model.containsKey("games"))
+            return ViewUtil.render(request, model, Path.Template.GAMESTOCK);
+
+        return ViewUtil.render(request, model, Path.Template.GAMESTOCK);
+    };
+
+    public static Route purchaseInfoPage = (Request request, Response response) -> {
+        Map<String, Object> model = new HashMap<>();
+        loadPage(request, model);
+        if (model.containsKey("games"))
+            return ViewUtil.render(request, model, Path.Template.PURCHASES);
+
+        return ViewUtil.render(request, model, Path.Template.PURCHASES);
+    };
+
+    public static Route ageInfoPage = (Request request, Response response) -> {
+        Map<String, Object> model = new HashMap<>();
+        loadPage(request, model);
+        if (model.containsKey("games"))
+            return ViewUtil.render(request, model, Path.Template.AGEINFO);
+
+        return ViewUtil.render(request, model, Path.Template.AGEINFO);
+    };
+
+    private static void loadPage(Request request, Map<String, Object> model){
+        ConUtil.searchGame(request, model);
+        ConUtil.insertAllUsers(request, model);
+        ConUtil.addGames(model);
+        createAllHisManagers(model);
+    }
 
     private static void createAllHisManagers(Map<String, Object> model) {
         List<UserDocumentManager> users = new ArrayList<>();

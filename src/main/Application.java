@@ -37,6 +37,9 @@ public final class Application {
         get(Path.Web.HISTORYLIST, HistoryListController.historyListPage);
         get(Path.Web.FORGOTPASSWORD, ForgotPasswordController.ForgotPassword);
         get(Path.Web.CHANGEPASSWORD, ChangePasswordController.changePasswordPage);
+        get(Path.Web.GAMESTOCK, StatController.gameStockPage);
+        get(Path.Web.AGEINFO, StatController.ageInfoPage);
+        get(Path.Web.PURCHASES, StatController.purchaseInfoPage);
 
         post(Path.Web.HISTORYLIST, HistoryListController.historyPost);
         post(Path.Web.LOGIN, LoginController.handleLoginPost);

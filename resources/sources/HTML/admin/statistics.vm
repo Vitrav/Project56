@@ -1,146 +1,24 @@
 #parse("sources/HTML/layout/layout.vm")
 #@mainLayout()
 <html>
+<div align="center">
+    <br>
+    <h3><a href="/gs">Gamestock</a></h3>
+</div>
+<div align="center">
+    <br>
+    <br>
+    <h3><a href="/ppd">Purchases per day</a></h3>
+</div>
+<div align="center">
+    <br>
+    <br>
+    <h3><a href="/cai">Customer age info</a></h3>
+    <br>
+</div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.js"></script>
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
-    <table id="stocktable">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Game</th>
-            </tr>
-        </thead>
-        <tbody>
-            #foreach($manager in $games)
-            <tr>
-                <th>$manager.getName() $manager.getPlatform()</th>
-                <th>$manager.getAmountInStock()</th>
-            </tr>
-            #end
-        </tbody>
-    </table>
-</div>
-
-<div id="purchase" style="min-width: 310px; height: 400px; margin: 0 auto">
-    <table id="purchasetable">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Game</th>
-            </tr>
-        </thead>
-        <tbody>
-            #set($i = 0)
-            #foreach($date in $allDates)
-            <tr>
-                <th>$allDates[$i]</th>
-                <th>$allCounts[$i]</th>
-            </tr>
-            #set($i = $i + 1)
-            #end
-        </tbody>
-    </table>
-</div>
-
-<div id="pie" style="min-width: 310px; height: 400px; margin: 0 auto">
-    <table id="pie">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Game</th>
-        </tr>
-        </thead>
-        <tbody>
-            #set($j = 0)
-            #foreach($age in $allAgeAmounts)
-            <tr>
-                <th>$allAgeGroups[$j]</th>
-                <th>$age</th>
-            </tr>
-            #set($j = $j + 1)
-            #end
-        </tbody>
-    </table>
-</div>
-
-<script type='text/javascript'>
-    $(function () {
-        Highcharts.chart('container', {
-            data: {
-                table: 'stocktable'
-            },
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'The current stock per game'
-            },
-            yAxis: {
-                allowDecimals: false,
-                title: {
-                    text: 'Stock'
-                }
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>Game: ' + this.point.name + '</b><br/>' +
-                            'Stock: ' + this.point.y;
-                }
-            }
-        });
-    });
-</script>
-
-<script type='text/javascript'>
-    $(function () {
-        Highcharts.chart('purchase', {
-            data: {
-                table: 'purchasetable'
-            },
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'The amount of purchased games per date'
-            },
-            yAxis: {
-                allowDecimals: false,
-                title: {
-                    text: '# of games purchased'
-                }
-            },
-            tooltip: {
-                formatter: function () {
-                    return 'Amount of purchases: ' + this.point.y;
-                }
-            }
-        });
-    });
-</script>
-
-<script type='text/javascript'>
-    $(function () {
-        Highcharts.chart('pie', {
-            data: {
-                table: 'pie'
-            },
-            chart: {
-                type: 'pie'
-            },
-            title: {
-                text: 'Distribution of age of registered customers'
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>Age group: ' + this.point.name + '</b><br/>' +
-                            'Amount of customers: ' + this.point.y;
-                }
-            }
-        });
-    });
-</script>
 </html>
 #end
