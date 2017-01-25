@@ -11,8 +11,6 @@ public class User {
     private Date dateOfBirth;
     private boolean isAdmin,hasPrivateWishList,isBlocked;
 
-
-
     public User(String username, String salt, String hashedPassword, Address address, int age, Date dateOfBirth, String email, boolean isAdmin, boolean hasPrivateWishList, boolean isBlocked) {
         this.username = username;
         this.salt = salt;

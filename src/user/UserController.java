@@ -24,7 +24,6 @@ public class UserController {
     public UserController(String username) {
         this.username = username;
 
-
         if (userCollectionManager.getUserDocument(username) != null)
             userDocumentManager = new UserDocumentManager(userCollectionManager.getUserDocument(username));
     }
@@ -42,7 +41,6 @@ public class UserController {
     }
 
     public boolean authenticateEmail(String emailadress) {
-
         if (email.isEmpty() )
             return false;
         if (!databaseHasEmail(emailadress))
@@ -68,8 +66,6 @@ public class UserController {
     public boolean usernameIsValid() {
         return usernameIsValid(username);
     }
-
-
 
     public boolean usernameIsValid(String name) {
         if (name.length() < 4 || name.length() > 14)
@@ -110,11 +106,9 @@ public class UserController {
     }
 
     public boolean userHasGame(int gameID){
-        for (Document item : userDocumentManager.getCartItems()){
-            if (item.getInteger("id") == gameID){
+        for (Document item : userDocumentManager.getCartItems())
+            if (item.getInteger("id") == gameID)
                 return  true;
-            }
-        }
         return false;
     }
 

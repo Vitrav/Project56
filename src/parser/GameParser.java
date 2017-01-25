@@ -18,12 +18,7 @@ public class GameParser {
     private final List<Game> games = new ArrayList<>();
     private final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
-    public GameParser() {
-        fillLines();
-        addGames();
-    }
-
-    private void fillLines() {
+    public void fillLines() {
         if (!lines.isEmpty())
             return;
         InputStream input = getClass().getResourceAsStream("games.txt");
@@ -40,7 +35,7 @@ public class GameParser {
         }
     }
 
-    private void addGames() {
+    public void addGames() {
         if (lines.isEmpty())
             fillLines();
 
@@ -94,6 +89,10 @@ public class GameParser {
     private String removeFromLine(String line, String part) {
         line = line.replaceFirst(part, "");
         return line.replaceFirst(";", "");
+    }
+
+    public List<String> getLines() {
+        return lines;
     }
 
 
