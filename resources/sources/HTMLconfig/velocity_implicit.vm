@@ -28,6 +28,8 @@
 #* @vtlvariable name="prev" type="java.lang.Integer" *#
 #* @vtlvariable name="allCounts" type="java.util.ArrayList" *#
 #* @vtlvariable name="allDates" type="java.util.ArrayList" *#
+#* @vtlvariable name="allAgeAmounts" type="java.util.ArrayList" *#
+#* @vtlvariable name="allAgeGroups" type="java.util.ArrayList" *#
 
 
 

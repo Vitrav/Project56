@@ -45,6 +45,26 @@
     </table>
 </div>
 
+<div id="pie" style="min-width: 310px; height: 400px; margin: 0 auto">
+    <table id="pie">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Game</th>
+        </tr>
+        </thead>
+        <tbody>
+            #set($j = 0)
+            #foreach($age in $allAgeAmounts)
+            <tr>
+                <th>$allAgeGroups[$j]</th>
+                <th>$age</th>
+            </tr>
+            #set($j = $j + 1)
+            #end
+        </tbody>
+    </table>
+</div>
 
 <script type='text/javascript'>
     $(function () {
@@ -100,6 +120,27 @@
         });
     });
 </script>
-</html>
 
+<script type='text/javascript'>
+    $(function () {
+        Highcharts.chart('pie', {
+            data: {
+                table: 'pie'
+            },
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Distribution of age of registered customers'
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>Age group: ' + this.point.name + '</b><br/>' +
+                            'Amount of customers: ' + this.point.y;
+                }
+            }
+        });
+    });
+</script>
+</html>
 #end
