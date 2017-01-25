@@ -39,9 +39,7 @@
                                 <ins>$manager.getPrice()</ins>
                             </div>
 
-                            <form id="add_to_cart" method="post">
-                                <input type="submit" name="$manager.getId()" value="Add to cart">
-                            </form>
+                            <input type="submit" name="$manager.getId()" value="Add to cart">
                         </div>
                     </div>
                 #end

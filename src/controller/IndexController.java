@@ -1,6 +1,5 @@
 package controller;
 
-
 import viewutil.ViewUtil;
 import spark.Request;
 import spark.Response;

@@ -85,6 +85,12 @@ public class ConUtil {
         model.put("games", docManagers.stream().filter(doc ->doc.getPrice() > min && doc.getPrice() < max).collect(Collectors.toList()));
     }
 
+    public static void addAllGames(Map<String, Object> model) {
+        List<GameDocumentManager> docManagers = new ArrayList<>();
+        new GameCollectionManager().getCollection().find().iterator().forEachRemaining(game -> docManagers.add(getGameDocManager(game.getInteger("id"))));
+        model.put("allGames", docManagers);
+    }
+
     public static void insertGameManager(Map<String, Object> model, List<Integer> managerList) {
         List<GameDocumentManager> gameManagers = new ArrayList<>();
         managerList.forEach(id -> gameManagers.add(ConUtil.getGameDocManager(id)));

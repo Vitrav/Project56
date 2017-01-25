@@ -17,6 +17,7 @@
 #* @vtlvariable name="gameManagers" type="java.util.ArrayList<model.document.GameDocumentManager>" *#
 #* @vtlvariable name="modifyUserManager" type="model.document.UserDocumentManager" *#
 #* @vtlvariable name="games" type="java.util.ArrayList<model.document.GameDocumentManager>" *#
+#* @vtlvariable name="allGames" type="java.util.ArrayList<model.document.GameDocumentManager>" *#
 #* @vtlvariable name="currentGame" type="model.document.GameDocumentManager" *#
 #* @vtlvariable name="userDocumentManager" type="model.document.UserDocumentManager" *#
 #* @vtlvariable name="cartManager" type="model.document.CartListDocManager" *#

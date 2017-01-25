@@ -56,7 +56,16 @@ public class CartController {
             });
 
             ConUtil.getUser(request).getCartItems().forEach(item -> ConUtil.getUser(request).addHistoryItem(item.getInteger("id"), item.getInteger("amount")));
-            ConUtil.getUser(request).setCartItems(new ArrayList<>());
+
+            //Remove the cart items after a delay.
+            new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        ConUtil.getUser(request).setCartItems(new ArrayList<>());
+                    }
+                }, 500
+            );
             return ViewUtil.render(request, model, Path.Template.PURCHASESUCCESSFUL);
         }
 

@@ -1,6 +1,7 @@
 package viewutil;
 
 import controller.ShopController;
+import controller.utils.ConUtil;
 import model.collection.UserCollectionManager;
 import model.document.CartItemDocumentManager;
 import model.document.CartListDocManager;
@@ -28,6 +29,7 @@ public class ViewUtil {
     // and to see if the User is logged in
     public static String render(Request request, Map<String, Object> model, String templatePath) {
         model.put("currentUser", getSessionCurrentUser(request));
+        ConUtil.addAllGames(model);
         model.put("WebPath", Path.Web.class); // Access application URLs from templates
         if (!ShopController.getUserItems().containsKey(request.session().id()))
             ShopController.getUserItems().put(request.session().id(), new ArrayList<>());
