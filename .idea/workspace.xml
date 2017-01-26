@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7e481b1-96da-480c-8318-41264a2eafc4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/sources/HTML/account/contact.vm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controller/ContactController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sources/HTML/account/changepassword.vm" afterPath="$PROJECT_DIR$/resources/sources/HTML/account/changepassword.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm" afterPath="$PROJECT_DIR$/resources/sources/HTML/layout/layout.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/ChangePasswordController.java" afterPath="$PROJECT_DIR$/src/controller/ChangePasswordController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/RegistrationController.java" afterPath="$PROJECT_DIR$/src/controller/RegistrationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Application.java" afterPath="$PROJECT_DIR$/src/main/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/user/User.java" afterPath="$PROJECT_DIR$/src/user/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/viewutil/Path.java" afterPath="$PROJECT_DIR$/src/viewutil/Path.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/viewutil/RequestUtil.java" afterPath="$PROJECT_DIR$/src/viewutil/RequestUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sources/HTML/account/contact.vm" afterPath="$PROJECT_DIR$/resources/sources/HTML/account/contact.vm" />
     </list>
     <ignored path="Project5-6.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/resources/sources/HTML/account/contact.vm">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.08103131">
-              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+              <caret line="2" column="53" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -75,8 +66,8 @@
       <file leaf-file-name="registration.vm" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/sources/HTML/account/registration.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1290324">
-              <caret line="3" column="19" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="19" />
+            <state vertical-scroll-proportion="-8.774194">
+              <caret line="40" column="77" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -1141,7 +1132,7 @@
       <workItem from="1485246945985" duration="4177000" />
       <workItem from="1485251293281" duration="14363000" />
       <workItem from="1485335396779" duration="10451000" />
-      <workItem from="1485425657966" duration="3760000" />
+      <workItem from="1485425657966" duration="5037000" />
     </task>
     <task id="LOCAL-00002" summary="Login fixed.">
       <created>1478002896554</created>
@@ -1329,11 +1320,17 @@
       <option name="project" value="LOCAL" />
       <updated>1485265468876</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="contactpage&#10;">
+      <created>1485455141624</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1485455141624</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="248981000" />
+    <option name="totallyTimeSpent" value="250258000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1422,7 +1419,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Strange admin panel and account page." />
     <MESSAGE value="Admin panel improved." />
     <MESSAGE value="Userdocmanager improved." />
     <MESSAGE value="productpage -&gt; css nog aanpassen" />
@@ -1447,7 +1443,8 @@
     <MESSAGE value="hist list2" />
     <MESSAGE value="forgot password page, takes email to se if it excist works.." />
     <MESSAGE value="want to change password? page" />
-    <option name="LAST_COMMIT_MESSAGE" value="want to change password? page" />
+    <MESSAGE value="contactpage&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="contactpage&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1566,6 +1563,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="110" column="19" selection-start-line="110" selection-start-column="19" selection-end-line="110" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1677,6 +1675,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="42" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1779,6 +1778,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.096775">
           <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1904,8 +1904,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/sources/HTML/account/registration.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1290324">
-          <caret line="3" column="19" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="19" />
+        <state vertical-scroll-proportion="-8.774194">
+          <caret line="40" column="77" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="77" />
           <folding />
         </state>
       </provider>
@@ -1913,7 +1913,7 @@
     <entry file="file://$PROJECT_DIR$/resources/sources/HTML/account/contact.vm">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08103131">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+          <caret line="2" column="53" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="53" />
           <folding />
         </state>
       </provider>
