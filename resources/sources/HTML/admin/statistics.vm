@@ -26,9 +26,5 @@
     <h3><a href="/cai">Customer age info</a></h3>
     <br>
 </div>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.js"></script>
 </html>
 #end
