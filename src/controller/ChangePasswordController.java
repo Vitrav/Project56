@@ -1,10 +1,14 @@
 package controller;
 
+import model.collection.CollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.UserDocumentManager;
+import org.eclipse.jetty.server.Authentication;
+import org.mindrot.jbcrypt.BCrypt;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import user.User;
 import user.UserController;
 import viewutil.Path;
 import viewutil.ViewUtil;
@@ -22,32 +26,34 @@ public class ChangePasswordController {
 
     public static Route changePasswordPage = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
-
         return ViewUtil.render(request, model, Path.Template.CHANGEPASSWORD);
     };
+
+
+
     public static Route handleChangePasswordPost = (Request request, Response response) -> {
         Map<String, Object> model = new HashMap<>();
         UserController controller = new UserController(getQueryUsername(request));
+
+        UserDocumentManager manager = (UserDocumentManager) model.get("modifyUserManager");
+        String oldPass = manager.getPassword();
         //user authentication
 
         String newpassword = getQueryPassword(request);
-        String oldpassword = getQueryPassword(request);
 
-
-        if (!controller.authenticate(getQueryPassword(request))) {
+      /*  if (!controller.authenticate(getQueryPassword(request))) {
             model.put("authenticationFailed", true);
             return ViewUtil.render(request, model, Path.Template.CHANGEPASSWORD);
         }
-        else if (!controller.passwordIsValid(newpassword)) {
+        /*if (!controller.passwordIsValid(newpassword)) {
             model.put("passwordInvalid", true);
             return ViewUtil.render(request, model, Path.Template.CHANGEPASSWORD);
-        }
-        else
-            controller.chancePassword(oldpassword,newpassword);
-
+        }*/
+        controller.chancePassword(oldPass,newpassword);
 
         return ViewUtil.render(request, model, Path.Template.CHANGEPASSWORD);
     };
+
 
 
 }

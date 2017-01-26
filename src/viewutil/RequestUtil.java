@@ -26,10 +26,14 @@ public class RequestUtil {
         return request.queryParams("email");
     }
 
-
+    public static String getQueryOldPassword(Request request) {
+        return request.queryParams("oldpassword");
+    }
     public static String getQueryPassword(Request request) {
         return request.queryParams("password");
     }
+
+
 
     public static String getdoB(Request request) {
         String doB = request.queryParams("doB");

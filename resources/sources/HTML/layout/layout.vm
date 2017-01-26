@@ -90,7 +90,7 @@
 ##                    <li><a href ="$WebPath.getINDEX()"></a></li>
                     <li><a href="$WebPath.getINDEX()">Home</a></li>
                     <li><a href="$WebPath.getSHOP()">Shop page</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="$WebPath.getCONTACT()">Contact</a></li>
                 </ul>
             </div>
         </div>

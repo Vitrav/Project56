@@ -5,11 +5,12 @@ import java.util.Date;
 //Simple class to capture User information, is used by the UserCollectionManager to insert a new user.
 public class User {
 
-    private String username,salt, hashedPassword, email;
+    private String username,salt, email;
     private Address address;
     private int age;
     private Date dateOfBirth;
     private boolean isAdmin,hasPrivateWishList,isBlocked;
+    public static String hashedPassword;
 
     public User(String username, String salt, String hashedPassword, Address address, int age, Date dateOfBirth, String email, boolean isAdmin, boolean hasPrivateWishList, boolean isBlocked) {
         this.username = username;
@@ -32,7 +33,7 @@ public class User {
         return salt;
     }
 
-    public String getHashedPassword(){
+    public static String getHashedPassword(){
         return hashedPassword;
     }
 

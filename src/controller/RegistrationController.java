@@ -57,7 +57,7 @@ public class RegistrationController {
             model.put("userInvalid", true);
             return ViewUtil.render(request, model, Path.Template.REGISTRATION);
         } else if (!controller.passwordIsValid(password)) {
-            model.put("passwordInvalid", true);
+            model.put(" passwordInvalid", true);
             return ViewUtil.render(request, model, Path.Template.REGISTRATION);
         } else if (!controller.validDob(doB)) {
             model.put("dobInvalid", true);

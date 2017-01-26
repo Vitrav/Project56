@@ -41,6 +41,7 @@ public final class Application {
         get(Path.Web.GAMESTOCK, StatController.gameStockPage);
         get(Path.Web.AGEINFO, StatController.ageInfoPage);
         get(Path.Web.PURCHASES, StatController.purchaseInfoPage);
+        get(Path.Web.CONTACT, ContactController.contactPage);
 
         post(Path.Web.HISTORYLIST, HistoryListController.historyPost);
         post(Path.Web.LOGIN, LoginController.handleLoginPost);
@@ -53,6 +54,7 @@ public final class Application {
         post(Path.Web.CART, CartController.handleCartPost);
         post(Path.Web.FORGOTPASSWORD, ForgotPasswordController.handleForgotPasswordPost);
         post(Path.Web.CHANGEPASSWORD, ChangePasswordController.handleChangePasswordPost);
+        post(Path.Web.CONTACT, ContactController.handleContactPost);
 
         //Add games to database.
         //new GameParser().addGamesToDB();

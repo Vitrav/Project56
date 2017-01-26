@@ -28,6 +28,7 @@ public class Path {
         @Getter public static final String GAMESTOCK = "/gs/";
         @Getter public static final String AGEINFO = "/cai/";
         @Getter public static final String PURCHASES = "/ppd/";
+        @Getter public static final String CONTACT = "/contact/";
     }
 
     public static class Template {
@@ -49,6 +50,7 @@ public class Path {
         public static final String PURCHASESUCCESSFUL = "/sources/HTML/cart/purchase.vm";
         public static final String FORGOTPASSWORD = "/sources/HTML/account/forgotpassword.vm";
         public static final String CHANGEPASSWORD = "/sources/HTML/account/changepassword.vm";
+        public static final String CONTACT = "/sources/HTML/account/contact.vm";
         public static final String GAMESTOCK = "/sources/HTML/admin/graphs/gamestock.vm";
         public static final String AGEINFO = "/sources/HTML/admin/graphs/ageinfo.vm";
         public static final String PURCHASES = "/sources/HTML/admin/graphs/purchases.vm";
