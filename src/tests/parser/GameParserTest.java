@@ -1,6 +1,6 @@
 package parser;
 
-import model.Database;
+import model.collection.GameCollectionManager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -59,11 +59,17 @@ public class GameParserTest {
 
     @Test
     public void gamesToDB() throws Exception {
-        Database.getInstance().getGameCollection().drop();
-        assertEquals(0, Database.getInstance().getGameCollection().count());
-        gameParser.addGamesToDB();
-        assertTrue(Database.getInstance().getGameCollection().count() > 0);
-        assertEquals(gameParser.getGames().size(), Database.getInstance().getGameCollection().count());
+        LocalDB.getInstance().getGameCollection().drop();
+        assertEquals(0, LocalDB.getInstance().getGameCollection().count());
+
+        //Same as GameParser gamesToDB method:
+        LocalDB.getInstance().getGameCollection().drop();
+        GameCollectionManager manager = new GameCollectionManager();
+        gameParser.addGames();
+        gameParser.getGames().forEach(game -> LocalDB.getInstance().getGameCollection().insertOne(manager.createGameDocument(game.getId(), game.getName(), game.getDescription(), game.getPublisher(), game.getPrice(), game.getAge(), game.getPlatform(), game.getGenre(), game.getAmount(), game.getReleaseDate(), game.getImage())));
+
+        assertTrue(LocalDB.getInstance().getGameCollection().count() > 0);
+        assertEquals(gameParser.getGames().size(), LocalDB.getInstance().getGameCollection().count());
     }
 
 
