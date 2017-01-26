@@ -1,11 +1,15 @@
 package model;
 
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import org.bson.Document;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
+import java.util.Arrays;
 
 //This class makes a connection with the (mongo) database using the singleton pattern
 public class Database {
@@ -15,11 +19,17 @@ public class Database {
 	private MongoCollection<Document> gameCollection;
 	private MongoCollection<Document> userCollection;
 
+	private final String host = "ds131139.mlab.com";
+    private final int port = 31139;
+    private final String databaseName = "project5";
+    private final String username = "admin";
+    private final String password = "supergames";
+
 	private static Database instance;
 
 	private Database() {
-		this.mongo = new MongoClient("localhost", 27017);
-		this.db = mongo.getDatabase("project5");
+        this.mongo = new MongoClient(new ServerAddress(host, port), Arrays.asList(MongoCredential.createCredential(username, databaseName, password.toCharArray())));
+		this.db = mongo.getDatabase(databaseName);
 		this.gameCollection = db.getCollection("games");
 		this.userCollection = db.getCollection("users");
 	}
@@ -49,5 +59,8 @@ public class Database {
 			instance = new Database();
 		return instance;
 	}
+
+	//cmd connection:
+    //mongo db131129.mlab.com:31139/project5 -u admin -p supergames
 
 }

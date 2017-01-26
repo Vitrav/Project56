@@ -78,15 +78,15 @@ public class GameParser {
         games.forEach(game -> manager.insertNewGame(game));
     }
 
-    private String reverseDate(String date) {
+    public String reverseDate(String date) {
         String newDate = "";
-        newDate += date.substring(date.lastIndexOf("-") + 1, date.length() - 1);
-        newDate += date.substring(date.indexOf("-") - 1, date.lastIndexOf("-"));
+        newDate += date.substring(date.lastIndexOf("-") + 1, date.length());
+        newDate += date.substring(date.indexOf("-"), date.lastIndexOf("-"));
         newDate += "-" + date.substring(0, date.indexOf("-"));
         return newDate.replaceAll("-", "/");
     }
 
-    private String removeFromLine(String line, String part) {
+    public String removeFromLine(String line, String part) {
         line = line.replaceFirst(part, "");
         return line.replaceFirst(";", "");
     }
@@ -95,5 +95,7 @@ public class GameParser {
         return lines;
     }
 
-
+    public List<Game> getGames() {
+        return games;
+    }
 }
