@@ -50,10 +50,6 @@ public class Database {
 		return userCollection;
 	}
 
-	public void dropCollection(MongoCollection<Document> collection) {
-		collection.drop();
-	}
-
 	public static Database getInstance() {
 		if (instance == null)
 			instance = new Database();
@@ -61,6 +57,6 @@ public class Database {
 	}
 
 	//cmd connection:
-    //mongo db131129.mlab.com:31139/project5 -u admin -p supergames
+    //mongo ds131139.mlab.com:31139/project5 -u admin -p supergames
 
 }

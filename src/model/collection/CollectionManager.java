@@ -21,18 +21,8 @@ public class CollectionManager {
 		this.collection = collection;
 	}
 
-	public void printValues() {
-		FindIterable<Document> cursor = collection.find();
-		while (cursor.iterator().hasNext())
-			System.out.println(cursor.iterator().next());
-	}
-
 	public MongoCollection<Document> getCollection() {
 		return collection;
-	}
-
-	public void dropCollection() {
-		Database.getInstance().dropCollection(collection);
 	}
 
 }

@@ -23,6 +23,12 @@ public class GameCollectionManager extends CollectionManager {
 		return collection.find(query).iterator().hasNext();
 	}
 
+	public void removeGame(int id) {
+        Document query = new Document();
+        query.put("id", id);
+        collection.findOneAndDelete(query);
+    }
+
 	public Document getGameDocument(int id) {
 		Document query = new Document();
 		query.put("id", id);
@@ -40,7 +46,11 @@ public class GameCollectionManager extends CollectionManager {
 	public void insertNewGame(Game game) {
         if(databaseHasGame(game.getId()))
             return;
-        collection.insertOne(createGameDocument(game.getId(), game.getName(), game.getDescription(), game.getPublisher(), game.getPrice(), game.getAge(), game.getPlatform(), game.getGenre(), game.getAmount(), game.getReleaseDate(), game.getImage()));
+        collection.insertOne(createGameDocument(game));
+    }
+
+    public Document createGameDocument(Game game) {
+        return createGameDocument(game.getId(), game.getName(), game.getDescription(), game.getPublisher(), game.getPrice(), game.getAge(), game.getPlatform(), game.getGenre(), game.getAmount(), game.getReleaseDate(), game.getImage());
     }
 
 	public Document createGameDocument(int id, String name, String description, String publisher, double price, int age, String platform, String genre, int amount, Date releaseDate, String image) {

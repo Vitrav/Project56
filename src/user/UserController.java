@@ -23,7 +23,6 @@ public class UserController {
 
     public UserController(String username) {
         this.username = username;
-
         if (userCollectionManager.getUserDocument(username) != null)
             userDocumentManager = new UserDocumentManager(userCollectionManager.getUserDocument(username));
     }

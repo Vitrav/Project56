@@ -65,7 +65,7 @@ public class ShopController {
         return ViewUtil.render(request, model, viewutil.Path.Template.SHOP);
     };
 
-    private static boolean userHasGame(String userId, int gameId) {
+    public static boolean userHasGame(String userId, int gameId) {
         if (!userItems.containsKey(userId))
             return false;
         for (Document i : userItems.get(userId))
@@ -134,9 +134,12 @@ public class ShopController {
 
     public static void removeUserItem(String id, int gameId) {
         List<Document> items = userItems.get(id);
-        for (int i = 0; i < items.size(); i++)
-            if (items.get(i).getInteger("id") == gameId)
+        for (int i = 0; i < userItems.get(id).size(); i++) {
+            if (userItems.get(id).get(i).getInteger("id") == gameId) {
                 items.remove(i);
+                break;
+            }
+        }
         userItems.put(id, items);
     }
 

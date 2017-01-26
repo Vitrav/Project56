@@ -10,6 +10,8 @@ import model.Database;
 import user.Address;
 import user.User;
 
+import javax.print.Doc;
+
 //This class can be used to get a userDocument by username or to insert a new user in the database.
 public class UserCollectionManager extends CollectionManager {
 
@@ -73,6 +75,12 @@ public class UserCollectionManager extends CollectionManager {
 		historyDocument.put("amount", amount);
 		historyDocument.put("purchase_date", dateFormat.format(purchaseDate));
 		return historyDocument;
+	}
+
+	public void deleteUser(String userName) {
+		Document query = new Document();
+        query.put("username", userName);
+        collection.findOneAndDelete(query);
 	}
 
 }
