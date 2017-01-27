@@ -5,6 +5,7 @@ import model.collection.GameCollectionManager;
 import model.collection.UserCollectionManager;
 import model.document.GameDocumentManager;
 import model.document.UserDocumentManager;
+import org.bson.Document;
 import user.UserController;
 import viewutil.Path;
 import viewutil.ViewUtil;
@@ -29,12 +30,16 @@ public class SingleProductController {
         if (model.containsKey("games"))
             return ViewUtil.render(request, model, Path.Template.SHOP);
         addCurrentGame(request, model);
-        addGames(model);
+        addGames(model, getGameDocManager(request, model));
+
 
         //Add game to wishlist or cart.
         if (request.queryParams().iterator().hasNext()) {
             if (request.session().attribute("currentUser") == null) {
-                model.put("notLoggedIn", true);
+                String id = request.session().id();
+                List<Document> items = ShopController.getUserItems().get(id);
+                items.add(new UserCollectionManager().createCartItemDocument(getGameDocManager(request, model).getId()));
+                ShopController.getUserItems().put(id, items);
                 return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
             }
             if (request.queryParams().iterator().next().equalsIgnoreCase("wishlist")) {
@@ -56,9 +61,13 @@ public class SingleProductController {
         return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
     };
 
-    private static void addGames(Map<String, Object> model) {
+    private static void addGames(Map<String, Object> model, GameDocumentManager currentGame) {
         List<GameDocumentManager> docManagers = new ArrayList<>();
-        new GameCollectionManager().getCollection().find().iterator().forEachRemaining(game -> docManagers.add(ConUtil.getGameDocManager(game.getInteger("id"))));
+        new GameCollectionManager().getCollection().find().iterator().forEachRemaining(game -> {
+            GameDocumentManager gm = ConUtil.getGameDocManager(game.getInteger("id"));
+            if (currentGame.getGenre().equals(gm.getGenre()))
+                docManagers.add(gm);
+        });
         model.put("games", docManagers);
     }
 

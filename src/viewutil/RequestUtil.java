@@ -33,8 +33,6 @@ public class RequestUtil {
         return request.queryParams("password");
     }
 
-
-
     public static String getdoB(Request request) {
         String doB = request.queryParams("doB");
         if (doB.contains("-"))
@@ -99,5 +97,4 @@ public class RequestUtil {
         String accept = request.headers("Accept");
         return accept != null && accept.contains("application/json");
     }
-    public static String getShopPage(Request request) {return request.queryParams("details.name");}
 }

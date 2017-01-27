@@ -22,7 +22,6 @@ public class Path {
         @Getter public static final String FAVORITELIST = "/favList/";
         @Getter public static final String STATISTICS = "/stat/";
         @Getter public static final String HISTORYLIST = "/historyList/";
-        @Getter public static final String PURCHASESUCCESSFUL = "/purchaseSuccessful/";
         @Getter public static final String FORGOTPASSWORD = "/forgotpassword/";
         @Getter public static final String CHANGEPASSWORD = "/changepassword/";
         @Getter public static final String GAMESTOCK = "/gs/";

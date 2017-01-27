@@ -64,7 +64,7 @@ public class CartController {
                     public void run() {
                         ConUtil.getUser(request).setCartItems(new ArrayList<>());
                     }
-                }, 500
+                }, 1200
             );
             return ViewUtil.render(request, model, Path.Template.PURCHASESUCCESSFUL);
         }

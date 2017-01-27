@@ -25,7 +25,7 @@ public class CartListDocManager {
     public double getTotalGamePrice(int gameId) {
         for (Document item : documents)
             if (item.getInteger("id") == gameId)
-                return new GameDocumentManager(new GameCollectionManager().getGameDocument(gameId)).getPrice() * item.getInteger("amount");
+                return roundOff(new GameDocumentManager(new GameCollectionManager().getGameDocument(gameId)).getPrice() * item.getInteger("amount"));
         return 0.0;
     }
 
@@ -33,7 +33,7 @@ public class CartListDocManager {
         double total = 0.0;
         for (Document item : documents)
             total += getTotalGamePrice(item.getInteger("id"));
-        return total;
+        return roundOff(total);
     }
 
     public int getGameAmount(int gameId) {
@@ -41,6 +41,10 @@ public class CartListDocManager {
             if (item.getInteger("id") == gameId)
                 return item.getInteger("amount");
         return 0;
+    }
+
+    private double roundOff(double num) {
+        return Math.round(num * 100.0) / 100.0;
     }
 
 
