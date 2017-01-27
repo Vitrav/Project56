@@ -56,8 +56,8 @@ public final class Application {
         post(Path.Web.CHANGEPASSWORD, ChangePasswordController.handleChangePasswordPost);
         post(Path.Web.CONTACT, ContactController.handleContactPost);
 
-        //Add games to database.
-        //new GameParser().addGamesToDB();
+//        Add games to database.
+//        new GameParser().addGamesToDB();
 
         int pages = ((int) Database.getInstance().getGameCollection().count() / 8) + 1;
         while (pages > 0) {

@@ -19,9 +19,9 @@ public class Database {
 	private MongoCollection<Document> gameCollection;
 	private MongoCollection<Document> userCollection;
 
-	private final String host = "ds131139.mlab.com";
-    private final int port = 31139;
-    private final String databaseName = "project5";
+	private final String host = "ds161518.mlab.com";
+    private final int port = 61518;
+    private final String databaseName = "project6";
     private final String username = "admin";
     private final String password = "supergames";
 
