@@ -13,11 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static viewutil.RequestUtil.*;
-import static viewutil.RequestUtil.getQueryUsername;
 
-/**
- * Created by eigenaar on 23-1-2017.
- */
 public class ForgotPasswordController {
 
     public static Route ForgotPassword = (Request request, Response response) -> {
@@ -30,9 +26,7 @@ public class ForgotPasswordController {
         UserController controller = new UserController(getQueryEmail(request));
         //get the email adress from the field on the website and store it in strings
 
-
         String email = getEmail(request);
-
 
         //email validation
         if (!controller.databaseHasEmail(email)) {

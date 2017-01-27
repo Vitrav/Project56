@@ -9,6 +9,7 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
+//Test the cart logic when not logged in
 public class ShopControllerTest {
 
     private final String testUser = "user";

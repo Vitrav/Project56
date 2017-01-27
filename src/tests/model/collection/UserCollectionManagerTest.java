@@ -15,9 +15,7 @@ public class UserCollectionManagerTest {
     private final UserCollectionManager manager = new UserCollectionManager();
     private final String username = "UnitTest";
     private final String salt = BCrypt.gensalt();
-   // User(String username, String salt, String hashedPassword, Address address, int age, Date dateOfBirth, String email, boolean isAdmin, boolean hasPrivateWishList, boolean isBlocked) {
     private final User testUser = new User(username, salt, BCrypt.hashpw("pass", salt), new Address("country", "city", "street", "12a", "1344ZP"), 20, new Date(), "email@test.com", false, true, false);
-
 
     @Test
     public void getUserDocument() throws Exception {

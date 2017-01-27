@@ -72,7 +72,4 @@ public class GameParserTest {
         assertEquals(gameParser.getGames().size(), LocalDB.getInstance().getGameCollection().count());
     }
 
-
-
-
 }

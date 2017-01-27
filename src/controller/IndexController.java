@@ -11,9 +11,7 @@ import java.util.Map;
 
 public class IndexController {
 
-    public static Route indexPage = (Request request, Response response) -> {
-        Map<String, Object> model = new HashMap<>();
-        return ViewUtil.render(request, model, viewutil.Path.Template.INDEX);
-    };
+    public static Route indexPage = (Request request, Response response) ->
+        ViewUtil.render(request, new HashMap<>(), viewutil.Path.Template.INDEX);
 
 }

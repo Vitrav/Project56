@@ -11,8 +11,7 @@ import java.util.Map;
 
 public class MyAccountController {
 
-    public static Route accountPage = (Request request, Response response) -> {
-        Map<String, Object> model = new HashMap<>();
-        return ViewUtil.render(request, model, Path.Template.MYACCOUNT);
-    };
+    public static Route accountPage = (Request request, Response response) ->
+        ViewUtil.render(request, new HashMap<>(), Path.Template.MYACCOUNT);
+
 }
