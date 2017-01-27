@@ -59,17 +59,19 @@ public class GameParserTest {
 
     @Test
     public void gamesToDB() throws Exception {
-        LocalDB.getInstance().getGameCollection().drop();
-        assertEquals(0, LocalDB.getInstance().getGameCollection().count());
+        TestDB.getInstance().getGameCollection().drop();
+        assertEquals(0, TestDB.getInstance().getGameCollection().count());
 
         //Same as GameParser gamesToDB method:
-        LocalDB.getInstance().getGameCollection().drop();
+        TestDB.getInstance().getGameCollection().drop();
         GameCollectionManager manager = new GameCollectionManager();
         gameParser.addGames();
-        gameParser.getGames().forEach(game -> LocalDB.getInstance().getGameCollection().insertOne(manager.createGameDocument(game.getId(), game.getName(), game.getDescription(), game.getPublisher(), game.getPrice(), game.getAge(), game.getPlatform(), game.getGenre(), game.getAmount(), game.getReleaseDate(), game.getImage())));
+        gameParser.getGames().forEach(game -> TestDB.getInstance().getGameCollection().insertOne(manager.createGameDocument(game.getId(), game.getName(), game.getDescription(), game.getPublisher(), game.getPrice(), game.getAge(), game.getPlatform(), game.getGenre(), game.getAmount(), game.getReleaseDate(), game.getImage())));
 
-        assertTrue(LocalDB.getInstance().getGameCollection().count() > 0);
-        assertEquals(gameParser.getGames().size(), LocalDB.getInstance().getGameCollection().count());
+        assertTrue(TestDB.getInstance().getGameCollection().count() > 0);
+        assertEquals(gameParser.getGames().size(), TestDB.getInstance().getGameCollection().count());
+        TestDB.getInstance().getGameCollection().drop();
+        assertEquals(0, TestDB.getInstance().getGameCollection().count());
     }
 
 }
