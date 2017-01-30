@@ -74,14 +74,6 @@ public class UserDocumentManager extends DocumentManager {
         }
     }
 
-    private Date getDateOfBirthAsDate(String date) {
-        try {
-            return dateFormat.parse(date);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
 	public void setDateOfBirth(Date dateOfBirth) {
         int age = RegistrationController.calculateAge(dateOfBirth);
         setAge(age);
