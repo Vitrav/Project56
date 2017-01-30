@@ -31,7 +31,7 @@
                 #foreach($manager in $games)
                     <div class="col-md-3 col-sm-6">
                         <div class="single-shop-product">
-                            <h4><a href="/single-page/$manager.getId()">$manager.getName()</a></h4>
+                            <h4><a href="/single-page/$manager.getId()" >$manager.getNameShort()</a></h4>
                             <img src="$manager.getImage()" height="120" width="123"></img>
                             <h4>$manager.getPlatform()</h4>
                             <p>$manager.getGenre()</p>

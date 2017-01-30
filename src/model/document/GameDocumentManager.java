@@ -32,6 +32,11 @@ public class GameDocumentManager extends DocumentManager {
 		update(new Document("name", name));
 	}
 
+	public String getNameShort() {
+		String name = getName();
+		return name.length() < 18 ? name : name.substring(0, 18).concat("...");
+	}
+
 	public String getDescription() {
 		return document.getString("description");
 	}
