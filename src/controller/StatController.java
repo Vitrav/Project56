@@ -25,6 +25,7 @@ public class StatController {
     };
 
     public static Route gameStockPage = (Request request, Response response) -> {
+        //displays the stock for each game
         Map<String, Object> model = new HashMap<>();
         loadPage(request, model);
         if (model.containsKey("games"))
@@ -34,6 +35,7 @@ public class StatController {
     };
 
     public static Route purchaseInfoPage = (Request request, Response response) -> {
+        //displays all the purchases made per day
         Map<String, Object> model = new HashMap<>();
         loadPage(request, model);
         if (model.containsKey("games"))
@@ -43,6 +45,7 @@ public class StatController {
     };
 
     public static Route ageInfoPage = (Request request, Response response) -> {
+        //displays the age distribution for al users
         Map<String, Object> model = new HashMap<>();
         loadPage(request, model);
         if (model.containsKey("games"))
@@ -52,6 +55,7 @@ public class StatController {
     };
 
     private static void loadPage(Request request, Map<String, Object> model){
+        //get all info for each statistics page to load correctly
         ConUtil.searchGame(request, model);
         ConUtil.insertAllUsers(request, model);
         ConUtil.addGames(model);
@@ -70,6 +74,7 @@ public class StatController {
     }
 
     private static void insertHisManagersToModel(Map<String, Object> model, List<HistoryDocumentManager> hisManagers) {
+        //creates two lists that hold the right information for purchase information when iterated through
         List<String> allDates = new ArrayList<>();
         List<Integer> allCounts = new ArrayList<>();
 
@@ -92,6 +97,7 @@ public class StatController {
     }
 
     private static void insertUsersToModel(Map<String, Object> model, List<UserDocumentManager> userManagers) {
+        //create two lists to be iterated for the right age information
         List<Integer> allAgeAmounts = new ArrayList<>();
         List<String> allAgeGroups = new ArrayList<>();
 

@@ -18,6 +18,8 @@ import static viewutil.RequestUtil.getSessionCurrentUser;
 public class ConUtil {
 
     public static void searchGame(Request request,  Map<String, Object> model) {
+        //true if you clicked the search button
+        //displays all the games that match your search command
         if (request.queryParams().iterator().hasNext() && request.queryParams().iterator().next().equalsIgnoreCase("search")) {
             String product = request.queryParams("search").replaceAll(" ", "");
             List<GameDocumentManager> docManagers = new ArrayList<>();
@@ -40,10 +42,9 @@ public class ConUtil {
     }
 
     public static void addToCart(Request request) {
+        //add a new game to your cart or increment the amount of the selected game in your cart
         if (request.queryParams().iterator().hasNext()) {
             int actualGameID = getGameId(request);
-            if (actualGameID == -1)
-                return;
             UserDocumentManager manager = new UserDocumentManager(new UserCollectionManager().getUserDocument(getSessionCurrentUser(request)));
             if (!new UserController(getSessionCurrentUser(request)).userHasGame(actualGameID))
                 manager.addCartItem(actualGameID);
@@ -80,6 +81,7 @@ public class ConUtil {
     }
 
     public static void addGames(Map<String, Object> model, int min, int max) {
+        //price filter for the games
         List<GameDocumentManager> docManagers = new ArrayList<>();
         new GameCollectionManager().getCollection().find().iterator().forEachRemaining(game -> docManagers.add(getGameDocManager(game.getInteger("id"))));
         model.put("games", docManagers.stream().filter(doc ->doc.getPrice() > min && doc.getPrice() < max).collect(Collectors.toList()));

@@ -1,7 +1,7 @@
 package parser;
 
 import java.util.Date;
-
+//all fields a game requires for the database
 public class Game {
 
     private final int id;

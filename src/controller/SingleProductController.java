@@ -76,6 +76,7 @@ public class SingleProductController {
     }
 
     private static GameDocumentManager getGameDocManager(Request request, Map<String, Object> model) {
+        //creates the url per game
         String id = request.url().substring(request.url().indexOf("single-page/"), request.url().length() - 1).replace("single-page/", "");
         return new GameDocumentManager(new GameCollectionManager().getGameDocument(Integer.parseInt(id)));
     }

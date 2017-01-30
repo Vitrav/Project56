@@ -30,6 +30,7 @@ public class HistoryListController {
         int gameId = Integer.parseInt(request.queryParams().iterator().next());
         model.put("currentGame", new GameDocumentManager(gameId));
 
+        //looks which button is button is pressed
         if (request.queryParams(request.queryParams().iterator().next()).contains("Add to fav list")) {
             ConUtil.getUser(request).addFavouriteItem(gameId);
             model.put("itemAdded", true);
@@ -42,6 +43,7 @@ public class HistoryListController {
     };
 
     private static void insertHisManagers(Request request, Map<String, Object> model) {
+        //insert all purchased games to the history list
         List<HistoryDocumentManager> hisManagers = new ArrayList<>();
         ConUtil.getUser(request).getPurchaseHistory().forEach(h -> hisManagers.add(new HistoryDocumentManager(h)));
         model.put("hisManagers", hisManagers);

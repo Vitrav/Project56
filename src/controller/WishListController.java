@@ -30,6 +30,7 @@ public class WishListController {
         String buttonName = request.queryParams(request.queryParams().iterator().next());
         UserDocumentManager manager = ConUtil.getUser(request);
 
+        //looks for the pressed button and executes the appropriate action
         if (buttonName.toLowerCase().contains("set your wishlist"))
             manager.setWishList(manager.wishListIsPrivate() ? false : true);
         else if (buttonName.equalsIgnoreCase("remove"))
@@ -43,6 +44,7 @@ public class WishListController {
             });
             model.put("publicPlayers", publicPlayers);
             model.put("viewList", true);
+        //view all other public wish lists
         } else if (buttonName.equalsIgnoreCase("view")) {
             insertPlayerGameManager(model, ConUtil.getUserDocManager(request.queryParams().iterator().next()).getWishList());
             model.put("view", true);

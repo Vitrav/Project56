@@ -1,9 +1,8 @@
 package model.document;
 
-
 import model.collection.GameCollectionManager;
 import org.bson.Document;
-
+//Manager for the history item documents, can retrieve all information per item
 public class HistoryDocumentManager {
 
     private final Document doc;

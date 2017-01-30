@@ -37,12 +37,15 @@ public class ShopController {
         Map<String, Object> model = new HashMap<>();
         addPageAmount(model);
 
+        //looks if the game exists
         if (getGameId(request) != -1) {
+            //checks if the user has the game already added to the cart or not
             if (request.session().attribute("currentUser") != null) {
                 ConUtil.addToCart(request);
             } else {
                 final String id = request.session().id();
                 final int gameId = getGameId(request);
+
                 if (userHasGame(id, gameId)) {
                     incGameAmount(id, gameId);
                 } else {
@@ -52,10 +55,12 @@ public class ShopController {
                 }
             }
             getGamesForPage(request, model);
+        //search for a game
         } else if (request.queryParams("search") != null && request.queryParams("search").length() > 1) {
             ConUtil.searchGame(request, model);
             model.put("searched", true);
         } else {
+            //price filter
             addGames(request, model);
             model.put("hasValues", true);
             model.put("min", Integer.parseInt(request.queryParams("min")));
@@ -91,6 +96,7 @@ public class ShopController {
     }
 
     private static void addGames(Request request, Map<String, Object> model) {
+        //adds games to the shop page based on the filter
         if (request.queryParams("min") != null && request.queryParams("max") != null)
             ConUtil.addGames(model, Integer.parseInt(request.queryParams("min")), Integer.parseInt(request.queryParams("max")));
         else
@@ -98,6 +104,7 @@ public class ShopController {
     }
 
     private static void getGamesForPage(Request request, Map<String, Object> model) {
+        //displays a set amount of games per page
         int pageId = Integer.parseInt(request.url().replaceAll("/", "").replaceAll("http:localhost:4567shop", ""));
         List<GameDocumentManager> docManagers = new ArrayList<>();
         model.put("next", pageId == calcPageAmount() ? pageId : pageId + 1);
@@ -114,6 +121,7 @@ public class ShopController {
     }
 
     private static void addPageAmount(Map<String, Object> model) {
+        //adds another page when the limit per page has been reached
         List<Integer> pages = new ArrayList<>();
         int amount = calcPageAmount();
         while (amount > 0) {

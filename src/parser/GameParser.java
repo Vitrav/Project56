@@ -10,7 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
+//reads a file and puts the game in the database
 public class GameParser {
 
     private final List<String> lines = new ArrayList<>();

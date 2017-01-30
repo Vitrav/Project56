@@ -24,7 +24,6 @@ public final class Application {
         get(Path.Web.INDEX, controller.IndexController.indexPage);
         get(Path.Web.SINGLEPAGE, SingleProductController.singlePage);
         get(Path.Web.CART, CartController.cartPage);
-        post(Path.Web.SHOP, ShopController.shopPost);
         get(Path.Web.LOGIN, LoginController.loginPage);
         get(Path.Web.LOGOUT, LoginController.handleLogoutPost);
         get(Path.Web.REGISTRATION, RegistrationController.registrationPage);
@@ -33,7 +32,6 @@ public final class Application {
         get(Path.Web.MODIFYSCREEN, AdminController.modifyPage);
         get(Path.Web.WISHLIST, WishListController.wishListPage);
         get(Path.Web.FAVORITELIST, FavListController.favListPage);
-        post(Path.Web.FAVORITELIST, FavListController.favListPage);
         get(Path.Web.STATISTICS, StatController.statPage);
         get(Path.Web.HISTORYLIST, HistoryListController.historyListPage);
         get(Path.Web.FORGOTPASSWORD, ForgotPasswordController.ForgotPassword);
@@ -51,10 +49,11 @@ public final class Application {
         post(Path.Web.DELETESCREEN, AdminController.handleDeletePost);
         post(Path.Web.WISHLIST, WishListController.handleWishListPost);
         post(Path.Web.CART, CartController.handleCartPost);
-        post(Path.Web.CART, CartController.handleCartPost);
         post(Path.Web.FORGOTPASSWORD, ForgotPasswordController.handleForgotPasswordPost);
         post(Path.Web.CHANGEPASSWORD, ChangePasswordController.handleChangePasswordPost);
         post(Path.Web.CONTACT, ContactController.handleContactPost);
+        post(Path.Web.SHOP, ShopController.shopPost);
+        post(Path.Web.FAVORITELIST, FavListController.favListPage);
 
 //        Add games to database.
 //        new GameParser().addGamesToDB();

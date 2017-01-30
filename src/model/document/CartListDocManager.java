@@ -6,7 +6,7 @@ import user.UserController;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//this class is used to calculate various things for items in the shopping cart: total price, amount per game and amount of all games
 public class CartListDocManager {
 
     private final List<Document> documents = new ArrayList<>();
