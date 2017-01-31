@@ -1,12 +1,12 @@
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertTrue;
 
 public class WillPassTest {
 
-    @org.junit.Test
+    @Test
     public void willPass() throws Exception {
-       assertTrue(5 != 6);
+        assertTrue(5 != 6);
     }
-
 
 }
