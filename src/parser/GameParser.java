@@ -3,9 +3,7 @@ package parser;
 import model.Database;
 import model.collection.GameCollectionManager;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,9 +18,16 @@ public class GameParser {
     public void fillLines() {
         if (!lines.isEmpty())
             return;
-        InputStream input = getClass().getResourceAsStream("games.txt");
+
+        String filePath = new File("").getAbsolutePath();
+        BufferedReader reader = null;
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+            reader = new BufferedReader(new FileReader(filePath + "/src/parser/games.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
             String line = reader.readLine();
             while (line != null) {
                 line = reader.readLine();
