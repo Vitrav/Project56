@@ -6,6 +6,8 @@ import model.Database;
 import parser.GameParser;
 import viewutil.*;
 
+import java.io.File;
+
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.*;
 import static spark.Spark.get;
