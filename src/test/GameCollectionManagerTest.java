@@ -1,5 +1,3 @@
-package collection;
-
 import model.collection.GameCollectionManager;
 import org.junit.Test;
 import parser.Game;

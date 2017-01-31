@@ -1,8 +1,8 @@
-package parser;
-
 import model.collection.GameCollectionManager;
 import org.junit.Before;
 import org.junit.Test;
+import parser.GameParser;
+import parser.TestDB;
 
 import static org.junit.Assert.*;
 

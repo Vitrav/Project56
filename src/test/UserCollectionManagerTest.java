@@ -1,5 +1,3 @@
-package collection;
-
 import model.collection.UserCollectionManager;
 import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;

@@ -1,5 +1,4 @@
-package controller;
-
+import controller.ShopController;
 import model.collection.UserCollectionManager;
 import org.junit.Test;
 
