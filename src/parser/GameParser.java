@@ -50,7 +50,6 @@ public class GameParser {
                     lineParts.add(part);
 
                 if (!line.contains(";")) {
-                    System.out.println(part);
                     break;
                 }
 
