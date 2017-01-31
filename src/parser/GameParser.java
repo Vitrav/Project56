@@ -15,6 +15,7 @@ public class GameParser {
     private final List<Game> games = new ArrayList<>();
     private final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
+    //Fill the lines
     public void fillLines() {
         if (!lines.isEmpty())
             return;
