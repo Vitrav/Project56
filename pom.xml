@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <build>
+        <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>src/test</testSourceDirectory>
         <plugins>
             <plugin>
