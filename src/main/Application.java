@@ -6,9 +6,7 @@ import model.Database;
 import parser.GameParser;
 import viewutil.*;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.*;
@@ -60,7 +58,7 @@ public final class Application {
         post(Path.Web.FAVORITELIST, FavListController.favListPage);
 
 //        Add games to database.
-        new GameParser().addGamesToDB();
+//        new GameParser().addGamesToDB();
 
         int pages = ((int) Database.getInstance().getGameCollection().count() / 8) + 1;
         while (pages > 0) {

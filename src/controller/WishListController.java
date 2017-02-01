@@ -54,6 +54,7 @@ public class WishListController {
         return ViewUtil.render(request, model, Path.Template.WISHLIST);
     };
 
+    //add all games to a list
     private static void insertPlayerGameManager(Map<String, Object> model, List<Integer> managerList) {
         List<GameDocumentManager> gameManagers = new ArrayList<>();
         managerList.forEach(id -> gameManagers.add(ConUtil.getGameDocManager(id)));
