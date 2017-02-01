@@ -23,25 +23,26 @@
     #else
         <h3>Thank you for buying these products:</h3>
     #end
-    <table cellspacing="0" class="shop_table cart">
+    <table style='white-space: nowrap' id="div1">
         <tr>
-            <th class="product-name">Product</th>
-            <th class="product-platform">Platform</th>
-            <th class="product-price">Price</th>
-            <th class="product-quantity">Quantity</th>
-            <th class="product-subtotal">Total</th>
+            <th>Name</th>
+            <th>Platform</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Total price</th>
         </tr>
-        #foreach($game in $cartGamesInfo)
+        #foreach ($manager in $hisManagers)
             <tr>
-                <td>$game.getName()</td>
-                <td>$game.getPlatform()</td>
-                <td>$$game.getPrice()</td>
-                <td>$userDocumentManager.getGameAmount($game.getId())</td>
-                <td>$$userDocumentManager.getTotalGamePrice($game.getId())</td>
+                <td><h4><a href="/single-page/$manager.getId()">$manager.getGameManager().getName()</a></h4></td>
+                <td>$manager.getGameManager().getPlatform()</td>
+                <td>$$manager.getGameManager().getPrice()</td>
+                <td>$manager.getAmount()</td>
+                <td>$$manager.getPrice()</td>
             </tr>
         #end
     </table>
 
+    <br></br>
     <a class="add_to_cart_button" href="$WebPath.getCART()">Return to cart</a>
     </body>
 

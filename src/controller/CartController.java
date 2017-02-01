@@ -1,8 +1,10 @@
 package controller;
 
 import controller.utils.ConUtil;
+import model.collection.UserCollectionManager;
 import model.document.CartItemDocumentManager;
 import model.document.GameDocumentManager;
+import model.document.HistoryDocumentManager;
 import model.document.UserDocumentManager;
 import org.bson.Document;
 import viewutil.Path;
@@ -56,23 +58,23 @@ public class CartController {
                     return ViewUtil.render(request, model, Path.Template.CART);
                 }
             }
-            //setts new amount in stock
+            //sets new amount in stock
             ConUtil.getUser(request).getCartItems().forEach(item -> {
                 GameDocumentManager manager = new GameDocumentManager(item.getInteger("id"));
                 manager.setAmountInStock(manager.getAmountInStock() - new CartItemDocumentManager(item).getAmount());
             });
             //adds the purchased items to your history list
-            ConUtil.getUser(request).getCartItems().forEach(item -> ConUtil.getUser(request).addHistoryItem(item.getInteger("id"), item.getInteger("amount")));
+            List<HistoryDocumentManager> hisManagers = new ArrayList<>();
+            ConUtil.getUser(request).getCartItems().forEach(item -> {
+                ConUtil.getUser(request).addHistoryItem(item.getInteger("id"), item.getInteger("amount"));
+                hisManagers.add(new HistoryDocumentManager(new UserCollectionManager().createHistoryDocument(item.getInteger("id"), item.getInteger("amount"))));
+            });
+            //put history managers in the model to show the bought items.
+            model.put("hasHistory", true);
+            model.put("hisManagers", hisManagers);
 
-            //Remove the cart items after a delay.
-            new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        ConUtil.getUser(request).setCartItems(new ArrayList<>());
-                    }
-                }, 1200
-            );
+            //Remove the cart items
+            ConUtil.getUser(request).setCartItems(new ArrayList<>());
             return ViewUtil.render(request, model, Path.Template.PURCHASESUCCESSFUL);
         }
 

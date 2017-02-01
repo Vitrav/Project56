@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 
 public class GameCollectionManagerTest {
 
+    //Given, when, then
     private final GameCollectionManager manager = new GameCollectionManager();
     private final Game testGame = new Game(-2, "game", "publisher", 12.11, 18, "PC", "Shooter", 20, new Date(), "desc", "image.png");
 

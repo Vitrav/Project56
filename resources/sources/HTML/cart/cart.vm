@@ -22,42 +22,46 @@
         <p>We can't deliver $outOfStockItem.getName(), there are $outOfStockItem.getAmountInStock() in stock.</p>
     #end
     <form method="post" action="#">
-        <table cellspacing="0" class="shop_table cart">
-            <thead>
-                <tr>
-                    <th>Remove product</th>
-                    <th>Product</th>
-                    <th>Platform</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-            #foreach($game in $cartGamesInfo)
-                <tr>
-                    <td>
-                        <input type="submit" name="$game.getId()" value="Remove"></input>
-                    </td>
-                    <td>$game.getName()</td>
-                    <td>$game.getPlatform()</td>
-                    <td>$$game.getPrice()</td>
-                    #if($hasManager)
-                        <td>$userDocumentManager.getGameAmount($game.getId())</td>
-                        <td>$$userDocumentManager.getTotalGamePrice($game.getId())</td>
-                    #else
-                        <td>$cartManager.getGameAmount($game.getId())</td>
-                        <td>$$cartManager.getTotalGamePrice($game.getId())</td>
-                    #end
-                </tr>
-            #end
+        #if (!$hasHistory)
+            <table cellspacing="0" class="shop_table cart">
+                <thead>
+                    <tr>
+                        <th>Remove product</th>
+                        <th>Product</th>
+                        <th>Platform</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                #foreach($game in $cartGamesInfo)
+                    <tr>
+                        <td>
+                            <input type="submit" name="$game.getId()" value="Remove"></input>
+                        </td>
+                        <td>$game.getName()</td>
+                        <td>$game.getPlatform()</td>
+                        <td>$$game.getPrice()</td>
+                        #if($hasManager)
+                            <td>$userDocumentManager.getGameAmount($game.getId())</td>
+                            <td>$$userDocumentManager.getTotalGamePrice($game.getId())</td>
+                        #else
+                            <td>$cartManager.getGameAmount($game.getId())</td>
+                            <td>$$cartManager.getTotalGamePrice($game.getId())</td>
+                        #end
+                    </tr>
+                #end
+
                 <tr>
                     <td class="actions" colspan="6">
                         <input type="submit" value="Proceed to Checkout" name="checkout" class="checkout-button button alt wc-forward">
                     </td>
                 </tr>
             </tbody>
-        </table>
+            </table>
+        #end
     </form>
 </body>
 </form>
