@@ -24,6 +24,7 @@ import static viewutil.RequestUtil.getSessionCurrentUser;
 
 public class ShopController {
 
+    //cart items until you're logged in.
     private static Map<String, List<Document>> userItems = new HashedMap();
 
     public static Route shopPage = (Request request, Response response) -> {
@@ -37,7 +38,7 @@ public class ShopController {
         Map<String, Object> model = new HashMap<>();
         addPageAmount(model);
 
-        //looks if the game exists
+        //looks if the game exists when clicking the add to cart button.
         if (getGameId(request) != -1) {
             //checks if the user has the game already added to the cart or not
             if (request.session().attribute("currentUser") != null) {

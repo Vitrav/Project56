@@ -8,17 +8,16 @@ import static org.junit.Assert.*;
 
 public class GameCollectionManagerTest {
 
-    //Given, when, then
     private final GameCollectionManager manager = new GameCollectionManager();
     private final Game testGame = new Game(-2, "game", "publisher", 12.11, 18, "PC", "Shooter", 20, new Date(), "desc", "image.png");
 
     @Test
-    public void databaseHasGame() throws Exception {
+    public void databaseShouldNotHaveTestGame() throws Exception {
         assertFalse(manager.databaseHasGame(-2));
     }
 
     @Test
-    public void insertRemoveGame() throws Exception {
+    public void managerShouldInsertAndRemoveGameById() throws Exception {
         manager.insertNewGame(testGame);
         assertTrue(manager.databaseHasGame(-2));
         manager.removeGame(-2);
@@ -26,7 +25,7 @@ public class GameCollectionManagerTest {
     }
 
     @Test
-    public void getGameDocument() throws Exception {
+    public void managerShouldGetGameDocumentById() throws Exception {
         if (!manager.databaseHasGame(-2))
             manager.insertNewGame(testGame);
         assertTrue(manager.databaseHasGame(-2));
