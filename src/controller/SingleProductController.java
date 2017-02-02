@@ -36,6 +36,10 @@ public class SingleProductController {
         //Add game to wishlist or cart.
         if (request.queryParams().iterator().hasNext()) {
             if (request.session().attribute("currentUser") == null) {
+                if (request.queryParams().iterator().next().equalsIgnoreCase("wishlist")) {
+                    model.put("notLoggedIn", true);
+                    return ViewUtil.render(request, model, Path.Template.SINGLEPAGE);
+                }
                 String id = request.session().id();
                 List<Document> items = ShopController.getUserItems().get(id);
                 items.add(new UserCollectionManager().createCartItemDocument(getGameDocManager(request, model).getId()));

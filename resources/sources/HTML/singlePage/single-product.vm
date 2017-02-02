@@ -46,7 +46,9 @@
                                     </div>
                                     <form action="">
                                         <button class="add_to_cart_button" name="wishlist" type="submit">Add to wishlist</button>
-                                        #if($addedToList)
+                                        #if($notLoggedIn)
+                                            <p>Please login to add something to your wishlist.</p>
+                                        #elseif($addedToList)
                                             <p>Game has been added to your wishlist.</p>
                                         #elseif($hasItem)
                                             <p>This product is already in your wishlist.</p>
